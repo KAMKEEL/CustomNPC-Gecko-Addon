@@ -20,10 +20,6 @@
 This mod is an addon mod to **CustomNPC+**. It requires both **GeckoLib** and **CustomNPC+** to be installed alongside it.
 
 ## Cloning / Compiling / Building
-
-Using IntelliJ, take the following steps:
-1. Run `setupDecompWorkspace` under the `forgegradle` tab.
-2. Refresh Gradle.
-3. Run `genIntellijRuns` under the `other` tab to set up your Minecraft runs.
-
-or for Eclipse, run `gradlew setupDecompWorkspace eclipse` then import the project.
+1. Run gradlew build in console and wait BUILD SUCCESSFUL
+2. Import project into IntelliJ
+3. Wait for the IntelliJ to build the environment
