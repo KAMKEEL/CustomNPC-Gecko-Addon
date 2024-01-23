@@ -7,7 +7,7 @@ public class DataGecko {
     private String model = "geckolib3:geo/npc.geo.json";
     private String animFile = "custom:geo_npc.animation.json";
     private String idleAnim = "";
-    private String walkAnim =d "";
+    private String walkAnim = "";
     private String attackAnim = "";
     private String hurtAnim = "";
 
