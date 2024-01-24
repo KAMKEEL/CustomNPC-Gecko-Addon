@@ -34,6 +34,6 @@
  * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
-    implementation name: "CustomNPC-Plus-1.8.6-dev"
+    implementation name: "CustomNPC-Plus-1.9-beta5"
     implementation name: "geckolib-forge-1.7.10-3.0.32"
 }

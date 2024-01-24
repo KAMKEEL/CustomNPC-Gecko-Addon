@@ -1,18 +1,16 @@
 {
   "required": true,
-  "minVersion": "0.8.5-GTNH",
+  "minVersion": "0.7.11",
   "package": "com.goodbird.cnpcgeckoaddon.mixin.impl",
   "refmap": "mixins.cnpcgeckoaddon.refmap.json",
   "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinDataDisplay",
-    "MixinEntityUtil"
+    "MixinGeckoAddon"
   ],
   "client": [
-    "MixinGuiCreationScreen",
-    "MixinGuiNpcDisplay",
-    "MixinRenderNPCInterface"
+    "MixinGeckoAddonClient"
   ],
   "server": []
 }

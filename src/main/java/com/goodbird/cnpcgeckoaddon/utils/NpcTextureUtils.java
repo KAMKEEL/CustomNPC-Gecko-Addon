@@ -13,7 +13,6 @@ import noppes.npcs.client.renderer.ImageBufferDownloadAlt;
 import noppes.npcs.client.renderer.RenderNPCInterface;
 import noppes.npcs.entity.EntityCustomNpc;
 import noppes.npcs.entity.EntityNPCInterface;
-import com.goodbird.cnpcgeckoaddon.mixin.impl.MixinRenderNPCInterface;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
