@@ -693,7 +693,9 @@ configurations.all {
         substitute module('com.github.GTNewHorizons:SpongeMixins') using module(mixinProviderSpecNoClassifer) withClassifier("dev") because("Unimixins replaces other mixin mods")
         substitute module('io.github.legacymoddingmc:unimixins') using module(mixinProviderSpecNoClassifer) withClassifier("dev") because("Our previous unimixins upload was missing the dev classifier")
 
-        substitute module('org.scala-lang:scala-library:2.11.1') using module('org.scala-lang:scala-library:2.11.5') because('To allow mixing with Java 8 targets')
+        substitute module('org.scala-lang:scala-library:2.11.1') using module('org.scala-lang:scala-library:2.13.11') because('To allow mixing with Java 8 targets')
+        substitute module('org.scala-lang:scala-compiler:2.11.5') using module('org.scala-lang:scala-compiler:2.13.11') because('To allow mixing with Java 8 targets')
+        substitute module('org.scala-lang:scala-reflect:2.11.1') using module('org.scala-lang:scala-reflect:2.13.11') because('To allow mixing with Java 8 targets')
     }
 }
 
