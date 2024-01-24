@@ -19,7 +19,7 @@ public abstract class MixinGuiNpcDisplay extends GuiNPCInterface2 {
         super(null);
     }
 
-    @Inject(method = "initGui", at = @At("TAIL"), remap = false)
+    @Inject(method = "initGui", at = @At("TAIL"))
     public void initGui(CallbackInfo ci){
         int y = 319;
         addLabel(new GuiNpcLabel(212,"Model Animation", guiLeft + 185, y + 5));
@@ -31,7 +31,7 @@ public abstract class MixinGuiNpcDisplay extends GuiNPCInterface2 {
         }
     }
 
-    @Inject(method = "actionPerformed", at = @At("TAIL"), remap = false)
+    @Inject(method = "actionPerformed", at = @At("TAIL"))
     public void actionPerformed(GuiButton guibutton, CallbackInfo ci){
         GuiNpcButton button = (GuiNpcButton) guibutton;
         if(button.id == 212){

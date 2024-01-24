@@ -31,7 +31,7 @@ public class MixinGuiCreationScreen extends GuiModelInterface {
         }
     }
 
-    @Inject(method = "actionPerformed", at = @At("TAIL"), remap = false)
+    @Inject(method = "actionPerformed", at = @At("TAIL"))
     protected void actionPerformed(GuiButton btn, CallbackInfo ci) {
         GuiNpcButton button = (GuiNpcButton) btn;
         if(button.id == 202){
