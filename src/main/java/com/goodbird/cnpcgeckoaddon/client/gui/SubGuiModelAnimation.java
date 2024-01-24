@@ -9,9 +9,10 @@ import noppes.npcs.client.gui.util.*;
 import noppes.npcs.entity.EntityNPCInterface;
 import software.bernie.geckolib3.resource.GeckoLibCache;
 
-public class SubGuiModelAnimation extends SubGuiInterface implements ITextfieldListener {
+public class SubGuiModelAnimation extends SubGuiInterface implements ITextfieldListener, ISubGuiListener {
     public SubGuiModelAnimation(EntityNPCInterface npc){
         this.npc = npc;
+        closeOnEsc = true;
     }
 
     @Override
@@ -60,7 +61,7 @@ public class SubGuiModelAnimation extends SubGuiInterface implements ITextfieldL
         if(button.id==4){
             setSubGui(new GuiStringSelection(this,"Selecting geckolib attack animation:",
                 AnimationFileUtil.getAnimationList(getModelData(npc).getAnimFile()),
-                (name)-> getModelData(npc).setAnimFile(name)));
+                (name)-> getModelData(npc).setAttackAnim(name)));
         }
         if(button.id==5){
             setSubGui(new GuiStringSelection(this,"Selecting geckolib hurt animation:",
@@ -109,5 +110,10 @@ public class SubGuiModelAnimation extends SubGuiInterface implements ITextfieldL
             else
                 textfield.setText(getModelData(npc).getHurtAnim());
         }
+    }
+
+    @Override
+    public void subGuiClosed(SubGuiInterface subGuiInterface) {
+        initGui();
     }
 }
