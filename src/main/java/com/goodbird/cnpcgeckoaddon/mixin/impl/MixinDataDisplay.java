@@ -1,7 +1,8 @@
-package com.goodbird.cnpcgeckoaddon.mixin;
+package com.goodbird.cnpcgeckoaddon.mixin.impl;
 
 import com.goodbird.cnpcgeckoaddon.data.CustomModelData;
 import com.goodbird.cnpcgeckoaddon.entity.EntityCustomModel;
+import com.goodbird.cnpcgeckoaddon.mixin.IDataDisplay;
 import net.minecraft.nbt.NBTTagCompound;
 import noppes.npcs.DataDisplay;
 import noppes.npcs.entity.EntityCustomNpc;
@@ -15,25 +16,30 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(DataDisplay.class)
-public class MixinDataDisplay {
+public class MixinDataDisplay implements IDataDisplay {
 
-    @Shadow public EntityNPCInterface npc;
+    @Shadow(remap = false) public EntityNPCInterface npc;
     @Unique
     private final CustomModelData customNPC_Gecko_Addon$customModelData = new CustomModelData();
 
-    @Inject(method = "writeToNBT", at = @At("HEAD"))
+    @Inject(method = "writeToNBT", at = @At("HEAD"), remap = false)
     public void writeToNBT(NBTTagCompound nbttagcompound, CallbackInfoReturnable<NBTTagCompound> cir) {
-        if(customNPC_Gecko_Addon$hasCustomModel())
+        if(hasCustomModel())
             customNPC_Gecko_Addon$customModelData.writeToNBT(nbttagcompound);
     }
 
-    @Inject(method = "readToNBT", at = @At("HEAD"))
+    @Inject(method = "readToNBT", at = @At("HEAD"), remap = false)
     public void readFromNBT(NBTTagCompound nbttagcompound, CallbackInfo ci){
         customNPC_Gecko_Addon$customModelData.readFromNBT(nbttagcompound);
     }
 
     @Unique
-    public boolean customNPC_Gecko_Addon$hasCustomModel() {
+    public CustomModelData getCustomModelData(){
+        return customNPC_Gecko_Addon$customModelData;
+    }
+
+    @Unique
+    public boolean hasCustomModel() {
         return (npc instanceof EntityCustomNpc) && ((EntityCustomNpc) npc).modelData.getEntity(npc) != null &&
             ((EntityCustomNpc) npc).modelData.getEntity(npc) instanceof EntityCustomModel;
     }

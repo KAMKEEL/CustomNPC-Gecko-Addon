@@ -1,4 +1,4 @@
-package com.goodbird.cnpcgeckoaddon.mixin;
+package com.goodbird.cnpcgeckoaddon.mixin.impl;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
