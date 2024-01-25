@@ -2,6 +2,7 @@ package com.goodbird.npcgecko.mixin.impl;
 
 import com.goodbird.npcgecko.client.gui.GuiStringSelection;
 import com.goodbird.npcgecko.client.gui.SubGuiModelAnimation;
+import com.goodbird.npcgecko.entity.EntityCustomModel;
 import com.goodbird.npcgecko.mixin.IDataDisplay;
 import kamkeel.addon.client.GeckoAddonClient;
 import net.minecraft.client.Minecraft;
@@ -39,7 +40,7 @@ public class MixinGeckoAddonClient {
         if(!supportEnabled)
             return;
 
-        if(EntityList.getEntityString(entity).equals("npcgecko.CustomModelEntity") || EntityList.getEntityString(entity).equals("Geckolib Model")){
+        if(entity instanceof EntityCustomModel){
             creationScreen.addButton(new GuiNpcButton(202, creationScreen.guiLeft-60, creationScreen.guiTop+40, 180, 20, ((IDataDisplay)creationScreen.npc.display).getCustomModelData().getModel()));
         }
     }
