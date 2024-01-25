@@ -1,4 +1,4 @@
-package com.goodbird.cnpcgeckoaddon.entity;
+package com.goodbird.cnpcplusgecko.entity;
 
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIWatchClosest;

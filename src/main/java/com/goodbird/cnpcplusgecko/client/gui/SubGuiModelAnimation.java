@@ -1,8 +1,8 @@
-package com.goodbird.cnpcgeckoaddon.client.gui;
+package com.goodbird.cnpcplusgecko.client.gui;
 
-import com.goodbird.cnpcgeckoaddon.data.CustomModelData;
-import com.goodbird.cnpcgeckoaddon.mixin.IDataDisplay;
-import com.goodbird.cnpcgeckoaddon.utils.AnimationFileUtil;
+import com.goodbird.cnpcplusgecko.data.CustomModelData;
+import com.goodbird.cnpcplusgecko.mixin.IDataDisplay;
+import com.goodbird.cnpcplusgecko.utils.AnimationFileUtil;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.ResourceLocation;
 import noppes.npcs.client.gui.util.*;

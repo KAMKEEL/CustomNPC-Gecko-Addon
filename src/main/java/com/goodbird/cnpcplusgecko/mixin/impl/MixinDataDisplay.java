@@ -1,8 +1,8 @@
-package com.goodbird.cnpcgeckoaddon.mixin.impl;
+package com.goodbird.cnpcplusgecko.mixin.impl;
 
-import com.goodbird.cnpcgeckoaddon.data.CustomModelData;
-import com.goodbird.cnpcgeckoaddon.entity.EntityCustomModel;
-import com.goodbird.cnpcgeckoaddon.mixin.IDataDisplay;
+import com.goodbird.cnpcplusgecko.data.CustomModelData;
+import com.goodbird.cnpcplusgecko.entity.EntityCustomModel;
+import com.goodbird.cnpcplusgecko.mixin.IDataDisplay;
 import net.minecraft.nbt.NBTTagCompound;
 import noppes.npcs.DataDisplay;
 import noppes.npcs.entity.EntityCustomNpc;

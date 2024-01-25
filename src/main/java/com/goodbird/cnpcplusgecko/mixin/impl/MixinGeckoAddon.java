@@ -1,17 +1,15 @@
-package com.goodbird.cnpcgeckoaddon.mixin.impl;
+package com.goodbird.cnpcplusgecko.mixin.impl;
 
-import com.goodbird.cnpcgeckoaddon.entity.EntityCustomModel;
-import com.goodbird.cnpcgeckoaddon.mixin.IDataDisplay;
-import com.goodbird.cnpcgeckoaddon.utils.NpcTextureUtils;
+import com.goodbird.cnpcplusgecko.entity.EntityCustomModel;
+import com.goodbird.cnpcplusgecko.mixin.IDataDisplay;
+import com.goodbird.cnpcplusgecko.utils.NpcTextureUtils;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import kamkeel.addon.GeckoAddon;
-import noppes.npcs.entity.EntityCustomNpc;
 import noppes.npcs.entity.EntityNPCInterface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(GeckoAddon.class)
 public class MixinGeckoAddon {

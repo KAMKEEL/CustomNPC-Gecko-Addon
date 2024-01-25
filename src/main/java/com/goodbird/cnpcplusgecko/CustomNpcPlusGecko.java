@@ -1,20 +1,20 @@
-package com.goodbird.cnpcgeckoaddon;
+package com.goodbird.cnpcplusgecko;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = "cnpcgeckoaddon",
-    name = "CustomNPC Gecko Addon",
+@Mod(modid = "customnpc-plus-gecko",
+    name = "CustomNPC+ Gecko Addon",
     version = "1.0",
     dependencies = "required-after:customnpcs;required-after:geckolib3")
-public class CNPCGeckoAddon {
+public class CustomNpcPlusGecko {
 
-    @SidedProxy(clientSide = "com.goodbird.cnpcgeckoaddon.client.ClientProxy", serverSide = "com.goodbird.cnpcgeckoaddon.CommonProxy")
+    @SidedProxy(clientSide = "com.goodbird.cnpcplusgecko.client.ClientProxy", serverSide = "com.goodbird.cnpcplusgecko.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.Instance
-    public static CNPCGeckoAddon instance;
+    public static CustomNpcPlusGecko instance;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent ev) {

@@ -1,11 +1,8 @@
-package com.goodbird.cnpcgeckoaddon.mixin.impl;
+package com.goodbird.cnpcplusgecko.mixin.impl;
 
-import com.goodbird.cnpcgeckoaddon.client.gui.GuiStringSelection;
-import com.goodbird.cnpcgeckoaddon.client.gui.SubGuiModelAnimation;
-import com.goodbird.cnpcgeckoaddon.entity.EntityCustomModel;
-import com.goodbird.cnpcgeckoaddon.mixin.IDataDisplay;
-import com.goodbird.cnpcgeckoaddon.utils.NpcTextureUtils;
-import kamkeel.addon.GeckoAddon;
+import com.goodbird.cnpcplusgecko.client.gui.GuiStringSelection;
+import com.goodbird.cnpcplusgecko.client.gui.SubGuiModelAnimation;
+import com.goodbird.cnpcplusgecko.mixin.IDataDisplay;
 import kamkeel.addon.client.GeckoAddonClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -23,7 +20,6 @@ import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.resource.GeckoLibCache;
 
@@ -43,7 +39,7 @@ public class MixinGeckoAddonClient {
         if(!supportEnabled)
             return;
 
-        if(EntityList.getEntityString(entity).equals("cnpcgeckoaddon.CustomModelEntity") || EntityList.getEntityString(entity).equals("Geckolib Model")){
+        if(EntityList.getEntityString(entity).equals("cnpcplusgecko.CustomModelEntity") || EntityList.getEntityString(entity).equals("Geckolib Model")){
             creationScreen.addButton(new GuiNpcButton(202, creationScreen.guiLeft-60, creationScreen.guiTop+40, 180, 20, ((IDataDisplay)creationScreen.npc.display).getCustomModelData().getModel()));
         }
     }
