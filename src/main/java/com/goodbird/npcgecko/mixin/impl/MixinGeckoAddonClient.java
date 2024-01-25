@@ -1,8 +1,8 @@
-package com.goodbird.cnpcplusgecko.mixin.impl;
+package com.goodbird.npcgecko.mixin.impl;
 
-import com.goodbird.cnpcplusgecko.client.gui.GuiStringSelection;
-import com.goodbird.cnpcplusgecko.client.gui.SubGuiModelAnimation;
-import com.goodbird.cnpcplusgecko.mixin.IDataDisplay;
+import com.goodbird.npcgecko.client.gui.GuiStringSelection;
+import com.goodbird.npcgecko.client.gui.SubGuiModelAnimation;
+import com.goodbird.npcgecko.mixin.IDataDisplay;
 import kamkeel.addon.client.GeckoAddonClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -39,7 +39,7 @@ public class MixinGeckoAddonClient {
         if(!supportEnabled)
             return;
 
-        if(EntityList.getEntityString(entity).equals("cnpcplusgecko.CustomModelEntity") || EntityList.getEntityString(entity).equals("Geckolib Model")){
+        if(EntityList.getEntityString(entity).equals("npcgecko.CustomModelEntity") || EntityList.getEntityString(entity).equals("Geckolib Model")){
             creationScreen.addButton(new GuiNpcButton(202, creationScreen.guiLeft-60, creationScreen.guiTop+40, 180, 20, ((IDataDisplay)creationScreen.npc.display).getCustomModelData().getModel()));
         }
     }
@@ -58,7 +58,7 @@ public class MixinGeckoAddonClient {
             for(ResourceLocation resLoc : GeckoLibCache.getInstance().getGeoModels().keySet()){
                 list.add(resLoc.toString());
             }
-            creationScreen.setSubGui(new GuiStringSelection(creationScreen,"Selecting geckolib model:", list, name -> {
+            creationScreen.setSubGui(new GuiStringSelection(creationScreen,"Selecting GeckoLib Model:", list, name -> {
                 ((IDataDisplay)creationScreen.npc.display).getCustomModelData().setModel(name);
                 creationScreen.getButton(202).setDisplayText(name);
             }));

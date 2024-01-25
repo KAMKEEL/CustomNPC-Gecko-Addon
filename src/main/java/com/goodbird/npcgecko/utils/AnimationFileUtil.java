@@ -1,4 +1,4 @@
-package com.goodbird.cnpcplusgecko.utils;
+package com.goodbird.npcgecko.utils;
 
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.builder.Animation;

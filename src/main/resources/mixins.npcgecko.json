@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.7.11",
-  "package": "com.goodbird.cnpcplusgecko.mixin.impl",
+  "package": "com.goodbird.npcgecko.mixin.impl",
   "refmap": "mixins.cnpcplusgecko.refmap.json",
   "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8",

@@ -1,4 +1,4 @@
-package com.goodbird.cnpcplusgecko.client.gui;
+package com.goodbird.npcgecko.client.gui;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

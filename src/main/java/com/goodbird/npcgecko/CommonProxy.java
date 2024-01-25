@@ -1,6 +1,6 @@
-package com.goodbird.cnpcplusgecko;
+package com.goodbird.npcgecko;
 
-import com.goodbird.cnpcplusgecko.entity.EntityCustomModel;
+import com.goodbird.npcgecko.entity.EntityCustomModel;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 

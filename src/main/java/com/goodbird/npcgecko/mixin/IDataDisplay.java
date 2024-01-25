@@ -1,6 +1,6 @@
-package com.goodbird.cnpcplusgecko.mixin;
+package com.goodbird.npcgecko.mixin;
 
-import com.goodbird.cnpcplusgecko.data.CustomModelData;
+import com.goodbird.npcgecko.data.CustomModelData;
 
 public interface IDataDisplay {
     CustomModelData getCustomModelData();

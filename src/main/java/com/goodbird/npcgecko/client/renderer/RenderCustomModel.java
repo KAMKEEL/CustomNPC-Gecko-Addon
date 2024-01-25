@@ -1,7 +1,7 @@
-package com.goodbird.cnpcplusgecko.client.renderer;
+package com.goodbird.npcgecko.client.renderer;
 
-import com.goodbird.cnpcplusgecko.client.model.ModelCustom;
-import com.goodbird.cnpcplusgecko.entity.EntityCustomModel;
+import com.goodbird.npcgecko.client.model.ModelCustom;
+import com.goodbird.npcgecko.entity.EntityCustomModel;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;

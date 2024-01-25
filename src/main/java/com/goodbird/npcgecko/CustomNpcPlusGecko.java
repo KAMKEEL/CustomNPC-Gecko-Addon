@@ -1,4 +1,4 @@
-package com.goodbird.cnpcplusgecko;
+package com.goodbird.npcgecko;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -10,7 +10,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
     dependencies = "required-after:customnpcs;required-after:geckolib3")
 public class CustomNpcPlusGecko {
 
-    @SidedProxy(clientSide = "com.goodbird.cnpcplusgecko.client.ClientProxy", serverSide = "com.goodbird.cnpcplusgecko.CommonProxy")
+    @SidedProxy(clientSide = "com.goodbird.npcgecko.client.ClientProxy", serverSide = "com.goodbird.npcgecko.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.Instance

@@ -1,8 +1,8 @@
-package com.goodbird.cnpcplusgecko.client;
+package com.goodbird.npcgecko.client;
 
-import com.goodbird.cnpcplusgecko.CommonProxy;
-import com.goodbird.cnpcplusgecko.client.renderer.RenderCustomModel;
-import com.goodbird.cnpcplusgecko.entity.EntityCustomModel;
+import com.goodbird.npcgecko.CommonProxy;
+import com.goodbird.npcgecko.client.renderer.RenderCustomModel;
+import com.goodbird.npcgecko.entity.EntityCustomModel;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 

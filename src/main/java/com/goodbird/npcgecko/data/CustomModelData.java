@@ -1,4 +1,4 @@
-package com.goodbird.cnpcplusgecko.data;
+package com.goodbird.npcgecko.data;
 
 import net.minecraft.nbt.NBTTagCompound;
 

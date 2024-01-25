@@ -1,8 +1,8 @@
-package com.goodbird.cnpcplusgecko.mixin.impl;
+package com.goodbird.npcgecko.mixin.impl;
 
-import com.goodbird.cnpcplusgecko.entity.EntityCustomModel;
-import com.goodbird.cnpcplusgecko.mixin.IDataDisplay;
-import com.goodbird.cnpcplusgecko.utils.NpcTextureUtils;
+import com.goodbird.npcgecko.entity.EntityCustomModel;
+import com.goodbird.npcgecko.mixin.IDataDisplay;
+import com.goodbird.npcgecko.utils.NpcTextureUtils;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import kamkeel.addon.GeckoAddon;

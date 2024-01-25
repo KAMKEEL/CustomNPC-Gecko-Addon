@@ -1,4 +1,4 @@
-package com.goodbird.cnpcplusgecko.utils;
+package com.goodbird.npcgecko.utils;
 
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import net.minecraft.client.Minecraft;
