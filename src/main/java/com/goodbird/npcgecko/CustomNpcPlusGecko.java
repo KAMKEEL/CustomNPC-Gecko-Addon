@@ -4,7 +4,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = "customnpc-plus-gecko",
+@Mod(modid = "npcgecko",
     name = "CustomNPC+ Gecko Addon",
     version = "1.0",
     dependencies = "required-after:customnpcs;required-after:geckolib3")
