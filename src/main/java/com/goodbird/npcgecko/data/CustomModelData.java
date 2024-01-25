@@ -7,15 +7,17 @@ public class CustomModelData {
     private String animFile = "custom:geo_npc.animation.json";
     private String idleAnim = "";
     private String walkAnim = "";
-    private String attackAnim = "";
+    private String meleeAttackAnim = "";
     private String hurtAnim = "";
+    private String rangedAttackAnim = "";
 
     public NBTTagCompound writeToNBT(NBTTagCompound nbttagcompound) {
         nbttagcompound.setString("Model", model);
         nbttagcompound.setString("AnimFile", animFile);
         nbttagcompound.setString("IdleAnim", idleAnim);
         nbttagcompound.setString("WalkAnim", walkAnim);
-        nbttagcompound.setString("AttackAnim", attackAnim);
+        nbttagcompound.setString("MeleeAttackAnim", meleeAttackAnim);
+        nbttagcompound.setString("RangedAttackAnim", rangedAttackAnim);
         nbttagcompound.setString("HurtAnim", hurtAnim);
         return nbttagcompound;
     }
@@ -27,7 +29,8 @@ public class CustomModelData {
             idleAnim = nbttagcompound.getString("IdleAnim");
             walkAnim = nbttagcompound.getString("WalkAnim");
             hurtAnim = nbttagcompound.getString("HurtAnim");
-            attackAnim = nbttagcompound.getString("AttackAnim");
+            meleeAttackAnim = nbttagcompound.getString("MeleeAttackAnim");
+            rangedAttackAnim = nbttagcompound.getString("RangedAttackAnim");
         }
     }
 
@@ -63,12 +66,12 @@ public class CustomModelData {
         this.walkAnim = walkAnim;
     }
 
-    public String getAttackAnim() {
-        return attackAnim;
+    public String getMeleeAttackAnim() {
+        return meleeAttackAnim;
     }
 
-    public void setAttackAnim(String attackAnim) {
-        this.attackAnim = attackAnim;
+    public void setMeleeAttackAnim(String meleeAttackAnim) {
+        this.meleeAttackAnim = meleeAttackAnim;
     }
 
     public String getHurtAnim() {
@@ -77,5 +80,13 @@ public class CustomModelData {
 
     public void setHurtAnim(String hurtAnim) {
         this.hurtAnim = hurtAnim;
+    }
+
+    public String getRangedAttackAnim() {
+        return rangedAttackAnim;
+    }
+
+    public void setRangedAttackAnim(String rangedAttackAnim) {
+        this.rangedAttackAnim = rangedAttackAnim;
     }
 }

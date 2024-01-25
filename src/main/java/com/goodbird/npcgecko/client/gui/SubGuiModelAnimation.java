@@ -22,8 +22,9 @@ public class SubGuiModelAnimation extends SubGuiInterface implements ITextfieldL
         addSelectionBlock(1,y,"Animation File:",getModelData(npc).getAnimFile());
         addSelectionBlock(2,y+=23,"Idle:",getModelData(npc).getIdleAnim());
         addSelectionBlock(3,y+=23,"Walk:",getModelData(npc).getWalkAnim());
-        addSelectionBlock(4,y+=23,"Attack:",getModelData(npc).getAttackAnim());
-        addSelectionBlock(5,y+23,"Hurt:",getModelData(npc).getHurtAnim());
+        addSelectionBlock(4,y+=23,"Melee Attack:",getModelData(npc).getMeleeAttackAnim());
+        addSelectionBlock(5,y+=23,"Ranged Attack:",getModelData(npc).getRangedAttackAnim());
+        addSelectionBlock(6,y+23,"Hurt:",getModelData(npc).getHurtAnim());
         addButton(new GuiNpcButton(670, width - 22, 2, 20, 20, "X"));
     }
 
@@ -59,11 +60,16 @@ public class SubGuiModelAnimation extends SubGuiInterface implements ITextfieldL
                 (name)-> getModelData(npc).setWalkAnim(name)));
         }
         if(button.id==4){
-            setSubGui(new GuiStringSelection(this,"Selecting geckolib attack animation:",
+            setSubGui(new GuiStringSelection(this,"Selecting geckolib melee attack animation:",
                 AnimationFileUtil.getAnimationList(getModelData(npc).getAnimFile()),
-                (name)-> getModelData(npc).setAttackAnim(name)));
+                (name)-> getModelData(npc).setMeleeAttackAnim(name)));
         }
         if(button.id==5){
+            setSubGui(new GuiStringSelection(this,"Selecting geckolib ranged attack animation:",
+                AnimationFileUtil.getAnimationList(getModelData(npc).getAnimFile()),
+                (name)-> getModelData(npc).setRangedAttackAnim(name)));
+        }
+        if(button.id==6){
             setSubGui(new GuiStringSelection(this,"Selecting geckolib hurt animation:",
                 AnimationFileUtil.getAnimationList(getModelData(npc).getAnimFile()),
                 (name)-> getModelData(npc).setHurtAnim(name)));
@@ -100,11 +106,17 @@ public class SubGuiModelAnimation extends SubGuiInterface implements ITextfieldL
         }
         if(textfield.id == 4 && isValidAnimation(textfield.getText())){
             if(!textfield.isEmpty())
-                getModelData(npc).setAttackAnim(textfield.getText());
+                getModelData(npc).setMeleeAttackAnim(textfield.getText());
             else
-                textfield.setText(getModelData(npc).getAttackAnim());
+                textfield.setText(getModelData(npc).getMeleeAttackAnim());
         }
         if(textfield.id == 5 && isValidAnimation(textfield.getText())){
+            if(!textfield.isEmpty())
+                getModelData(npc).setRangedAttackAnim(textfield.getText());
+            else
+                textfield.setText(getModelData(npc).getRangedAttackAnim());
+        }
+        if(textfield.id == 6 && isValidAnimation(textfield.getText())){
             if(!textfield.isEmpty())
                 getModelData(npc).setHurtAnim(textfield.getText());
             else

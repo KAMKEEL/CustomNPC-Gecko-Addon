@@ -30,10 +30,11 @@ public class MixinGeckoAddon {
             modelEntity.textureResLoc = NpcTextureUtils.getNpcTexture((EntityNPCInterface) copied);
             modelEntity.modelResLoc = new ResourceLocation(display.getCustomModelData().getModel());
             modelEntity.animResLoc = new ResourceLocation(display.getCustomModelData().getAnimFile());
-            modelEntity.idleAnim = display.getCustomModelData().getIdleAnim();
-            modelEntity.walkAnim = display.getCustomModelData().getWalkAnim();
-            modelEntity.attackAnim = display.getCustomModelData().getAttackAnim();
-            modelEntity.hurtAnim = display.getCustomModelData().getHurtAnim();
+            modelEntity.idleAnimName = display.getCustomModelData().getIdleAnim();
+            modelEntity.walkAnimName = display.getCustomModelData().getWalkAnim();
+            modelEntity.meleeAttackAnimName = display.getCustomModelData().getMeleeAttackAnim();
+            modelEntity.rangedAttackAnimName = display.getCustomModelData().getRangedAttackAnim();
+            modelEntity.hurtAnimName = display.getCustomModelData().getHurtAnim();
             modelEntity.leftHeldItem = npc.inventory.getOffHand();
         }
     }
