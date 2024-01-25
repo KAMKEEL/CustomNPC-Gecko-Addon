@@ -2,6 +2,7 @@ package com.goodbird.npcgecko;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = "npcgecko",
@@ -19,5 +20,9 @@ public class CustomNpcPlusGecko {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent ev) {
         proxy.preInit(ev);
+    }
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent ev) {
+        proxy.init(ev);
     }
 }
