@@ -35,5 +35,5 @@
  */
 dependencies {
     implementation rfg.deobf(name: "CustomNPC-Plus-1.9-beta5")
-    implementation name: "geckolib-forge-1.7.10-3.0.32"
+    implementation name: "geckolib-forge-1.7.10-3.0.33"
 }
