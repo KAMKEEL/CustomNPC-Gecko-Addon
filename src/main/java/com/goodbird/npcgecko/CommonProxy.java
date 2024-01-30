@@ -1,5 +1,6 @@
 package com.goodbird.npcgecko;
 
+import com.goodbird.npcgecko.api.AbstractGeckoAPI;
 import com.goodbird.npcgecko.entity.EntityCustomModel;
 import com.goodbird.npcgecko.handler.EventHandler;
 import com.goodbird.npcgecko.network.NetworkHandler;
@@ -17,5 +18,6 @@ public class CommonProxy {
 
     public void init(FMLInitializationEvent ev){
         NetworkHandler.init();
+        NpcAPI.Instance().addGlobalObject("GeckoAPI", AbstractGeckoAPI.Instance());
     }
 }
