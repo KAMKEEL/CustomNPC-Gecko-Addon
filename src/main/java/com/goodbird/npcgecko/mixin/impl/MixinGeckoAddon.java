@@ -36,6 +36,8 @@ public class MixinGeckoAddon {
             modelEntity.rangedAttackAnimName = display.getCustomModelData().getRangedAttackAnim();
             modelEntity.hurtAnimName = display.getCustomModelData().getHurtAnim();
             modelEntity.leftHeldItem = npc.inventory.getOffHand();
+            modelEntity.hurtTime = npc.hurtTime;
+            modelEntity.deathTime = npc.deathTime;
         }
     }
 }

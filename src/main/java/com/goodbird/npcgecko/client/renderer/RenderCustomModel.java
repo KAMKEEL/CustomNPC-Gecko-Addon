@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
+import software.bernie.geckolib3.core.util.Color;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.geo.render.built.GeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
@@ -80,6 +81,14 @@ public class RenderCustomModel extends GeoEntityRenderer<EntityCustomModel> {
         GL11.glTranslatef(-1.51F, -0.55F, 0.7F);
         RenderManager.instance.itemRenderer.renderItem(animatable, stack, 0, IItemRenderer.ItemRenderType.INVENTORY);
         GL11.glPopMatrix();
+    }
+
+    public Color getRenderColor(EntityCustomModel animatable, float partialTicks) {
+        if(animatable.hurtTime>0 || animatable.deathTime > 0){
+            return Color.ofRGBA(255, 30, 30, 255);
+        }else{
+            return Color.ofRGBA(255, 255, 255, 255);
+        }
     }
 
     public boolean isBoneRenderOverriden(EntityCustomModel entity, GeoBone bone) {
