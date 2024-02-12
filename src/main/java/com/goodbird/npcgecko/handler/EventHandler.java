@@ -9,7 +9,7 @@ import noppes.npcs.scripted.event.NpcEvent;
 
 public class EventHandler {
     @SubscribeEvent
-    public void onNpcMeleeAttack(NpcEvent.MeleeAttackEvent event){
+    public void onNpcMeleeAttack(NpcEvent.SwingEvent event){
         NetworkHandler.sendToAll(new CPacketSyncAutoAnim((EntityNPCInterface) event.npc.getMCEntity(), EnumSyncAutoAnim.MELEE_ATTACK));
     }
 
