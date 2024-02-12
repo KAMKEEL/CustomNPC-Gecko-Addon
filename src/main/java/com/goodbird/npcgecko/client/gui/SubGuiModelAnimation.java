@@ -92,35 +92,20 @@ public class SubGuiModelAnimation extends SubGuiInterface implements ITextfieldL
             else
                 textfield.setText(getModelData(npc).getAnimFile());
         }
-        if(textfield.id == 2 && isValidAnimation(textfield.getText())){
-            if(!textfield.isEmpty())
-                getModelData(npc).setIdleAnim(textfield.getText());
-            else
-                textfield.setText(getModelData(npc).getIdleAnim());
+        if(textfield.id == 2 && (isValidAnimation(textfield.getText()) || textfield.getText().isEmpty())){
+            getModelData(npc).setIdleAnim(textfield.getText());
         }
-        if(textfield.id == 3 && isValidAnimation(textfield.getText())){
-            if(!textfield.isEmpty())
-                getModelData(npc).setWalkAnim(textfield.getText());
-            else
-                textfield.setText(getModelData(npc).getWalkAnim());
+        if(textfield.id == 3 && (isValidAnimation(textfield.getText()) || textfield.getText().isEmpty())){
+            getModelData(npc).setWalkAnim(textfield.getText());
         }
-        if(textfield.id == 4 && isValidAnimation(textfield.getText())){
-            if(!textfield.isEmpty())
-                getModelData(npc).setMeleeAttackAnim(textfield.getText());
-            else
-                textfield.setText(getModelData(npc).getMeleeAttackAnim());
+        if(textfield.id == 4 && (isValidAnimation(textfield.getText()) || textfield.getText().isEmpty())){
+            getModelData(npc).setMeleeAttackAnim(textfield.getText());
         }
-        if(textfield.id == 5 && isValidAnimation(textfield.getText())){
-            if(!textfield.isEmpty())
-                getModelData(npc).setRangedAttackAnim(textfield.getText());
-            else
-                textfield.setText(getModelData(npc).getRangedAttackAnim());
+        if(textfield.id == 5 && (isValidAnimation(textfield.getText()) || textfield.getText().isEmpty())){
+            getModelData(npc).setRangedAttackAnim(textfield.getText());
         }
-        if(textfield.id == 6 && isValidAnimation(textfield.getText())){
-            if(!textfield.isEmpty())
-                getModelData(npc).setHurtAnim(textfield.getText());
-            else
-                textfield.setText(getModelData(npc).getHurtAnim());
+        if(textfield.id == 6 && (isValidAnimation(textfield.getText()) || textfield.getText().isEmpty())){
+            getModelData(npc).setHurtAnim(textfield.getText());
         }
     }
 
