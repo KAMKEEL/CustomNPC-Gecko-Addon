@@ -75,7 +75,7 @@ public class MixinGeckoAddonClient {
         if(!supportEnabled)
             return;
 
-        int y = 319;
+        int y = gui.guiTop + 188;
         gui.addLabel(new GuiNpcLabel(212,"Model Animation", gui.guiLeft + 185, y + 5));
         gui.addButton(new GuiNpcButton(212, gui.guiLeft + 300, y, 100, 20, "selectServer.edit"));
         if (!((IDataDisplay)gui.npc.display).hasCustomModel()) {
