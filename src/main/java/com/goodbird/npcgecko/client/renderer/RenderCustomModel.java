@@ -85,7 +85,7 @@ public class RenderCustomModel extends GeoEntityRenderer<EntityCustomModel> {
 
     public Color getRenderColor(EntityCustomModel animatable, float partialTicks) {
         if(animatable.hurtTime>0 || animatable.deathTime > 0){
-            return Color.ofRGBA(255, 30, 30, 255);
+            return Color.ofRGBA(255, 153, 153, 255);
         }else{
             return Color.ofRGBA(255, 255, 255, 255);
         }
