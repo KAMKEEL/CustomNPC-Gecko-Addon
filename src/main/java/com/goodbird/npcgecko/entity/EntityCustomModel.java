@@ -32,6 +32,7 @@ public class EntityCustomModel extends EntityCreature implements IAnimatable, IA
     public AnimationBuilder attackAnim = null;
     public AnimationBuilder hurtAnim = null;
     public ItemStack leftHeldItem;
+    public boolean isSemiVisible = false;
 
     private <E extends IAnimatable> PlayState predicateMovement(AnimationEvent<E> event) {
         if (manualAnim != null) {

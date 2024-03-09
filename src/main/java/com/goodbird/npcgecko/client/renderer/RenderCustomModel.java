@@ -87,6 +87,9 @@ public class RenderCustomModel extends GeoEntityRenderer<EntityCustomModel> {
         if(animatable.hurtTime>0 || animatable.deathTime > 0){
             return Color.ofRGBA(255, 30, 30, 255);
         }else{
+            if(animatable.isSemiVisible){
+                return Color.ofRGBA(255, 255, 255, 100);
+            }
             return Color.ofRGBA(255, 255, 255, 255);
         }
     }
