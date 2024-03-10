@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import noppes.npcs.controllers.data.TintData;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
@@ -33,6 +34,7 @@ public class EntityCustomModel extends EntityCreature implements IAnimatable, IA
     public AnimationBuilder hurtAnim = null;
     public ItemStack leftHeldItem;
     public boolean isSemiVisible = false;
+    public TintData tintData;
 
     private <E extends IAnimatable> PlayState predicateMovement(AnimationEvent<E> event) {
         if (manualAnim != null) {

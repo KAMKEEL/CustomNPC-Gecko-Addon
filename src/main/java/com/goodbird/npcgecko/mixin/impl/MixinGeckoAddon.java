@@ -38,6 +38,7 @@ public class MixinGeckoAddon {
             modelEntity.leftHeldItem = npc.inventory.getOffHand();
             modelEntity.hurtTime = npc.hurtTime;
             modelEntity.deathTime = npc.deathTime;
+            modelEntity.tintData = npc.display.tintData;
         }
     }
 }

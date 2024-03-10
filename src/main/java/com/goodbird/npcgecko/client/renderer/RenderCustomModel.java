@@ -85,12 +85,32 @@ public class RenderCustomModel extends GeoEntityRenderer<EntityCustomModel> {
 
     public Color getRenderColor(EntityCustomModel animatable, float partialTicks) {
         if(animatable.hurtTime>0 || animatable.deathTime > 0){
+            if(animatable.tintData!=null && animatable.tintData.isTintEnabled() && animatable.tintData.isHurtTintEnabled()){
+                int hurtTint = animatable.tintData.getHurtTint();
+                int r = (int) ((float)(hurtTint >> 16 & 255));
+                int g = (int) ((float)(hurtTint >> 8 & 255));
+                int b = (int) ((float)(hurtTint & 255));
+                return Color.ofRGBA(r,g,b, 255);
+            }
             return Color.ofRGBA(255, 153, 153, 255);
         }else{
-            if(animatable.isSemiVisible){
-                return Color.ofRGBA(255, 255, 255, 100);
+            int r = 255;
+            int g = 255;
+            int b = 255;
+            if(animatable.tintData!=null && animatable.tintData.isTintEnabled() && animatable.tintData.isGeneralTintEnabled()){
+                int hurtTint = animatable.tintData.getGeneralTint();
+                int tintR = (int) ((float)(hurtTint >> 16 & 255));
+                int tintG = (int) ((float)(hurtTint >> 8 & 255));
+                int tintB = (int) ((float)(hurtTint & 255));
+                double alpha = ((double)animatable.tintData.getGeneralAlpha() / 100.0);
+                r = (int) (alpha*tintR + r*(1-alpha));
+                g = (int) (alpha*tintG + g*(1-alpha));
+                b = (int) (alpha*tintB + b*(1-alpha));
             }
-            return Color.ofRGBA(255, 255, 255, 255);
+            if(animatable.isSemiVisible){
+                return Color.ofRGBA(r, g, b, 100);
+            }
+            return Color.ofRGBA(r, g, b, 255);
         }
     }
 
