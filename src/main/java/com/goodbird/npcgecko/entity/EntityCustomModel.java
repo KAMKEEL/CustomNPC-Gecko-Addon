@@ -134,9 +134,4 @@ public class EntityCustomModel extends EntityCreature implements IAnimatable, IA
     public int tickTimer() {
         return ticksExisted;
     }
-
-    @Override
-    public void tick() {
-        super.onUpdate();
-    }
 }
