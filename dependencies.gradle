@@ -34,6 +34,6 @@
  * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
-    implementation rfg.deobf(name: "CustomNPC-Plus-1.9-beta6")
+    implementation rfg.deobf(name: "CustomNPC-Plus-1.9")
     implementation name: "geckolib-unofficial-1.7.10-1.0.1-dev"
 }
