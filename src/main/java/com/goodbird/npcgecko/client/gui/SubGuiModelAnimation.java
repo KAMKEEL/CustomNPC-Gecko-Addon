@@ -31,7 +31,7 @@ public class SubGuiModelAnimation extends SubGuiInterface implements ITextfieldL
     public void addSelectionBlock(int id, int y, String label, String value){
         addLabel(new GuiNpcLabel(id,label, guiLeft - 85, y + 5,0xffffff));
         addTextField(new GuiNpcTextField(id,this, fontRendererObj, guiLeft - 10, y, 200, 20, value));
-        this.addButton(new GuiNpcButton(id, guiLeft + 193, y, 80, 20, "mco.template.button.select"));
+        this.addButton(new GuiNpcButton(id, guiLeft + 193, y, 80, 20, "gui.select"));
     }
 
     public CustomModelData getModelData(EntityNPCInterface npc){
