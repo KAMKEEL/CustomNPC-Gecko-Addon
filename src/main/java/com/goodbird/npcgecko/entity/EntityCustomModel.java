@@ -117,7 +117,6 @@ public class EntityCustomModel extends EntityCreature implements IAnimatable, IA
         super(worldIn);
         this.ignoreFrustumCheck = true;
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.setSize(0.7F, 2F);
     }
 
     @Override
