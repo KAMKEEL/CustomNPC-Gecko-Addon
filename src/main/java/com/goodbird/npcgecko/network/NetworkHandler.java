@@ -13,8 +13,6 @@ public final class NetworkHandler {
     private static Side side = FMLCommonHandler.instance().getSide();
 
     public static void init() {
-        if(side.isServer())
-            return;
         wrapper.registerMessage(CPacketSyncAutoAnim.class, CPacketSyncAutoAnim.class, 0, Side.CLIENT);
         wrapper.registerMessage(CPacketSyncManualAnim.class, CPacketSyncManualAnim.class, 1, Side.CLIENT);
     }
