@@ -10,6 +10,8 @@ import noppes.npcs.entity.EntityNPCInterface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.manager.AnimationData;
 
 @Mixin(GeckoAddon.class)
 public class MixinGeckoAddon {
@@ -39,6 +41,11 @@ public class MixinGeckoAddon {
             modelEntity.hurtTime = npc.hurtTime;
             modelEntity.deathTime = npc.deathTime;
             modelEntity.tintData = npc.display.tintData;
+            modelEntity.headBoneName = display.getCustomModelData().getHeadBoneName();
+            AnimationData animationData = modelEntity.getFactory().getOrCreateAnimationData(modelEntity.getUniqueID().hashCode());
+            for(AnimationController controller : animationData.getAnimationControllers().values()){
+                controller.transitionLengthTicks = display.getCustomModelData().getTransitionLengthTicks();
+            }
         }
     }
 }

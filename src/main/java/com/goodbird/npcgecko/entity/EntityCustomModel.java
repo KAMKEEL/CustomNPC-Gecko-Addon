@@ -28,6 +28,7 @@ public class EntityCustomModel extends EntityCreature implements IAnimatable, IA
     public String hurtAnimName = "";
     public String meleeAttackAnimName = "";
     public String rangedAttackAnimName = "";
+    public String headBoneName = "head";
     public AnimationBuilder dialogAnim = null;
     public AnimationBuilder manualAnim = null;
     public AnimationBuilder attackAnim = null;
@@ -116,7 +117,6 @@ public class EntityCustomModel extends EntityCreature implements IAnimatable, IA
     public EntityCustomModel(World worldIn) {
         super(worldIn);
         this.ignoreFrustumCheck = true;
-        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.setSize(0.7F, 2F);
     }
 
