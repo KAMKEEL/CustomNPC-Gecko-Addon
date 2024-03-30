@@ -11,7 +11,6 @@ import noppes.npcs.entity.EntityNPCInterface;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 
 public class GeckoAPI extends AbstractGeckoAPI {
-    public static Side side = FMLCommonHandler.instance().getEffectiveSide();
     private static AbstractGeckoAPI Instance;
 
     private GeckoAPI() {}

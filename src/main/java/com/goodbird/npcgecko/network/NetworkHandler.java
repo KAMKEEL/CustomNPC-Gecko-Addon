@@ -10,7 +10,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 
 public final class NetworkHandler {
     private static final SimpleNetworkWrapper wrapper = new SimpleNetworkWrapper("npcgecko");
-    private static Side side = FMLCommonHandler.instance().getSide();
 
     public static void init() {
         wrapper.registerMessage(CPacketSyncAutoAnim.class, CPacketSyncAutoAnim.class, 0, Side.CLIENT);
@@ -18,20 +17,14 @@ public final class NetworkHandler {
     }
 
     public static void sendToPlayer(IMessage message, EntityPlayer player) {
-        if(side.isClient())
-            return;
         wrapper.sendTo(message, (EntityPlayerMP) player);
     }
 
     public static void sendToAll(IMessage message) {
-        if(side.isClient())
-            return;
         wrapper.sendToAll(message);
     }
 
     public static void sendToServer(IMessage message) {
-        if(side.isServer())
-            return;
         wrapper.sendToServer(message);
     }
 }
