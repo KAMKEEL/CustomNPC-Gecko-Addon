@@ -3,6 +3,7 @@ package com.goodbird.npcgecko.mixin.impl;
 import com.goodbird.npcgecko.entity.EntityCustomModel;
 import com.goodbird.npcgecko.mixin.IDataDisplay;
 import com.goodbird.npcgecko.utils.NpcTextureUtils;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import kamkeel.addon.GeckoAddon;
@@ -27,7 +28,9 @@ public class MixinGeckoAddon {
         if(!supportEnabled)
             return;
 
-        if (entity instanceof EntityCustomModel modelEntity && copied instanceof EntityNPCInterface npc) {
+        if (entity instanceof EntityCustomModel && copied instanceof EntityNPCInterface) {
+            EntityCustomModel  modelEntity = (EntityCustomModel) entity;
+            EntityNPCInterface npc = (EntityNPCInterface) copied;
             IDataDisplay display = (IDataDisplay) npc.display;
             modelEntity.textureResLoc = NpcTextureUtils.getNpcTexture((EntityNPCInterface) copied);
             modelEntity.modelResLoc = new ResourceLocation(display.getCustomModelData().getModel());

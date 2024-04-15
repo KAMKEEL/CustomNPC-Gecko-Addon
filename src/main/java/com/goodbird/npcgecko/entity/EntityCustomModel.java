@@ -98,19 +98,15 @@ public class EntityCustomModel extends EntityCreature implements IAnimatable, IA
         dialogAnim = new AnimationBuilder().playOnce(name);
     }
     public void activateReceivedAnim(EnumSyncAutoAnim type) {
-        switch (type) {
-            case HURT -> {
-                if(!hurtAnimName.isEmpty())
-                    hurtAnim = new AnimationBuilder().playOnce(hurtAnimName);
-            }
-            case MELEE_ATTACK -> {
-                if(!meleeAttackAnimName.isEmpty())
-                    attackAnim = new AnimationBuilder().playOnce(meleeAttackAnimName);
-            }
-            case RANGED_ATTACK -> {
-                if(!rangedAttackAnimName.isEmpty())
-                    attackAnim = new AnimationBuilder().playOnce(rangedAttackAnimName);
-            }
+        if(type == EnumSyncAutoAnim.HURT){
+            if(!hurtAnimName.isEmpty())
+                hurtAnim = new AnimationBuilder().playOnce(hurtAnimName);
+        }else if(type == EnumSyncAutoAnim.MELEE_ATTACK){
+            if(!meleeAttackAnimName.isEmpty())
+                attackAnim = new AnimationBuilder().playOnce(meleeAttackAnimName);
+        }else if(type == EnumSyncAutoAnim.RANGED_ATTACK){
+            if(!rangedAttackAnimName.isEmpty())
+                attackAnim = new AnimationBuilder().playOnce(rangedAttackAnimName);
         }
     }
 
