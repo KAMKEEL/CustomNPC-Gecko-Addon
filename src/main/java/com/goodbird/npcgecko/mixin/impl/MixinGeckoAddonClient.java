@@ -125,7 +125,6 @@ public class MixinGeckoAddonClient {
         GL11.glRotatef(180, 1,0,0);
         GL11.glTranslated(0, -1.5,0);
 
-        (mainModel).entity.renderYawOffset = (mainModel).entity.prevRenderYawOffset = 0;
         if (!npc.isInvisible())
         {
             if(mainModel.entity instanceof EntityCustomModel){

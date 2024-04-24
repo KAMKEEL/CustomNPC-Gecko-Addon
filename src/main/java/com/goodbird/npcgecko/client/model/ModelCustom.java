@@ -32,8 +32,8 @@ public class ModelCustom extends AnimatedGeoModel<EntityCustomModel> {
             //We get the model data for an entity
             EntityModelData extraData = (EntityModelData) animationEvent.getExtraDataOfType(EntityModelData.class).get(0);
             //And we set the head bone rotation to the interpolated pitch and yaw rotations of an entity
-            head.setRotationY((extraData.netHeadYaw) * ((float) Math.PI / 180F));
             head.setRotationX((extraData.headPitch) * ((float) Math.PI / 180F));
+            head.setRotationY((extraData.netHeadYaw) * ((float) Math.PI / 180F));
         }
     }
 }
