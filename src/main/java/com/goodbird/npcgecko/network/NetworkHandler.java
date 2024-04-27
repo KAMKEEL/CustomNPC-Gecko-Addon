@@ -18,20 +18,14 @@ public final class NetworkHandler {
     }
 
     public static void sendToPlayer(IMessage message, EntityPlayer player) {
-        if(side.isClient())
-            return;
         wrapper.sendTo(message, (EntityPlayerMP) player);
     }
 
     public static void sendToAll(IMessage message) {
-        if(side.isClient())
-            return;
         wrapper.sendToAll(message);
     }
 
     public static void sendToServer(IMessage message) {
-        if(side.isServer())
-            return;
         wrapper.sendToServer(message);
     }
 }
