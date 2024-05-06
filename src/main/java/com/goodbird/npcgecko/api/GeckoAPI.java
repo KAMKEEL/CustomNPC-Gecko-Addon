@@ -74,7 +74,7 @@ public class GeckoAPI extends AbstractGeckoAPI {
     private TileEntityCustomModel getOrCreateTECM(IBlockScripted scriptedBlock){
         TileScripted tile = (TileScripted) scriptedBlock.getMCTileEntity();
         if(!(tile.renderTile instanceof TileEntityCustomModel)){
-            tile.renderTile = new TileEntityCustomModel();
+            tile.renderTile = new TileEntityCustomModel(tile);
         }
         return (TileEntityCustomModel) tile.renderTile;
     }
