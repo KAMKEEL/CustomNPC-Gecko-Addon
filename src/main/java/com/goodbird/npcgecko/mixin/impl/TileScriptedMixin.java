@@ -1,5 +1,6 @@
 package com.goodbird.npcgecko.mixin.impl;
 
+import com.goodbird.npcgecko.CustomNpcPlusGecko;
 import com.goodbird.npcgecko.tile.TileEntityCustomModel;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
@@ -24,9 +25,10 @@ public class TileScriptedMixin {
         if(compound.hasKey("renderTileTag")){
             renderTile = new TileEntityCustomModel();
             NBTTagCompound saveTag = compound.getCompoundTag("renderTileTag");
-            if(MinecraftServer.getServer()!=null && saveTag.hasKey("dimID")){
-                World world = MinecraftServer.getServer().worldServers[saveTag.getInteger("dimID")];
-                renderTile.setWorldObj(world);
+            if(saveTag.hasKey("dimID")){
+                renderTile.setWorldObj(CustomNpcPlusGecko.proxy.getWorldById(saveTag.getInteger("dimID")));
+            }else{
+                renderTile.setWorldObj(CustomNpcPlusGecko.proxy.getWorldById(0));
             }
             renderTile.readFromNBT(saveTag);
         }

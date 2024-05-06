@@ -8,6 +8,8 @@ import com.goodbird.npcgecko.tile.TileEntityCustomModel;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.World;
 
 
 public class ClientProxy extends CommonProxy {
@@ -19,4 +21,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCustomModel.class, new RenderTileCustomModel());
     }
 
+    public World getWorldById(int id){
+        return Minecraft.getMinecraft().theWorld;
+    }
 }
