@@ -37,12 +37,12 @@ public abstract class MixinBlockScriptedRenderer {
         if(!(tileScripted.renderTile instanceof TileEntityCustomModel)) return;
         GL11.glPushMatrix();
         GL11.glTranslated(x,y,z);
-        GL11.glTranslated(0.5,0, 0.5);
+        GL11.glTranslated(0.5,0.5, 0.5);
         GL11.glRotatef((float)tileScripted.rotationY, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef((float)tileScripted.rotationX, 1.0F, 0.0F, 0.0F);
         GL11.glRotatef((float)tileScripted.rotationZ, 0.0F, 0.0F, 1.0F);
         GL11.glScalef(tileScripted.scaleX, tileScripted.scaleY, tileScripted.scaleZ);
-        GL11.glTranslated(-0.5,0, -0.5);
+        GL11.glTranslated(-0.5,-0.5/tileScripted.scaleY, -0.5);
         GL11.glTranslated(-x,-y,-z);
         TileEntityRendererDispatcher.instance.renderTileEntityAt(tileScripted.renderTile, x, y, z, partialTicks);
         GL11.glPopMatrix();
