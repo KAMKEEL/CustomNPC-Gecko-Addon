@@ -6,20 +6,36 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
+import software.bernie.geckolib3.resource.GeckoLibCache;
 
 public class ModelCustom extends AnimatedGeoModel<EntityCustomModel> {
     @Override
     public ResourceLocation getAnimationFileLocation(EntityCustomModel entity) {
+        if(!GeckoLibCache.getInstance().getAnimations().containsKey(entity.animResLoc)){
+            return new ResourceLocation("npcgecko","animations/none.animations.json");
+        }
         return entity.animResLoc;
     }
 
     @Override
     public ResourceLocation getModelLocation(EntityCustomModel entity) {
+        if(!GeckoLibCache.getInstance().getGeoModels().containsKey(entity.modelResLoc)){
+            return new ResourceLocation("npcgecko","geo/modelnotfound.geo.json");
+        }
+        if(!GeckoLibCache.getInstance().getAnimations().containsKey(entity.animResLoc)){
+            return new ResourceLocation("npcgecko","geo/animfilenotfound.geo.json");
+        }
         return entity.modelResLoc;
     }
 
     @Override
     public ResourceLocation getTextureLocation(EntityCustomModel entity) {
+        if(!GeckoLibCache.getInstance().getGeoModels().containsKey(entity.modelResLoc)){
+            return new ResourceLocation("npcgecko","textures/model/alphabet.png");
+        }
+        if(!GeckoLibCache.getInstance().getAnimations().containsKey(entity.animResLoc)){
+            return new ResourceLocation("npcgecko","textures/model/alphabet.png");
+        }
         return entity.textureResLoc;
     }
 
