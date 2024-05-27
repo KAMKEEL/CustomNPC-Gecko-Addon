@@ -19,22 +19,19 @@ import static net.minecraftforge.client.IItemRenderer.ItemRenderType.ENTITY;
 @Mixin(BlockScriptedRenderer.class)
 public abstract class MixinBlockScriptedRenderer {
 
-    @Shadow(remap = false)
-    protected abstract boolean overrideModel();
-
     @Inject(method = "renderTileEntityAt", at = @At(value = "INVOKE", target = "Lnoppes/npcs/client/renderer/blocks/BlockScriptedRenderer;renderItem(Lnet/minecraft/tileentity/TileEntity;Lnet/minecraft/item/ItemStack;)V", remap = false))
     public void geckoModelRendering(TileEntity te, double x, double y, double z, float partialTicks, CallbackInfo ci) {
         if(!(te instanceof TileScripted)) return;
         TileScripted tileScripted = (TileScripted) te;
         if(tileScripted.itemModel == null) return;
-        if(!(MinecraftForgeClient.getItemRenderer(tileScripted.itemModel, ENTITY) instanceof RenderBlockItem) || overrideModel()) return;
+        if(!(MinecraftForgeClient.getItemRenderer(tileScripted.itemModel, ENTITY) instanceof RenderBlockItem) || BlockScriptedRenderer.overrideModel()) return;
         GL11.glTranslated(0, -0.5, 0);
         GL11.glScaled(2, 2, 2);
     }
 
     @Inject(method = "renderTileEntityAt", at = @At(value = "HEAD"), cancellable = true)
     public void customGeckoModelRendering(TileEntity te, double x, double y, double z, float partialTicks, CallbackInfo ci) {
-        if(overrideModel()) return;
+        if(BlockScriptedRenderer.overrideModel()) return;
         if(!(te instanceof TileScripted)) return;
         TileScripted tileScripted = (TileScripted) te;
         if(!(tileScripted.renderTile instanceof TileEntityCustomModel)) return;
