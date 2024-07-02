@@ -21,7 +21,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class EntityCustomModel extends EntityCreature implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public ResourceLocation modelResLoc = new ResourceLocation("geckolib3", "geo/npc.geo.json");
-    public ResourceLocation animResLoc = new ResourceLocation("custom", "geo_npc.animation.json");
+    public ResourceLocation animResLoc = new ResourceLocation("npcgecko", "animations/geo_npc.animation.json");
     public ResourceLocation textureResLoc = new ResourceLocation("geckolib3", "textures/model/entity/geo_npc.png");
     public String idleAnimName = "";
     public String walkAnimName = "";
