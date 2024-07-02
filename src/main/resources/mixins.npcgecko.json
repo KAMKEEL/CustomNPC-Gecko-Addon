@@ -8,9 +8,12 @@
   "mixins": [
     "MixinDataDisplay",
     "MixinGeckoAddon",
+    "MixinItemScripted",
+    "MixinScriptCustomItem",
     "TileScriptedMixin"
   ],
   "client": [
+    "MixinCustomItemRenderer",
     "MixinBlockScriptedRenderer",
     "MixinGeckoAddonClient"
   ],

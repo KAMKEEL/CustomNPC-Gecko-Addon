@@ -1,7 +1,9 @@
 package com.goodbird.npcgecko.api;
 
 import com.goodbird.npcgecko.client.renderer.RenderTileCustomModel;
+import com.goodbird.npcgecko.data.CustomItemModelData;
 import com.goodbird.npcgecko.mixin.IDataDisplay;
+import com.goodbird.npcgecko.mixin.IScriptCustomItem;
 import com.goodbird.npcgecko.network.CPacketSyncManualAnim;
 import com.goodbird.npcgecko.network.CPacketSyncTileManualAnim;
 import com.goodbird.npcgecko.network.NetworkHandler;
@@ -16,6 +18,7 @@ import noppes.npcs.api.entity.IPlayer;
 import noppes.npcs.blocks.tiles.TileScripted;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.scripted.BlockScriptedWrapper;
+import noppes.npcs.scripted.item.ScriptCustomItem;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 
 public class GeckoAPI extends AbstractGeckoAPI {
@@ -115,5 +118,41 @@ public class GeckoAPI extends AbstractGeckoAPI {
     @Override
     public void syncAnimForAll(IBlockScripted scriptedBlock, AnimationBuilder builder) {
         NetworkHandler.sendToAll(new CPacketSyncTileManualAnim(scriptedBlock.getMCTileEntity(), builder));
+    }
+
+    private CustomItemModelData getOrCreateCIMD(ScriptCustomItem item){
+        IScriptCustomItem scriptCustomItem = (IScriptCustomItem) item;
+        if(!scriptCustomItem.hasCustomModel()){
+            scriptCustomItem.setCustomModelData(new CustomItemModelData());
+        }
+        return scriptCustomItem.getCustomModelData();
+    }
+
+    @Override
+    public void setModel(ScriptCustomItem item, String model) {
+        CustomItemModelData data = getOrCreateCIMD(item);
+        data.setModel(model);
+        item.saveItemData();
+    }
+
+    @Override
+    public void setTexture(ScriptCustomItem item, String texture) {
+        CustomItemModelData data = getOrCreateCIMD(item);
+        data.setTexture(texture);
+        item.saveItemData();
+    }
+
+    @Override
+    public void setAnimationFile(ScriptCustomItem item, String animation) {
+        CustomItemModelData data = getOrCreateCIMD(item);
+        data.setAnimFile(animation);
+        item.saveItemData();
+    }
+
+    @Override
+    public void setIdleAnimation(ScriptCustomItem item, String animation) {
+        CustomItemModelData data = getOrCreateCIMD(item);
+        data.setIdleAnim(animation);
+        item.saveItemData();
     }
 }
