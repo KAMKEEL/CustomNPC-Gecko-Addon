@@ -7,7 +7,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = "npcgecko",
     name = "CustomNPC+ Gecko Addon",
-    version = "1.1",
+    version = "1.1-beta1",
     dependencies = "required-after:customnpcs;required-after:geckolib3")
 public class CustomNpcPlusGecko {
 
