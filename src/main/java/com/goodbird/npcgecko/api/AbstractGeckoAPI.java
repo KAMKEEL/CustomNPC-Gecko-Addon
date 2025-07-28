@@ -49,8 +49,10 @@ public abstract class AbstractGeckoAPI {
     public abstract void syncAnimForPlayer(IBlockScripted scriptedBlock, AnimationBuilder builder, IPlayer<EntityPlayerMP> player);
     public abstract void syncAnimForAll(IBlockScripted scriptedBlock, AnimationBuilder builder);
 
-    public abstract void setModel(ScriptCustomItem item, String model);
-    public abstract void setTexture(ScriptCustomItem item, String texture);
-    public abstract void setAnimationFile(ScriptCustomItem item, String animation);
-    public abstract void setIdleAnimation(ScriptCustomItem item, String animation);
+    // TODO: Fix ScriptCustomItem
+
+//    public abstract void setModel(ScriptCustomItem item, String model);
+//    public abstract void setTexture(ScriptCustomItem item, String texture);
+//    public abstract void setAnimationFile(ScriptCustomItem item, String animation);
+//    public abstract void setIdleAnimation(ScriptCustomItem item, String animation);
 }

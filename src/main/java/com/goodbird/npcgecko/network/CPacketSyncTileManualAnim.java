@@ -6,6 +6,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import kamkeel.npcs.util.ByteBufUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
@@ -70,12 +71,12 @@ public class CPacketSyncTileManualAnim implements IMessage, IMessageHandler<CPac
             animList.appendTag(animTag);
         }
         compound.setTag("anims",animList);
-        Server.writeNBT(buffer,compound);
+        ByteBufUtils.writeNBT(buffer,compound);
     }
 
     public static AnimationBuilder readAnimBuilder(ByteBuf buffer) throws IOException {
         AnimationBuilder builder = new AnimationBuilder();
-        NBTTagCompound compound = Server.readNBT(buffer);
+        NBTTagCompound compound = ByteBufUtils.readNBT(buffer);
         NBTTagList animList = compound.getTagList("anims",10);
         for(int i=0;i<animList.tagCount();i++){
             NBTTagCompound animTag = animList.getCompoundTagAt(i);
