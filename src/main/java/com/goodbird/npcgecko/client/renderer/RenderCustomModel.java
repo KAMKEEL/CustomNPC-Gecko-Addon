@@ -3,7 +3,9 @@ package com.goodbird.npcgecko.client.renderer;
 import com.goodbird.npcgecko.client.model.ModelCustom;
 import com.goodbird.npcgecko.entity.EntityCustomModel;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 import software.bernie.geckolib3.core.util.Color;
@@ -116,5 +118,9 @@ public class RenderCustomModel extends GeoEntityRenderer<EntityCustomModel> {
 
     public boolean isBoneRenderOverriden(EntityCustomModel entity, GeoBone bone) {
         return bone.name.equals("held_item") || bone.name.equals("left_held_item");
+    }
+
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
+        return super.getTextureLocation((EntityCustomModel) p_110775_1_);
     }
 }
