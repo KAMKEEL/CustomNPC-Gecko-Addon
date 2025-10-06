@@ -3,13 +3,15 @@ package com.goodbird.npcgecko.mixin.impl;
 import com.goodbird.npcgecko.entity.EntityCustomModel;
 import com.goodbird.npcgecko.mixin.IDataDisplay;
 import com.goodbird.npcgecko.utils.NpcTextureUtils;
+import kamkeel.npcs.addon.GeckoAddon;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import kamkeel.addon.GeckoAddon;
 import noppes.npcs.entity.EntityNPCInterface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.manager.AnimationData;
 
 @Mixin(GeckoAddon.class)
 public class MixinGeckoAddon {
@@ -25,7 +27,9 @@ public class MixinGeckoAddon {
         if(!supportEnabled)
             return;
 
-        if (entity instanceof EntityCustomModel modelEntity && copied instanceof EntityNPCInterface npc) {
+        if (entity instanceof EntityCustomModel && copied instanceof EntityNPCInterface) {
+            EntityCustomModel  modelEntity = (EntityCustomModel) entity;
+            EntityNPCInterface npc = (EntityNPCInterface) copied;
             IDataDisplay display = (IDataDisplay) npc.display;
             modelEntity.textureResLoc = NpcTextureUtils.getNpcTexture((EntityNPCInterface) copied);
             modelEntity.modelResLoc = new ResourceLocation(display.getCustomModelData().getModel());
@@ -39,6 +43,11 @@ public class MixinGeckoAddon {
             modelEntity.hurtTime = npc.hurtTime;
             modelEntity.deathTime = npc.deathTime;
             modelEntity.tintData = npc.display.tintData;
+            modelEntity.headBoneName = display.getCustomModelData().getHeadBoneName();
+            AnimationData animationData = modelEntity.getFactory().getOrCreateAnimationData(modelEntity.getUniqueID().hashCode());
+            for(AnimationController controller : animationData.getAnimationControllers().values()){
+                controller.transitionLengthTicks = display.getCustomModelData().getTransitionLengthTicks();
+            }
         }
     }
 }

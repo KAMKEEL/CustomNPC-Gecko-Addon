@@ -2,13 +2,13 @@ package com.goodbird.npcgecko.mixin.impl;
 
 import com.goodbird.npcgecko.client.gui.GuiStringSelection;
 import com.goodbird.npcgecko.client.gui.SubGuiModelAnimation;
+import com.goodbird.npcgecko.client.gui.SubGuiModelExtras;
 import com.goodbird.npcgecko.entity.EntityCustomModel;
 import com.goodbird.npcgecko.mixin.IDataDisplay;
-import kamkeel.addon.client.GeckoAddonClient;
+import kamkeel.npcs.addon.client.GeckoAddonClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import noppes.npcs.client.gui.model.GuiCreationScreen;
@@ -42,6 +42,7 @@ public class MixinGeckoAddonClient {
 
         if(entity instanceof EntityCustomModel){
             creationScreen.addButton(new GuiNpcButton(202, creationScreen.guiLeft-60, creationScreen.guiTop+40, 180, 20, ((IDataDisplay)creationScreen.npc.display).getCustomModelData().getModel()));
+            creationScreen.addButton(new GuiNpcButton(203, creationScreen.guiLeft-60, creationScreen.guiTop+62, 180, 20, "Extras"));
         }
     }
 
@@ -63,6 +64,9 @@ public class MixinGeckoAddonClient {
                 ((IDataDisplay)creationScreen.npc.display).getCustomModelData().setModel(name);
                 creationScreen.getButton(202).setDisplayText(name);
             }));
+        }
+        if(button.id == 203){
+            creationScreen.setSubGui(new SubGuiModelExtras(creationScreen.npc));
         }
     }
 
@@ -120,7 +124,6 @@ public class MixinGeckoAddonClient {
         GL11.glRotatef(180, 1,0,0);
         GL11.glTranslated(0, -1.5,0);
 
-        (mainModel).entity.renderYawOffset = (mainModel).entity.prevRenderYawOffset = 0;
         if (!npc.isInvisible())
         {
             if(mainModel.entity instanceof EntityCustomModel){

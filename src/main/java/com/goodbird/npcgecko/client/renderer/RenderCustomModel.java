@@ -2,8 +2,12 @@ package com.goodbird.npcgecko.client.renderer;
 
 import com.goodbird.npcgecko.client.model.ModelCustom;
 import com.goodbird.npcgecko.entity.EntityCustomModel;
+import com.mojang.realmsclient.gui.ChatFormatting;
+import net.geckominecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 import software.bernie.geckolib3.core.util.Color;
@@ -27,6 +31,26 @@ public class RenderCustomModel extends GeoEntityRenderer<EntityCustomModel> {
         if (model.getBone("left_held_item").isPresent() && animatable.leftHeldItem != null) {
             GeoBone bone = model.getBone("left_held_item").get();
             this.renderLeftHandItem(animatable, animatable.leftHeldItem, bone);
+        }
+    }
+
+    protected void applyRotations(EntityCustomModel entityLiving, float ageInTicks, float rotationYaw, float partialTicks) {
+        if (!entityLiving.isPlayerSleeping()) {
+            GlStateManager.rotate(-180, 0.0F, 1.0F, 0.0F);
+        }
+        if (entityLiving.deathTime > 0) {
+            float f = ((float)entityLiving.deathTime + partialTicks - 1.0F) / 20.0F * 1.6F;
+            f = net.minecraft.util.MathHelper.sqrt_float(f);
+            if (f > 1.0F) {
+                f = 1.0F;
+            }
+            GlStateManager.rotate(f * this.getDeathMaxRotation(entityLiving), 0.0F, 0.0F, 1.0F);
+        } else if (entityLiving.hasCustomNameTag()) {
+            String s = ChatFormatting.stripFormatting(entityLiving.getCommandSenderName());
+            if (("Dinnerbone".equals(s) || "Grumm".equals(s))) {
+                GlStateManager.translate(0.0, entityLiving.height + 0.1F, 0.0);
+                GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
+            }
         }
     }
 
@@ -116,5 +140,10 @@ public class RenderCustomModel extends GeoEntityRenderer<EntityCustomModel> {
 
     public boolean isBoneRenderOverriden(EntityCustomModel entity, GeoBone bone) {
         return bone.name.equals("held_item") || bone.name.equals("left_held_item");
+    }
+
+    @Override
+    protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
+        return super.getTextureLocation((EntityCustomModel) p_110775_1_);
     }
 }
