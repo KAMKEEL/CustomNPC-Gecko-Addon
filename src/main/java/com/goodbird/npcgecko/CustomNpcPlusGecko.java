@@ -4,10 +4,11 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import noppes.npcs.controllers.APIRegistry;
 
 @Mod(modid = "npcgecko",
     name = "CustomNPC+ Gecko Addon",
-    version = "1.3",
+    version = "1.4",
     dependencies = "required-after:customnpcs;required-after:geckolib3")
 public class CustomNpcPlusGecko {
 
@@ -25,5 +26,6 @@ public class CustomNpcPlusGecko {
     @Mod.EventHandler
     public void init(FMLInitializationEvent ev) {
         proxy.init(ev);
+        APIRegistry.Instance.register("Gecko Addon API", "https://kamkeel.github.io/CustomNPC-Gecko-Addon/");
     }
 }

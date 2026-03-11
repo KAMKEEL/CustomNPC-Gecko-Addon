@@ -29,3 +29,32 @@ tasks.named("generateTypeScriptDefinitions").configure {
 }
 processResources.dependsOn generateTypeScriptDefinitions
 sourcesJar.dependsOn generateTypeScriptDefinitions
+
+// ============================================================================
+// Javadoc Generation (for GitHub Pages deployment)
+// ============================================================================
+javadoc {
+    options.encoding = 'UTF-8'
+    options.charSet = 'UTF-8'
+    options.docEncoding = 'UTF-8'
+
+    options.stylesheetFile = file('.github/javadoc/javadoc-theme.css')
+    options.header = file('.github/javadoc/javadoc-header.html').text
+    options.footer = file('.github/javadoc/javadoc-footer.html').text
+
+    options.addBooleanOption('-allow-script-in-comments', true)
+
+    // Only document public API
+    include 'com/goodbird/npcgecko/api/**'
+
+    options.links('https://docs.oracle.com/en/java/javase/11/docs/api/')
+
+    // Cross-link to CNPC+ javadoc (URL injected by CI workflow)
+    if (project.hasProperty('cnpcDocUrl') && project.hasProperty('cnpcDocElementList')) {
+        options.linksOffline(project.property('cnpcDocUrl'), project.property('cnpcDocElementList'))
+    }
+
+    javadocTool = javaToolchains.javadocToolFor {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}

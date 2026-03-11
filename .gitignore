@@ -39,3 +39,7 @@ layout.json
 
 # Generated D.TS files (rebuilt by gradle on every build)
 src/main/resources/assets/npcgecko/api
+
+# GitHub Pages build output
+.github/pages-dist/
+.github/pages/node_modules/
