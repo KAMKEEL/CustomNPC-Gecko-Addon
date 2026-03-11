@@ -18,23 +18,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(DataDisplay.class)
 public class MixinDataDisplay implements IDataDisplay {
 
-    @Shadow(remap = false) public EntityNPCInterface npc;
+    @Shadow(remap = false)
+    public EntityNPCInterface npc;
     @Unique
     private final CustomModelData customNPC_Gecko_Addon$customModelData = new CustomModelData();
 
     @Inject(method = "writeToNBT", at = @At("HEAD"), remap = false)
     public void writeToNBT(NBTTagCompound nbttagcompound, CallbackInfoReturnable<NBTTagCompound> cir) {
-        if(hasCustomModel())
+        if (hasCustomModel())
             customNPC_Gecko_Addon$customModelData.writeToNBT(nbttagcompound);
     }
 
     @Inject(method = "readToNBT", at = @At("HEAD"), remap = false)
-    public void readFromNBT(NBTTagCompound nbttagcompound, CallbackInfo ci){
+    public void readFromNBT(NBTTagCompound nbttagcompound, CallbackInfo ci) {
         customNPC_Gecko_Addon$customModelData.readFromNBT(nbttagcompound);
     }
 
     @Unique
-    public CustomModelData getCustomModelData(){
+    public CustomModelData getCustomModelData() {
         return customNPC_Gecko_Addon$customModelData;
     }
 

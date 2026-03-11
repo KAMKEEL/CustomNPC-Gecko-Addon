@@ -2,8 +2,6 @@ package com.goodbird.npcgecko.entity;
 
 import com.goodbird.npcgecko.constants.EnumSyncAutoAnim;
 import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -97,15 +95,16 @@ public class EntityCustomModel extends EntityCreature implements IAnimatable, IA
     public void setDialogAnim(String name) {
         dialogAnim = new AnimationBuilder().playOnce(name);
     }
+
     public void activateReceivedAnim(EnumSyncAutoAnim type) {
-        if(type == EnumSyncAutoAnim.HURT){
-            if(!hurtAnimName.isEmpty())
+        if (type == EnumSyncAutoAnim.HURT) {
+            if (!hurtAnimName.isEmpty())
                 hurtAnim = new AnimationBuilder().playOnce(hurtAnimName);
-        }else if(type == EnumSyncAutoAnim.MELEE_ATTACK){
-            if(!meleeAttackAnimName.isEmpty())
+        } else if (type == EnumSyncAutoAnim.MELEE_ATTACK) {
+            if (!meleeAttackAnimName.isEmpty())
                 attackAnim = new AnimationBuilder().playOnce(meleeAttackAnimName);
-        }else if(type == EnumSyncAutoAnim.RANGED_ATTACK){
-            if(!rangedAttackAnimName.isEmpty())
+        } else if (type == EnumSyncAutoAnim.RANGED_ATTACK) {
+            if (!rangedAttackAnimName.isEmpty())
                 attackAnim = new AnimationBuilder().playOnce(rangedAttackAnimName);
         }
     }

@@ -1,21 +1,26 @@
 {
-	"modListVersion": 2,
-	"modList": [{
-		"modid": "${modId}",
-		"name": "${modName}",
-		"description": "A mod that is made for integrating GeckoLib3 and CustomNPC",
-		"version": "${modVersion}",
-		"mcversion": "${minecraftVersion}",
-		"url": "https://github.com/KAMKEEL/CustomNPC-Gecko-Addon",
-		"updateUrl": "",
-		"authorList": ["Goodbird","KAMKEEL"],
-		"credits": "",
-		"logoFile": "",
-		"screenshots": [],
-		"parent": "",
-		"requiredMods": [],
-		"dependencies": [],
-		"dependants": [],
-		"useDependencyInformation": false
-	}]
+  "modListVersion": 2,
+  "modList": [
+    {
+      "modid": "${modId}",
+      "name": "${modName}",
+      "description": "A mod that is made for integrating GeckoLib3 and CustomNPC",
+      "version": "${modVersion}",
+      "mcversion": "${minecraftVersion}",
+      "url": "https://github.com/KAMKEEL/CustomNPC-Gecko-Addon",
+      "updateUrl": "",
+      "authorList": [
+        "Goodbird",
+        "KAMKEEL"
+      ],
+      "credits": "",
+      "logoFile": "",
+      "screenshots": [],
+      "parent": "",
+      "requiredMods": [],
+      "dependencies": [],
+      "dependants": [],
+      "useDependencyInformation": false
+    }
+  ]
 }

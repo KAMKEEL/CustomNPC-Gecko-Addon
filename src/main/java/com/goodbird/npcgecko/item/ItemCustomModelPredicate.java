@@ -15,8 +15,8 @@ public class ItemCustomModelPredicate {
     public static <P extends Item & IAnimatable> PlayState predicate(AnimationEvent<P> event) {
         ItemStack stack = (ItemStack) event.getExtraData().get(0);
         IItemStack istack = NpcAPI.Instance().getIItemStack(stack);
-        if(!(istack instanceof ScriptCustomItem)) return PlayState.STOP;
-        IScriptCustomItem item = (IScriptCustomItem)istack;
+        if (!(istack instanceof ScriptCustomItem)) return PlayState.STOP;
+        IScriptCustomItem item = (IScriptCustomItem) istack;
         event.getController().setAnimation(new AnimationBuilder().loop(item.getCustomModelData().getIdleAnim()));
         return PlayState.CONTINUE;
     }

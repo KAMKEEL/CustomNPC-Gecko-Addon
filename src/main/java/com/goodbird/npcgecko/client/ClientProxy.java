@@ -21,7 +21,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCustomModel.class, new RenderTileCustomModel());
     }
 
-    public World getWorldById(int id){
+    public World getWorldById(int id) {
         return Minecraft.getMinecraft().theWorld;
     }
 }

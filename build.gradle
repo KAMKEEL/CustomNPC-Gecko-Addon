@@ -2,7 +2,30 @@
 
 plugins {
     id 'com.gtnewhorizons.gtnhconvention'
+    id 'dts.typescript-generator'
 }
 
+apply from: 'gradle.submodules.gradle'
+
 version = "1.3"
-group= "com.goodbird.npcgecko"
+group = "com.goodbird.npcgecko"
+
+// ============================================================================
+// TypeScript Definition Generation Task
+// Generates .d.ts files from Java API sources for scripting IDE support
+// ============================================================================
+tasks.named("generateTypeScriptDefinitions").configure {
+    sourceDirectories = ['src/main/java']
+    outputDirectory = "src/main/resources/assets/${project.property("modId")}/api"
+    apiPackages = ['com.goodbird.npcgecko.api'] as Set
+    cleanOutputFirst = true
+    patchesDirectory = "dts-patches"
+    implementationPackages = [
+        'com.goodbird.npcgecko.data',
+        'com.goodbird.npcgecko.entity',
+        'com.goodbird.npcgecko.tile',
+        'com.goodbird.npcgecko.client'
+    ] as Set
+}
+processResources.dependsOn generateTypeScriptDefinitions
+sourcesJar.dependsOn generateTypeScriptDefinitions

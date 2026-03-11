@@ -22,12 +22,12 @@ public class CustomItemModelData {
     }
 
     public void readFromNBT(NBTTagCompound nbttagcompound) {
-        if(nbttagcompound.hasKey("Model")) {
+        if (nbttagcompound.hasKey("Model")) {
             model = nbttagcompound.getString("Model");
             animFile = nbttagcompound.getString("AnimFile");
             idleAnim = nbttagcompound.getString("IdleAnim");
             texture = nbttagcompound.getString("Texture");
-            if(nbttagcompound.hasKey("TransitionLengthTicks")){
+            if (nbttagcompound.hasKey("TransitionLengthTicks")) {
                 transitionLengthTicks = nbttagcompound.getInteger("TransitionLengthTicks");
             }
         }

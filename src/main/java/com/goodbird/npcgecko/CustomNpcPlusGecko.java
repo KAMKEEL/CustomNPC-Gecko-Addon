@@ -21,6 +21,7 @@ public class CustomNpcPlusGecko {
     public void preInit(FMLPreInitializationEvent ev) {
         proxy.preInit(ev);
     }
+
     @Mod.EventHandler
     public void init(FMLInitializationEvent ev) {
         proxy.init(ev);

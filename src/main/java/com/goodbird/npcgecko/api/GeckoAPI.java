@@ -1,15 +1,11 @@
 package com.goodbird.npcgecko.api;
 
-import com.goodbird.npcgecko.client.renderer.RenderTileCustomModel;
-import com.goodbird.npcgecko.data.CustomItemModelData;
+import com.goodbird.npcgecko.wrapper.*;
 import com.goodbird.npcgecko.mixin.IDataDisplay;
-import com.goodbird.npcgecko.mixin.IScriptCustomItem;
 import com.goodbird.npcgecko.network.CPacketSyncManualAnim;
 import com.goodbird.npcgecko.network.CPacketSyncTileManualAnim;
 import com.goodbird.npcgecko.network.NetworkHandler;
 import com.goodbird.npcgecko.tile.TileEntityCustomModel;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
 import noppes.npcs.api.block.IBlockScripted;
@@ -17,14 +13,17 @@ import noppes.npcs.api.entity.ICustomNpc;
 import noppes.npcs.api.entity.IPlayer;
 import noppes.npcs.blocks.tiles.TileScripted;
 import noppes.npcs.entity.EntityNPCInterface;
-import noppes.npcs.scripted.BlockScriptedWrapper;
-import noppes.npcs.scripted.item.ScriptCustomItem;
+import software.bernie.geckolib3.core.builder.Animation;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.util.Color;
+import software.bernie.geckolib3.file.AnimationFile;
+import software.bernie.geckolib3.resource.GeckoLibCache;
 
 public class GeckoAPI extends AbstractGeckoAPI {
     private static AbstractGeckoAPI Instance;
 
-    private GeckoAPI() {}
+    private GeckoAPI() {
+    }
 
     public static AbstractGeckoAPI Instance() {
         if (GeckoAPI.Instance == null) {
@@ -33,14 +32,108 @@ public class GeckoAPI extends AbstractGeckoAPI {
         return Instance;
     }
 
+    // ========================================================================
+    // Internal helper - unwrap IGeckoAnimationBuilder to GeckoLib AnimationBuilder
+    // ========================================================================
+
+    private static AnimationBuilder unwrap(IGeckoAnimationBuilder builder) {
+        return ((GeckoAnimationBuilderWrapper) builder).getBuilder();
+    }
+
+    // ========================================================================
+    // Animation Builder
+    // ========================================================================
+
     @Override
-    public AnimationBuilder createAnimationBuilder() {
-        return new AnimationBuilder();
+    public IGeckoAnimationBuilder createAnimBuilder() {
+        return new GeckoAnimationBuilderWrapper(new AnimationBuilder());
     }
 
     @Override
+    public IGeckoAnimationBuilder createAnimationBuilder() {
+        return createAnimBuilder();
+    }
+
+    // ========================================================================
+    // Animatable Access
+    // ========================================================================
+
+    @Override
+    public IGeckoAnimatable getAnimatable(ICustomNpc<EntityNPCInterface> npc) {
+        return new GeckoNpcAnimatable(npc);
+    }
+
+    @Override
+    public IGeckoAnimatable getAnimatable(IBlockScripted scriptedBlock) {
+        TileEntityCustomModel tile = getOrCreateTECM(scriptedBlock);
+        return new GeckoBlockAnimatable(scriptedBlock, tile);
+    }
+
+    // ========================================================================
+    // Animation Queries
+    // ========================================================================
+
+    @Override
+    public String[] getAnimationList(String animationFile) {
+        AnimationFile file = GeckoLibCache.getInstance().getAnimations().get(new ResourceLocation(animationFile));
+        if (file == null) {
+            return new String[0];
+        }
+        java.util.Collection<Animation> animations = file.getAllAnimations();
+        String[] names = new String[animations.size()];
+        int i = 0;
+        for (Animation anim : animations) {
+            names[i++] = anim.animationName;
+        }
+        return names;
+    }
+
+    @Override
+    public String[] getAnimationFileList() {
+        java.util.Set<ResourceLocation> keys = GeckoLibCache.getInstance().getAnimations().keySet();
+        String[] result = new String[keys.size()];
+        int i = 0;
+        for (ResourceLocation resLoc : keys) {
+            result[i++] = resLoc.toString();
+        }
+        return result;
+    }
+
+    @Override
+    public IGeckoAnimation getAnimation(String animationFile, String animationName) {
+        AnimationFile file = GeckoLibCache.getInstance().getAnimations().get(new ResourceLocation(animationFile));
+        if (file == null) {
+            return null;
+        }
+        for (Animation anim : file.getAllAnimations()) {
+            if (anim.animationName.equals(animationName)) {
+                return new GeckoAnimationWrapper(anim);
+            }
+        }
+        return null;
+    }
+
+    // ========================================================================
+    // Color Utilities
+    // ========================================================================
+
+    @Override
+    public IGeckoColor colorOfRGB(int r, int g, int b) {
+        return new GeckoColorWrapper(Color.ofRGB(r, g, b));
+    }
+
+    @Override
+    public IGeckoColor colorOfRGBA(int r, int g, int b, int a) {
+        return new GeckoColorWrapper(Color.ofRGBA(r, g, b, a));
+    }
+
+    // ========================================================================
+    // NPC Methods
+    // ========================================================================
+
+    @Override
     public void setModel(ICustomNpc<EntityNPCInterface> npc, String model) {
-        ((IDataDisplay)npc.getMCEntity().display).getCustomModelData().setModel(model);
+        ((IDataDisplay) npc.getMCEntity().display).getCustomModelData().setModel(model);
         npc.updateClient();
     }
 
@@ -52,31 +145,33 @@ public class GeckoAPI extends AbstractGeckoAPI {
 
     @Override
     public void setAnimationFile(ICustomNpc<EntityNPCInterface> npc, String animation) {
-        ((IDataDisplay)npc.getMCEntity().display).getCustomModelData().setAnimFile(animation);
+        ((IDataDisplay) npc.getMCEntity().display).getCustomModelData().setAnimFile(animation);
         npc.updateClient();
     }
 
     @Override
     public void setIdleAnimation(ICustomNpc<EntityNPCInterface> npc, String animation) {
-        ((IDataDisplay)npc.getMCEntity().display).getCustomModelData().setIdleAnim(animation);
+        ((IDataDisplay) npc.getMCEntity().display).getCustomModelData().setIdleAnim(animation);
         npc.updateClient();
     }
 
     @Override
-    public void syncAnimForPlayer(ICustomNpc<EntityNPCInterface> npc, AnimationBuilder builder, IPlayer<EntityPlayerMP> player) {
-        NetworkHandler.sendToPlayer(new CPacketSyncManualAnim(npc.getMCEntity(),builder), player.getMCEntity());
+    public void syncAnimForPlayer(ICustomNpc<EntityNPCInterface> npc, IGeckoAnimationBuilder builder, IPlayer<EntityPlayerMP> player) {
+        NetworkHandler.sendToPlayer(new CPacketSyncManualAnim(npc.getMCEntity(), unwrap(builder)), player.getMCEntity());
     }
 
     @Override
-    public void syncAnimForAll(ICustomNpc<EntityNPCInterface> npc, AnimationBuilder builder) {
-        NetworkHandler.sendToAll(new CPacketSyncManualAnim(npc.getMCEntity(),builder));
+    public void syncAnimForAll(ICustomNpc<EntityNPCInterface> npc, IGeckoAnimationBuilder builder) {
+        NetworkHandler.sendToAll(new CPacketSyncManualAnim(npc.getMCEntity(), unwrap(builder)));
     }
 
+    // ========================================================================
+    // Block Methods
+    // ========================================================================
 
-
-    private TileEntityCustomModel getOrCreateTECM(IBlockScripted scriptedBlock){
+    private TileEntityCustomModel getOrCreateTECM(IBlockScripted scriptedBlock) {
         TileScripted tile = (TileScripted) scriptedBlock.getMCTileEntity();
-        if(!(tile.renderTile instanceof TileEntityCustomModel)){
+        if (!(tile.renderTile instanceof TileEntityCustomModel)) {
             tile.renderTile = new TileEntityCustomModel(tile);
         }
         return (TileEntityCustomModel) tile.renderTile;
@@ -111,13 +206,13 @@ public class GeckoAPI extends AbstractGeckoAPI {
     }
 
     @Override
-    public void syncAnimForPlayer(IBlockScripted scriptedBlock, AnimationBuilder builder, IPlayer<EntityPlayerMP> player) {
-        NetworkHandler.sendToPlayer(new CPacketSyncTileManualAnim(scriptedBlock.getMCTileEntity(), builder), player.getMCEntity());
+    public void syncAnimForPlayer(IBlockScripted scriptedBlock, IGeckoAnimationBuilder builder, IPlayer<EntityPlayerMP> player) {
+        NetworkHandler.sendToPlayer(new CPacketSyncTileManualAnim(scriptedBlock.getMCTileEntity(), unwrap(builder)), player.getMCEntity());
     }
 
     @Override
-    public void syncAnimForAll(IBlockScripted scriptedBlock, AnimationBuilder builder) {
-        NetworkHandler.sendToAll(new CPacketSyncTileManualAnim(scriptedBlock.getMCTileEntity(), builder));
+    public void syncAnimForAll(IBlockScripted scriptedBlock, IGeckoAnimationBuilder builder) {
+        NetworkHandler.sendToAll(new CPacketSyncTileManualAnim(scriptedBlock.getMCTileEntity(), unwrap(builder)));
     }
 
 //    private CustomItemModelData getOrCreateCIMD(ScriptCustomItem item){

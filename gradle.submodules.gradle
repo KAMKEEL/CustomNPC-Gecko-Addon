@@ -1,0 +1,111 @@
+// ============================================================================
+// Submodule Dependency Management
+// ============================================================================
+// Manages CustomNPC+ and GeckoLib as git submodule dependencies.
+//
+// How it works:
+//   - Both mods are git submodules built automatically alongside this mod
+//   - Their dev JARs are referenced as devOnlyNonPublishable dependencies
+//   - This means: available at COMPILE + RUNTIME, but NOT in the output JAR
+//   - ./gradlew build     -> builds CNPC+ & GeckoLib first, then clean addon-only JAR
+//   - ./gradlew runClient -> builds CNPC+ & GeckoLib first, then runs with all on classpath
+//
+// First-time setup:
+//   ./gradlew initSubmodules   (clones/updates submodules recursively)
+// ============================================================================
+
+def isWindows = System.getProperty('os.name').toLowerCase().contains('windows')
+
+// Resolve the gradlew executable for a submodule directory
+def gradlewFor = { File submoduleDir ->
+    if (isWindows) {
+        return new File(submoduleDir, 'gradlew.bat').absolutePath
+    } else {
+        return new File(submoduleDir, 'gradlew').absolutePath
+    }
+}
+
+// Helper: find the dev JAR in a submodule's build output (resolved at execution time)
+def findDevJar = { String submoduleDir ->
+    def libsDir = file("${submoduleDir}/build/libs")
+    if (!libsDir.exists()) return []
+    return libsDir.listFiles()?.findAll { it.name.endsWith('-dev.jar') && !it.name.contains('-preshadow') } ?: []
+}
+
+// ---- Submodule Init Task ----
+tasks.register('initSubmodules', Exec) {
+    group = 'submodules'
+    description = 'Initialize and update all git submodules recursively'
+    commandLine 'git', 'submodule', 'update', '--init', '--recursive'
+}
+
+// Helper: clean old dev JARs from a submodule's build/libs before rebuilding
+// Prevents stale JARs from different versions accumulating on the classpath
+def cleanDevJars = { String submoduleDir ->
+    def libsDir = file("${submoduleDir}/build/libs")
+    if (libsDir.exists()) {
+        libsDir.listFiles()?.each { if (it.name.endsWith('.jar')) it.delete() }
+    }
+}
+
+// ---- Build CustomNPC+ ----
+// Uses -Pnomixin to avoid embedding Mixin into the JAR (UniMixins provides it at runtime)
+tasks.register('buildCNPC', Exec) {
+    group = 'submodules'
+    description = 'Builds CustomNPC+ dev JAR from submodule source (no embedded Mixin)'
+    workingDir file('CustomNPC-Plus')
+
+    doFirst { cleanDevJars('CustomNPC-Plus') }
+
+    def gradlew = gradlewFor(file('CustomNPC-Plus'))
+    if (isWindows) {
+        commandLine 'cmd', '/c', gradlew, 'build', '-Pnomixin', '-x', 'test'
+    } else {
+        commandLine gradlew, 'build', '-Pnomixin', '-x', 'test'
+    }
+
+    // Gradle up-to-date checking
+    inputs.dir file('CustomNPC-Plus/src')
+    outputs.dir file('CustomNPC-Plus/build/libs')
+}
+
+// ---- Build GeckoLib ----
+tasks.register('buildGeckoLib', Exec) {
+    group = 'submodules'
+    description = 'Builds GeckoLib dev JAR from submodule source'
+    workingDir file('GeckoLib')
+
+    doFirst { cleanDevJars('GeckoLib') }
+
+    def gradlew = gradlewFor(file('GeckoLib'))
+    if (isWindows) {
+        commandLine 'cmd', '/c', gradlew, 'build', '-x', 'test'
+    } else {
+        commandLine gradlew, 'build', '-x', 'test'
+    }
+
+    // Gradle up-to-date checking
+    inputs.dir file('GeckoLib/src')
+    outputs.dir file('GeckoLib/build/libs')
+}
+
+// ---- Convenience: build all submodules ----
+tasks.register('buildSubmodules') {
+    group = 'submodules'
+    description = 'Builds all submodule dev JARs'
+    dependsOn 'buildCNPC', 'buildGeckoLib'
+}
+
+// ---- Auto-build: submodules compile before this mod ----
+tasks.named('compileJava').configure {
+    dependsOn 'buildCNPC', 'buildGeckoLib'
+}
+
+// ---- Dependency Declarations ----
+// devOnlyNonPublishable = compile + runtime, but NOT in output JAR and NOT published
+// Dev JARs are already deobfuscated (MCP names), so no rfg.deobf() needed
+// Using lazy file resolution so JARs are found AFTER submodule build tasks execute
+dependencies {
+    devOnlyNonPublishable files({ findDevJar('CustomNPC-Plus') })
+    devOnlyNonPublishable files({ findDevJar('GeckoLib') })
+}

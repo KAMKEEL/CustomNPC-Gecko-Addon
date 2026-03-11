@@ -9,20 +9,20 @@ import noppes.npcs.scripted.event.NpcEvent;
 
 public class EventHandler {
     @SubscribeEvent
-    public void onNpcMeleeAttack(NpcEvent.SwingEvent event){
-        if(event != null && event.npc != null && event.npc.getMCEntity() != null)
+    public void onNpcMeleeAttack(NpcEvent.SwingEvent event) {
+        if (event != null && event.npc != null && event.npc.getMCEntity() != null)
             NetworkHandler.sendToAll(new CPacketSyncAutoAnim((EntityNPCInterface) event.npc.getMCEntity(), EnumSyncAutoAnim.MELEE_ATTACK));
     }
 
     @SubscribeEvent
-    public void onNpcRanged(NpcEvent.RangedLaunchedEvent event){
-        if(event != null && event.npc != null && event.npc.getMCEntity() != null)
+    public void onNpcRanged(NpcEvent.RangedLaunchedEvent event) {
+        if (event != null && event.npc != null && event.npc.getMCEntity() != null)
             NetworkHandler.sendToAll(new CPacketSyncAutoAnim((EntityNPCInterface) event.npc.getMCEntity(), EnumSyncAutoAnim.RANGED_ATTACK));
     }
 
     @SubscribeEvent
-    public void onNpcDamaged(NpcEvent.DamagedEvent event){
-        if(event != null && event.npc != null && event.npc.getMCEntity() != null)
+    public void onNpcDamaged(NpcEvent.DamagedEvent event) {
+        if (event != null && event.npc != null && event.npc.getMCEntity() != null)
             NetworkHandler.sendToAll(new CPacketSyncAutoAnim((EntityNPCInterface) event.npc.getMCEntity(), EnumSyncAutoAnim.HURT));
     }
 }

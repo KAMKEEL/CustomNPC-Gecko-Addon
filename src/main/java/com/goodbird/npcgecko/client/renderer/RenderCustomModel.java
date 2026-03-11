@@ -22,6 +22,7 @@ public class RenderCustomModel extends GeoEntityRenderer<EntityCustomModel> {
     public RenderCustomModel() {
         super(new ModelCustom());
     }
+
     public void renderAfter(GeoModel model, EntityCustomModel animatable, float ticks, float red, float green, float blue, float alpha) {
         super.renderAfter(model, animatable, ticks, red, green, blue, alpha);
         if (model.getBone("held_item").isPresent() && animatable.getHeldItem() != null) {
@@ -39,7 +40,7 @@ public class RenderCustomModel extends GeoEntityRenderer<EntityCustomModel> {
             GlStateManager.rotate(-180, 0.0F, 1.0F, 0.0F);
         }
         if (entityLiving.deathTime > 0) {
-            float f = ((float)entityLiving.deathTime + partialTicks - 1.0F) / 20.0F * 1.6F;
+            float f = ((float) entityLiving.deathTime + partialTicks - 1.0F) / 20.0F * 1.6F;
             f = net.minecraft.util.MathHelper.sqrt_float(f);
             if (f > 1.0F) {
                 f = 1.0F;
@@ -56,7 +57,7 @@ public class RenderCustomModel extends GeoEntityRenderer<EntityCustomModel> {
 
     public GeoBone[] getPathFromRoot(GeoBone bone) {
         ArrayList<GeoBone> bones;
-        for(bones = new ArrayList<>(); bone != null; bone = bone.parent) {
+        for (bones = new ArrayList<>(); bone != null; bone = bone.parent) {
             bones.add(0, bone);
         }
 
@@ -108,30 +109,30 @@ public class RenderCustomModel extends GeoEntityRenderer<EntityCustomModel> {
     }
 
     public Color getRenderColor(EntityCustomModel animatable, float partialTicks) {
-        if(animatable.hurtTime>0 || animatable.deathTime > 0){
-            if(animatable.tintData!=null && animatable.tintData.isTintEnabled() && animatable.tintData.isHurtTintEnabled()){
+        if (animatable.hurtTime > 0 || animatable.deathTime > 0) {
+            if (animatable.tintData != null && animatable.tintData.isTintEnabled() && animatable.tintData.isHurtTintEnabled()) {
                 int hurtTint = animatable.tintData.getHurtTint();
-                int r = (int) ((float)(hurtTint >> 16 & 255));
-                int g = (int) ((float)(hurtTint >> 8 & 255));
-                int b = (int) ((float)(hurtTint & 255));
-                return Color.ofRGBA(r,g,b, 255);
+                int r = (int) ((float) (hurtTint >> 16 & 255));
+                int g = (int) ((float) (hurtTint >> 8 & 255));
+                int b = (int) ((float) (hurtTint & 255));
+                return Color.ofRGBA(r, g, b, 255);
             }
             return Color.ofRGBA(255, 153, 153, 255);
-        }else{
+        } else {
             int r = 255;
             int g = 255;
             int b = 255;
-            if(animatable.tintData!=null && animatable.tintData.isTintEnabled() && animatable.tintData.isGeneralTintEnabled()){
+            if (animatable.tintData != null && animatable.tintData.isTintEnabled() && animatable.tintData.isGeneralTintEnabled()) {
                 int hurtTint = animatable.tintData.getGeneralTint();
-                int tintR = (int) ((float)(hurtTint >> 16 & 255));
-                int tintG = (int) ((float)(hurtTint >> 8 & 255));
-                int tintB = (int) ((float)(hurtTint & 255));
-                double alpha = ((double)animatable.tintData.getGeneralAlpha() / 100.0);
-                r = (int) (alpha*tintR + r*(1-alpha));
-                g = (int) (alpha*tintG + g*(1-alpha));
-                b = (int) (alpha*tintB + b*(1-alpha));
+                int tintR = (int) ((float) (hurtTint >> 16 & 255));
+                int tintG = (int) ((float) (hurtTint >> 8 & 255));
+                int tintB = (int) ((float) (hurtTint & 255));
+                double alpha = ((double) animatable.tintData.getGeneralAlpha() / 100.0);
+                r = (int) (alpha * tintR + r * (1 - alpha));
+                g = (int) (alpha * tintG + g * (1 - alpha));
+                b = (int) (alpha * tintB + b * (1 - alpha));
             }
-            if(animatable.isSemiVisible){
+            if (animatable.isSemiVisible) {
                 return Color.ofRGBA(r, g, b, 100);
             }
             return Color.ofRGBA(r, g, b, 255);
@@ -143,7 +144,7 @@ public class RenderCustomModel extends GeoEntityRenderer<EntityCustomModel> {
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
+    public ResourceLocation getEntityTexture(Entity p_110775_1_) {
         return super.getTextureLocation((EntityCustomModel) p_110775_1_);
     }
 }
