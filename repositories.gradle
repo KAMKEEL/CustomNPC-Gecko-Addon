@@ -1,7 +1,5 @@
-// Add any additional repositories for your dependencies here
+// Additional repositories for dependencies
+// Submodule dependencies (CustomNPC+, GeckoLib) are managed via gradle.submodules.gradle
 
 repositories {
-    flatDir {
-        dirs 'lib'
-    }
 }

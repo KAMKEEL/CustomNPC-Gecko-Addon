@@ -10,6 +10,7 @@ pluginManagement {
                 includeGroupByRegex("com\\.gtnewhorizons\\..+")
             }
         }
+        maven { url "https://jitpack.io" }
         gradlePluginPortal()
         mavenCentral()
         mavenLocal()
@@ -17,5 +18,10 @@ pluginManagement {
 }
 
 plugins {
-    id 'com.gtnewhorizons.gtnhsettingsconvention' version '1.0.15'
+    id 'com.gtnewhorizons.gtnhsettingsconvention' version '1.0.27'
+}
+
+// Include the D.TS generator plugin from CustomNPC+ submodule
+if (file('CustomNPC-Plus/gradle-plugins/settings.gradle').exists()) {
+    includeBuild 'CustomNPC-Plus/gradle-plugins'
 }

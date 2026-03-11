@@ -143,7 +143,7 @@ public class RenderCustomModel extends GeoEntityRenderer<EntityCustomModel> {
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
+    public ResourceLocation getEntityTexture(Entity p_110775_1_) {
         return super.getTextureLocation((EntityCustomModel) p_110775_1_);
     }
 }
