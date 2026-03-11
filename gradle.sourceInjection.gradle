@@ -1,0 +1,267 @@
+// ============================================================================
+// Reusable Source Injection System
+// ============================================================================
+//
+// Merges submodule source into compilation for IDE hotswap during dev runs.
+// Output JAR contains ONLY the addon's own code.
+//
+// HOW IT WORKS:
+//   For each file in the JAR, we check if its source exists in any injected
+//   directory. If it does, the file came from a submodule and is excluded.
+//   No hardcoded package names — works with ANY package structure.
+//
+// DEV JAR vs RELEASE JAR:
+//   Both exclude ALL injected code. Each submodule's own dev JAR (built by
+//   gradle.submodules.gradle) serves as the FML mod container so each @Mod
+//   is discovered in its own JAR. Hotswap works via build/classes/java/main/.
+//
+// USAGE (in build.gradle):
+//
+//   ext.sourceInjections = [
+//       [
+//           path:             'CustomNPC-Plus',
+//           src:              ['src/api/java', 'src/main/java'],
+//           resources:        ['src/main/resources'],
+//           compileOnlyFiles: ['tools/standalone-JaninoLoader-1.0.2.jar'],
+//           compileOnlyDeps:  [],
+//           mixinConfig:      'mixins.customnpcs.json',
+//       ],
+//   ]
+//   apply from: 'gradle.sourceInjection.gradle'
+//
+// Disable with: -PnoSourceInjection=true (CI uses JAR-only builds)
+// ============================================================================
+
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+import java.util.regex.Pattern
+import java.util.regex.Matcher
+
+if (!project.hasProperty('sourceInjections') || sourceInjections.isEmpty()) {
+    throw new GradleException("ext.sourceInjections must be defined before applying gradle.sourceInjection.gradle")
+}
+
+println "Source injection enabled for: ${sourceInjections.collect { it.path }.join(', ')}"
+
+// ============================================================================
+// 1. Merge submodule source directories into compilation
+// ============================================================================
+sourceInjections.each { injection ->
+    sourceSets.main.java.srcDirs += injection.src.collect { "${injection.path}/${it}" }
+    if (injection.resources) {
+        sourceSets.main.resources.srcDirs += injection.resources.collect { "${injection.path}/${it}" }
+    }
+}
+
+// ============================================================================
+// 2. Add dev dependencies needed by submodule source
+// ============================================================================
+// Uses devOnlyNonPublishable: available at compile + runtime, NOT in output JAR.
+// Needed because source-injected code may reference deps that are shadowed/relocated
+// in the submodule's own JAR (e.g., jackson relocated in GeckoLib's shadow build).
+sourceInjections.each { injection ->
+    injection.compileOnlyFiles?.each { dep ->
+        dependencies.add('devOnlyNonPublishable', files("${injection.path}/${dep}"))
+    }
+    injection.compileOnlyDeps?.each { dep ->
+        dependencies.add('devOnlyNonPublishable', dep)
+    }
+}
+
+// ============================================================================
+// 3. Merge mcmod.info from all mods for dev runs
+// ============================================================================
+tasks.register("mergeMcmodInfo") {
+    doLast {
+        def mergedModList = []
+        def allResourceDirs = [file("src/main/resources")]
+
+        sourceInjections.each { injection ->
+            injection.resources?.each { res ->
+                allResourceDirs.add(file("${injection.path}/${res}"))
+            }
+        }
+
+        allResourceDirs.each { resDir ->
+            def mcmodFile = new File(resDir, "mcmod.info")
+            if (mcmodFile.exists()) {
+                // Resolve ${property} placeholders from submodule's gradle.properties
+                def propsFile = resDir.toPath().resolve("../../../gradle.properties").normalize().toFile()
+                def props = [:]
+                if (propsFile.exists()) {
+                    propsFile.withReader("UTF-8") { reader ->
+                        new Properties().with { p ->
+                            p.load(reader)
+                            p.each { k, v -> props[k] = v }
+                        }
+                    }
+                }
+
+                def text = mcmodFile.text
+                props.each { key, value ->
+                    text = Pattern.compile('\\$\\{' + Pattern.quote(key) + '\\}')
+                        .matcher(text).replaceAll(Matcher.quoteReplacement(value))
+                }
+
+                def json = new JsonSlurper().parseText(text)
+                // Handle both mcmod.info formats:
+                //   Old format: [{modid: "...", ...}]  (plain array)
+                //   New format: {modListVersion: 2, modList: [{...}]}
+                if (json instanceof List) {
+                    mergedModList.addAll(json)
+                } else if (json.modList) {
+                    mergedModList.addAll(json.modList)
+                }
+            }
+        }
+
+        def outputDir = file("$buildDir/generatedResources/main")
+        outputDir.mkdirs()
+        new File(outputDir, "mcmod.info").text = JsonOutput.prettyPrint(
+            JsonOutput.toJson([modListVersion: 2, modList: mergedModList])
+        )
+        println "Merged ${mergedModList.size()} mod entries for dev runtime"
+    }
+}
+
+tasks.named("processResources") {
+    dependsOn tasks.named("mergeMcmodInfo")
+    from(sourceSets.main.resources.srcDirs) { exclude "mcmod.info" }
+    from("$buildDir/generatedResources/main") { include "mcmod.info" }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+project.afterEvaluate {
+    tasks.named("processResources") {
+        doLast {
+            def gen = file("$buildDir/generatedResources/main/mcmod.info")
+            def target = file("$buildDir/resources/main/mcmod.info")
+            if (gen.exists()) target.text = gen.text
+        }
+    }
+}
+
+// ============================================================================
+// 4. JAR filtering helpers
+// ============================================================================
+// Pre-resolve all injected source/resource directories for performance.
+def injectedSrcDirs = sourceInjections.collectMany { inj ->
+    (inj.src ?: []).collect { file("${inj.path}/${it}") }.findAll { it.exists() }
+}
+def injectedResDirs = sourceInjections.collectMany { inj ->
+    (inj.resources ?: []).collect { file("${inj.path}/${it}") }.findAll { it.exists() }
+}
+
+// Check if a .class file originated from one of the given source directories.
+// Handles inner classes (Foo$Bar.class → Foo.java) and package-private classes
+// (classes defined in another file within the same package).
+def isInjectedClass = { String classPath ->
+    // Inner classes: com/foo/Bar$Baz.class → com/foo/Bar.java
+    def javaPath = classPath.replaceFirst('\\$[^/]*\\.class$', '.java')
+    if (javaPath == classPath) javaPath = classPath.replace('.class', '.java')
+
+    // Direct match: .java file exists in an injected source directory
+    if (injectedSrcDirs.any { new File(it, javaPath).exists() }) return true
+
+    // Package-private classes: multiple top-level classes in one .java file
+    // If the package directory exists in an injected src dir with .java files,
+    // this class came from that submodule.
+    def pkgDir = javaPath.contains('/') ? javaPath.substring(0, javaPath.lastIndexOf('/')) : ''
+    if (pkgDir) {
+        return injectedSrcDirs.any { srcDir ->
+            def dir = new File(srcDir, pkgDir)
+            dir.isDirectory() && dir.listFiles()?.any { it.name.endsWith('.java') }
+        }
+    }
+
+    return false
+}
+
+def isInjectedResource = { String resPath ->
+    injectedResDirs.any { new File(it, resPath).exists() }
+}
+
+// ============================================================================
+// 5. Dev JAR: exclude ALL injected code
+// ============================================================================
+// Each submodule has its own dev JAR on the classpath (built by gradle.submodules.gradle)
+// which serves as its FML mod container. The addon's dev JAR must NOT contain submodule
+// @Mod classes, otherwise FML sees duplicate mod IDs.
+// Hotswap still works: build/classes/java/main/ is on the classpath separately.
+jar {
+    includeEmptyDirs = false
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    exclude { details ->
+        def path = details.relativePath.pathString
+        if (path == 'mcmod.info') return false  // keep merged mcmod.info
+        if (path.endsWith('.class')) return isInjectedClass(path)
+        return isInjectedResource(path)
+    }
+}
+
+// ============================================================================
+// 6. Release JAR: also strips injected code (same filter, different mcmod.info)
+// ============================================================================
+tasks.register("stripInjectedJar", Zip) {
+    dependsOn tasks.named("jar")
+    group = 'build'
+    description = 'Creates a JAR with only addon classes (all submodule code stripped)'
+
+    from(zipTree(tasks.named("jar", Jar).flatMap { it.archiveFile })) {
+        exclude { details ->
+            def path = details.relativePath.pathString
+            // Replace merged mcmod.info with addon's original
+            if (path == 'mcmod.info') return true
+            // Classes and resources already filtered by jar task, but double-check
+            if (path.endsWith('.class')) return isInjectedClass(path)
+            return isInjectedResource(path)
+        }
+    }
+
+    // Add addon's original mcmod.info (not the merged dev one)
+    from('src/main/resources') {
+        include 'mcmod.info'
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    includeEmptyDirs = false
+    archiveExtension.set('jar')
+    archiveClassifier.set('stripped')
+}
+
+project.afterEvaluate {
+    tasks.named("reobfJar").configure {
+        dependsOn tasks.named("stripInjectedJar")
+        inputJar.set(tasks.named("stripInjectedJar", Zip).flatMap { it.archiveFile })
+    }
+}
+
+// ============================================================================
+// 7. Sources JAR: exclude all injected source
+// ============================================================================
+tasks.named("sourcesJar") {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    exclude { details ->
+        def path = details.relativePath.pathString
+        if (path.endsWith('.java')) {
+            return injectedSrcDirs.any { srcDir -> new File(srcDir, path).exists() }
+        }
+        return isInjectedResource(path)
+    }
+}
+
+// ============================================================================
+// 8. Run tasks: aggregate mixin configs from injected submodules
+// ============================================================================
+def mixinConfigs = sourceInjections.findAll { it.mixinConfig }.collect { it.mixinConfig }
+if (mixinConfigs) {
+    ['runClient', 'runServer'].each { taskName ->
+        tasks.named(taskName).configure {
+            dependsOn(tasks.named("processResources"))
+            extraArgs.addAll("--tweakClass", "org.spongepowered.asm.launch.MixinTweaker")
+            mixinConfigs.each { config ->
+                extraArgs.addAll("--mixin", config)
+            }
+        }
+    }
+}

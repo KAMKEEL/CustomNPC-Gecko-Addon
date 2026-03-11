@@ -182,6 +182,7 @@ jobs:
       - name: Generate Javadoc
         run: |
           ./gradlew javadoc \
+            -PnoSourceInjection=true \
             -PcnpcDocUrl=${{ steps.cnpc_docs.outputs.url }} \
             -PcnpcDocElementList=build/cnpc-element-list
 

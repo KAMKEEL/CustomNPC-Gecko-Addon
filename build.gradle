@@ -7,6 +7,30 @@ plugins {
 
 apply from: 'gradle.submodules.gradle'
 
+// Source injection: merges submodule source for IDE hotswap during runClient/runServer.
+// Output JAR contains only addon classes. Disable with: -PnoSourceInjection=true
+if (!(project.hasProperty("noSourceInjection") && project.noSourceInjection == 'true')) {
+    ext.sourceInjections = [
+        [
+            path: 'CustomNPC-Plus',
+            src: ['src/api/java', 'src/main/java'],
+            resources: ['src/main/resources'],
+            compileOnlyFiles: ['tools/standalone-JaninoLoader-1.0.2.jar'],
+            mixinConfig: 'mixins.customnpcs.json',
+        ],
+        [
+            path: 'GeckoLib',
+            src: ['src/main/java'],
+            resources: ['src/main/resources'],
+            compileOnlyDeps: [
+                'com.fasterxml.jackson.core:jackson-databind:2.9.0',
+                'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.0',
+            ],
+        ],
+    ]
+    apply from: 'gradle.sourceInjection.gradle'
+}
+
 version = "1.4-pre"
 group = "com.goodbird.npcgecko"
 

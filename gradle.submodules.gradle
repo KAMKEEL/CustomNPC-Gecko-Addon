@@ -112,15 +112,15 @@ tasks.register('buildSubmodules') {
     dependsOn 'buildCNPC', 'buildGeckoLib'
 }
 
-// ---- Auto-build: submodules compile before this mod ----
+// ---- Auto-build & dependency mode ----
+// Both submodule dev JARs are always built and on the classpath.
+// In source injection mode, the dev JARs serve as FML mod containers (so FML
+// discovers each @Mod in its own JAR). Hotswap works via build/classes/java/main/.
+// In JAR mode (-PnoSourceInjection=true), the dev JARs are the sole source of submodule code.
 tasks.named('compileJava').configure {
     dependsOn 'buildCNPC', 'buildGeckoLib'
 }
 
-// ---- Dependency Declarations ----
-// devOnlyNonPublishable = compile + runtime, but NOT in output JAR and NOT published
-// Dev JARs are already deobfuscated (MCP names), so no rfg.deobf() needed
-// Using lazy file resolution so JARs are found AFTER submodule build tasks execute
 dependencies {
     devOnlyNonPublishable files({ findDevJar('CustomNPC-Plus') })
     devOnlyNonPublishable files({ findDevJar('GeckoLib') })

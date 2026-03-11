@@ -58,7 +58,7 @@ jobs:
         run: ./gradlew --build-cache --info --stacktrace "${WORKSPACE_TASK}"
 
       - name: Compile the mod
-        run: ./gradlew --build-cache --info --stacktrace assemble
+        run: ./gradlew --build-cache --info --stacktrace assemble -PnoSourceInjection=true
 
       - name: Attach compilation artifacts
         uses: actions/upload-artifact@v4
@@ -69,7 +69,7 @@ jobs:
 
       - name: Run post-build checks
         id: build_mod
-        run: xvfb-run --server-args="-screen 0 1366x768x24" ./gradlew --build-cache --info --stacktrace build
+        run: xvfb-run --server-args="-screen 0 1366x768x24" ./gradlew --build-cache --info --stacktrace build -PnoSourceInjection=true
 
       - name: Attach gradle reports
         if: failure() && steps.build_mod.conclusion == 'failure'
@@ -116,7 +116,7 @@ jobs:
           echo "eula=true" > run/eula.txt
           echo "level-seed=-6202107849386030209\nonline-mode=true\n" > run/server.properties
           echo "stop" > run/stop.txt
-          timeout "${RUN_SERVER_TIMEOUT}" ./gradlew --build-cache --info --stacktrace runServer 2>&1 < run/stop.txt | tee -a server.log || true
+          timeout "${RUN_SERVER_TIMEOUT}" ./gradlew --build-cache --info --stacktrace runServer -PnoSourceInjection=true 2>&1 < run/stop.txt | tee -a server.log || true
 
       - name: Test no errors reported during server run
         if: ${{ env.RUN_SERVER_ENABLED == 'true' }}
