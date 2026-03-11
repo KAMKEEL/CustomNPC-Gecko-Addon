@@ -8,7 +8,7 @@ import noppes.npcs.controllers.APIRegistry;
 
 @Mod(modid = "npcgecko",
     name = "CustomNPC+ Gecko Addon",
-    version = "1.4",
+    version = "1.4-pre",
     dependencies = "required-after:customnpcs;required-after:geckolib3")
 public class CustomNpcPlusGecko {
 
