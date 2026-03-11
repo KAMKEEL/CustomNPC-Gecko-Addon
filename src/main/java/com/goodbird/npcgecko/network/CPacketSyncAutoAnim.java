@@ -14,9 +14,11 @@ import noppes.npcs.entity.EntityNPCInterface;
 public final class CPacketSyncAutoAnim implements IMessage, IMessageHandler<CPacketSyncAutoAnim, IMessage> {
     public EnumSyncAutoAnim animType;
     public int entityId;
-    public CPacketSyncAutoAnim(){
+
+    public CPacketSyncAutoAnim() {
 
     }
+
     public CPacketSyncAutoAnim(EntityNPCInterface npc, EnumSyncAutoAnim animType) {
         this.animType = animType;
         this.entityId = npc.getEntityId();
@@ -37,9 +39,9 @@ public final class CPacketSyncAutoAnim implements IMessage, IMessageHandler<CPac
     @Override
     public IMessage onMessage(CPacketSyncAutoAnim message, MessageContext ctx) {
         Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(message.entityId);
-        if(!(entity instanceof EntityCustomNpc)) return null;
+        if (!(entity instanceof EntityCustomNpc)) return null;
         EntityCustomNpc npc = (EntityCustomNpc) entity;
-        if(npc.modelData==null || !(npc.modelData.getEntity(npc) instanceof EntityCustomModel)) return null;
+        if (npc.modelData == null || !(npc.modelData.getEntity(npc) instanceof EntityCustomModel)) return null;
         EntityCustomModel entityCustomModel = (EntityCustomModel) npc.modelData.getEntity(npc);
         entityCustomModel.activateReceivedAnim(message.animType);
         return null;

@@ -24,7 +24,7 @@ import java.security.MessageDigest;
 import java.util.Map;
 
 public class NpcTextureUtils {
-    public static ResourceLocation getNpcTexture(EntityNPCInterface npc){
+    public static ResourceLocation getNpcTexture(EntityNPCInterface npc) {
         if (npc.textureLocation == null) {
             if (npc.display.skinType == 0) {
                 if (npc instanceof EntityCustomNpc && ((EntityCustomNpc) npc).modelData.entityClass == null) {
@@ -37,22 +37,22 @@ public class NpcTextureUtils {
                 } else {
                     npc.textureLocation = new ResourceLocation(npc.display.texture);
                 }
-            } else if(RenderNPCInterface.LastTextureTick < 5) { //fixes request flood somewhat
+            } else if (RenderNPCInterface.LastTextureTick < 5) { //fixes request flood somewhat
                 return AbstractClientPlayer.locationStevePng;
-            } else if(npc.display.skinType == 1 && npc.display.playerProfile != null) {
+            } else if (npc.display.skinType == 1 && npc.display.playerProfile != null) {
                 Minecraft minecraft = Minecraft.getMinecraft();
                 Map map = minecraft.func_152342_ad().func_152788_a(npc.display.playerProfile);
-                if (map.containsKey(MinecraftProfileTexture.Type.SKIN)){
-                    npc.textureLocation = minecraft.func_152342_ad().func_152792_a((MinecraftProfileTexture)map.get(MinecraftProfileTexture.Type.SKIN), MinecraftProfileTexture.Type.SKIN);
+                if (map.containsKey(MinecraftProfileTexture.Type.SKIN)) {
+                    npc.textureLocation = minecraft.func_152342_ad().func_152792_a((MinecraftProfileTexture) map.get(MinecraftProfileTexture.Type.SKIN), MinecraftProfileTexture.Type.SKIN);
                 }
                 RenderNPCInterface.LastTextureTick = 0;
             } else if (npc.display.skinType == 2 || npc.display.skinType == 3) {
                 try {
                     MessageDigest digest = MessageDigest.getInstance("MD5");
                     byte[] hash = digest.digest(npc.display.url.getBytes(StandardCharsets.UTF_8));
-                    StringBuilder sb = new StringBuilder(2*hash.length);
+                    StringBuilder sb = new StringBuilder(2 * hash.length);
                     for (byte b : hash) {
-                        sb.append(String.format("%02x", b&0xff));
+                        sb.append(String.format("%02x", b & 0xff));
                     }
                     if (npc.display.skinType == 2) {
                         npc.textureLocation = new ResourceLocation("skins/" + sb);
@@ -62,7 +62,8 @@ public class NpcTextureUtils {
                         ClientCacheHandler.getNPCTexture(npc.display.url, true, npc.textureLocation);
                     }
                     RenderNPCInterface.LastTextureTick = 0;
-                } catch(Exception ignored){}
+                } catch (Exception ignored) {
+                }
             } else {
                 return AbstractClientPlayer.locationStevePng;
             }
@@ -86,7 +87,7 @@ public class NpcTextureUtils {
                 bufferedimage = bufferedimage.getSubimage(0, 0, totalWidth, 32);
             }
 
-            ImageDownloadAlt object = new ImageDownloadAlt((File)null, npc.display.texture, SkinManager.field_152793_a, new ImageBufferDownloadAlt(false));
+            ImageDownloadAlt object = new ImageDownloadAlt((File) null, npc.display.texture, SkinManager.field_152793_a, new ImageBufferDownloadAlt(false));
             object.setBufferedImage(bufferedimage);
 
             try {
@@ -96,7 +97,7 @@ public class NpcTextureUtils {
                 byte[] var13 = hash;
                 int var14 = hash.length;
 
-                for(int var15 = 0; var15 < var14; ++var15) {
+                for (int var15 = 0; var15 < var14; ++var15) {
                     byte b = var13[var15];
                     sb.append(String.format("%02x", b & 255));
                 }

@@ -1,4 +1,3 @@
-
 // TODO: Fix ScriptCustomItem
 //package com.goodbird.npcgecko.mixin.impl;
 //

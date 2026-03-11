@@ -16,7 +16,8 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 @Mixin(GeckoAddon.class)
 public class MixinGeckoAddon {
 
-    @Shadow(remap = false) public boolean supportEnabled;
+    @Shadow(remap = false)
+    public boolean supportEnabled;
 
     /**
      * @author Goodbird
@@ -24,11 +25,11 @@ public class MixinGeckoAddon {
      */
     @Overwrite(remap = false)
     public void geckoCopyData(EntityLivingBase copied, EntityLivingBase entity) {
-        if(!supportEnabled)
+        if (!supportEnabled)
             return;
 
         if (entity instanceof EntityCustomModel && copied instanceof EntityNPCInterface) {
-            EntityCustomModel  modelEntity = (EntityCustomModel) entity;
+            EntityCustomModel modelEntity = (EntityCustomModel) entity;
             EntityNPCInterface npc = (EntityNPCInterface) copied;
             IDataDisplay display = (IDataDisplay) npc.display;
             modelEntity.textureResLoc = NpcTextureUtils.getNpcTexture((EntityNPCInterface) copied);
@@ -45,7 +46,7 @@ public class MixinGeckoAddon {
             modelEntity.tintData = npc.display.tintData;
             modelEntity.headBoneName = display.getCustomModelData().getHeadBoneName();
             AnimationData animationData = modelEntity.getFactory().getOrCreateAnimationData(modelEntity.getUniqueID().hashCode());
-            for(AnimationController controller : animationData.getAnimationControllers().values()){
+            for (AnimationController controller : animationData.getAnimationControllers().values()) {
                 controller.transitionLengthTicks = display.getCustomModelData().getTransitionLengthTicks();
             }
         }

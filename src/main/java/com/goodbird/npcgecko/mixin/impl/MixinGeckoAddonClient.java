@@ -29,20 +29,21 @@ import java.util.Vector;
 @Mixin(GeckoAddonClient.class)
 public class MixinGeckoAddonClient {
 
-    @Shadow(remap = false) public boolean supportEnabled;
+    @Shadow(remap = false)
+    public boolean supportEnabled;
 
     /**
      * @author Goodbird
      * @reason Show Custom Model Selection button for Custom Entities
      */
     @Overwrite(remap = false)
-    public void showGeckoButtons(GuiCreationScreen creationScreen, EntityLivingBase entity){
-        if(!supportEnabled)
+    public void showGeckoButtons(GuiCreationScreen creationScreen, EntityLivingBase entity) {
+        if (!supportEnabled)
             return;
 
-        if(entity instanceof EntityCustomModel){
-            creationScreen.addButton(new GuiNpcButton(202, creationScreen.guiLeft-60, creationScreen.guiTop+40, 180, 20, ((IDataDisplay)creationScreen.npc.display).getCustomModelData().getModel()));
-            creationScreen.addButton(new GuiNpcButton(203, creationScreen.guiLeft-60, creationScreen.guiTop+62, 180, 20, "Extras"));
+        if (entity instanceof EntityCustomModel) {
+            creationScreen.addButton(new GuiNpcButton(202, creationScreen.guiLeft - 60, creationScreen.guiTop + 40, 180, 20, ((IDataDisplay) creationScreen.npc.display).getCustomModelData().getModel()));
+            creationScreen.addButton(new GuiNpcButton(203, creationScreen.guiLeft - 60, creationScreen.guiTop + 62, 180, 20, "Extras"));
         }
     }
 
@@ -51,21 +52,21 @@ public class MixinGeckoAddonClient {
      * @reason Add support for new showGeckoButtons() in GuiCreationScreen
      */
     @Overwrite(remap = false)
-    public void geckoGuiCreationScreenActionPerformed(GuiCreationScreen creationScreen, GuiNpcButton button){
-        if(!supportEnabled)
+    public void geckoGuiCreationScreenActionPerformed(GuiCreationScreen creationScreen, GuiNpcButton button) {
+        if (!supportEnabled)
             return;
 
-        if(button.id == 202){
+        if (button.id == 202) {
             Vector<String> list = new Vector<>();
-            for(ResourceLocation resLoc : GeckoLibCache.getInstance().getGeoModels().keySet()){
+            for (ResourceLocation resLoc : GeckoLibCache.getInstance().getGeoModels().keySet()) {
                 list.add(resLoc.toString());
             }
-            creationScreen.setSubGui(new GuiStringSelection(creationScreen,"Selecting GeckoLib Model:", list, name -> {
-                ((IDataDisplay)creationScreen.npc.display).getCustomModelData().setModel(name);
+            creationScreen.setSubGui(new GuiStringSelection(creationScreen, "Selecting GeckoLib Model:", list, name -> {
+                ((IDataDisplay) creationScreen.npc.display).getCustomModelData().setModel(name);
                 creationScreen.getButton(202).setDisplayText(name);
             }));
         }
-        if(button.id == 203){
+        if (button.id == 203) {
             creationScreen.setSubGui(new SubGuiModelExtras(creationScreen.npc));
         }
     }
@@ -75,15 +76,15 @@ public class MixinGeckoAddonClient {
      * @reason Init Model Animation Button for NPCs
      */
     @Overwrite(remap = false)
-    public void geckoNpcDisplayInitGui(GuiNPCInterface2 gui){
-        if(!supportEnabled)
+    public void geckoNpcDisplayInitGui(GuiNPCInterface2 gui) {
+        if (!supportEnabled)
             return;
 
         int y = gui.guiTop + 188;
-        gui.addLabel(new GuiNpcLabel(212,"Model Animation", gui.guiLeft + 185, y + 5));
+        gui.addLabel(new GuiNpcLabel(212, "Model Animation", gui.guiLeft + 185, y + 5));
         gui.addButton(new GuiNpcButton(212, gui.guiLeft + 300, y, 100, 20, "selectServer.edit"));
-        if (!((IDataDisplay)gui.npc.display).hasCustomModel()) {
-            gui.getLabel(212).enabled=false;
+        if (!((IDataDisplay) gui.npc.display).hasCustomModel()) {
+            gui.getLabel(212).enabled = false;
             gui.getButton(212).setVisible(false);
             gui.getButton(212).setEnabled(false);
         }
@@ -94,11 +95,11 @@ public class MixinGeckoAddonClient {
      * @reason Add Support for Model Animation button on Npc Display
      */
     @Overwrite(remap = false)
-    public void geckoNpcDisplayActionPerformed(GuiNPCInterface2 gui, GuiNpcButton btn){
-        if(!supportEnabled)
+    public void geckoNpcDisplayActionPerformed(GuiNPCInterface2 gui, GuiNpcButton btn) {
+        if (!supportEnabled)
             return;
 
-        if(btn.id == 212){
+        if (btn.id == 212) {
             gui.setSubGui(new SubGuiModelAnimation(gui.npc));
         }
     }
@@ -108,8 +109,8 @@ public class MixinGeckoAddonClient {
      * @reason Check if Entity is a Gecko Model
      */
     @Overwrite(remap = false)
-    public boolean isGeckoModel(ModelBase mainModel){
-        if(!supportEnabled)
+    public boolean isGeckoModel(ModelBase mainModel) {
+        if (!supportEnabled)
             return false;
 
         return (mainModel instanceof ModelMPM && ((ModelMPM) mainModel).entity instanceof IAnimatable);
@@ -120,23 +121,20 @@ public class MixinGeckoAddonClient {
      * @reason Render Gecko Model Support
      */
     @Overwrite(remap = false)
-    public void geckoRenderModel(ModelMPM mainModel, EntityNPCInterface npc, float rot, float partial){
-        GL11.glRotatef(180, 1,0,0);
-        GL11.glTranslated(0, -1.5,0);
+    public void geckoRenderModel(ModelMPM mainModel, EntityNPCInterface npc, float rot, float partial) {
+        GL11.glRotatef(180, 1, 0, 0);
+        GL11.glTranslated(0, -1.5, 0);
 
-        if (!npc.isInvisible())
-        {
-            if(mainModel.entity instanceof EntityCustomModel){
-                ((EntityCustomModel)mainModel.entity).isSemiVisible = false;
+        if (!npc.isInvisible()) {
+            if (mainModel.entity instanceof EntityCustomModel) {
+                ((EntityCustomModel) mainModel.entity).isSemiVisible = false;
             }
-            RenderManager.instance.renderEntityWithPosYaw(mainModel.entity, 0,0,0,rot,partial);
-        }
-        else if (!npc.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer))
-        {
-            if(mainModel.entity instanceof EntityCustomModel){
-                ((EntityCustomModel)mainModel.entity).isSemiVisible = true;
-                RenderManager.instance.renderEntityWithPosYaw(mainModel.entity, 0,0,0,rot,partial);
-            }else {
+            RenderManager.instance.renderEntityWithPosYaw(mainModel.entity, 0, 0, 0, rot, partial);
+        } else if (!npc.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer)) {
+            if (mainModel.entity instanceof EntityCustomModel) {
+                ((EntityCustomModel) mainModel.entity).isSemiVisible = true;
+                RenderManager.instance.renderEntityWithPosYaw(mainModel.entity, 0, 0, 0, rot, partial);
+            } else {
                 GL11.glPushMatrix();
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.15F);
                 GL11.glDepthMask(false);

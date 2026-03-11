@@ -21,10 +21,11 @@ public class TileEntityCustomModel extends TileEntity implements IAnimatable {
     public String idleAnimName = "";
     public AnimationBuilder manualAnim = null;
 
-    public TileEntityCustomModel(){
+    public TileEntityCustomModel() {
 
     }
-    public TileEntityCustomModel(TileEntity other){
+
+    public TileEntityCustomModel(TileEntity other) {
         setWorldObj(other.getWorldObj());
         xCoord = other.xCoord;
         yCoord = other.yCoord;

@@ -12,6 +12,7 @@ public class CustomModelData {
     private String rangedAttackAnim = "";
     private String headBoneName = "head";
     private int transitionLengthTicks = 10;
+
     public NBTTagCompound writeToNBT(NBTTagCompound nbttagcompound) {
         nbttagcompound.setString("Model", model);
         nbttagcompound.setString("AnimFile", animFile);
@@ -26,7 +27,7 @@ public class CustomModelData {
     }
 
     public void readFromNBT(NBTTagCompound nbttagcompound) {
-        if(nbttagcompound.hasKey("Model")) {
+        if (nbttagcompound.hasKey("Model")) {
             model = nbttagcompound.getString("Model");
             animFile = nbttagcompound.getString("AnimFile");
             idleAnim = nbttagcompound.getString("IdleAnim");
@@ -35,7 +36,7 @@ public class CustomModelData {
             meleeAttackAnim = nbttagcompound.getString("MeleeAttackAnim");
             rangedAttackAnim = nbttagcompound.getString("RangedAttackAnim");
             headBoneName = nbttagcompound.getString("HeadBoneName");
-            if(nbttagcompound.hasKey("TransitionLengthTicks")){
+            if (nbttagcompound.hasKey("TransitionLengthTicks")) {
                 transitionLengthTicks = nbttagcompound.getInteger("TransitionLengthTicks");
             }
         }

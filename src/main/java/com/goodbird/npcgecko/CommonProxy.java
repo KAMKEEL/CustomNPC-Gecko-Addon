@@ -12,22 +12,21 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import noppes.npcs.scripted.NpcAPI;
-import software.bernie.example.block.tile.BotariumTileEntity;
 
 public class CommonProxy {
 
-    public void preInit(FMLPreInitializationEvent ev){
+    public void preInit(FMLPreInitializationEvent ev) {
         EntityRegistry.registerModEntity(EntityCustomModel.class, "CustomModelEntity", 0, CustomNpcPlusGecko.instance, 64, 10, false);
         NpcAPI.EVENT_BUS.register(new EventHandler());
     }
 
-    public void init(FMLInitializationEvent ev){
+    public void init(FMLInitializationEvent ev) {
         NetworkHandler.init();
         GameRegistry.registerTileEntity(TileEntityCustomModel.class, "custommodeltile");
         NpcAPI.Instance().addGlobalObject("GeckoAPI", AbstractGeckoAPI.Instance());
     }
 
-    public World getWorldById(int id){
+    public World getWorldById(int id) {
         return MinecraftServer.getServer().worldServers[id];
     }
 }
