@@ -7,11 +7,14 @@
 //   - Both mods are git submodules built automatically alongside this mod
 //   - Their dev JARs are referenced as devOnlyNonPublishable dependencies
 //   - This means: available at COMPILE + RUNTIME, but NOT in the output JAR
-//   - ./gradlew build     -> builds CNPC+ & GeckoLib first, then clean addon-only JAR
-//   - ./gradlew runClient -> builds CNPC+ & GeckoLib first, then runs with all on classpath
+//   - Submodule builds are skipped when their source hasn't changed
+//   - When they do rebuild, old JARs are cleaned first to prevent duplicates
 //
-// First-time setup:
-//   ./gradlew initSubmodules   (clones/updates submodules recursively)
+// Tasks:
+//   ./gradlew initSubmodules      — first-time: clone/update submodules
+//   ./gradlew buildSubmodules     — force rebuild both (always runs)
+//   ./gradlew buildCNPC           — force rebuild CustomNPC+ only
+//   ./gradlew buildGeckoLib       — force rebuild GeckoLib only
 // ============================================================================
 
 def isWindows = System.getProperty('os.name').toLowerCase().contains('windows')
@@ -48,14 +51,25 @@ def cleanDevJars = { String submoduleDir ->
     }
 }
 
+// Helper: touch a marker file after a successful build
+// We track this marker as the task output instead of build/libs (whose filenames
+// change with every commit due to version stamps, confusing Gradle's up-to-date check)
+def touchMarker = { String submoduleDir ->
+    def marker = file("${submoduleDir}/build/libs/.build-marker")
+    marker.parentFile.mkdirs()
+    marker.text = "${System.currentTimeMillis()}"
+}
+
 // ---- Build CustomNPC+ ----
 // Uses -Pnomixin to avoid embedding Mixin into the JAR (UniMixins provides it at runtime)
+// Skipped automatically when source hasn't changed. doFirst cleans stale JARs when it runs.
 tasks.register('buildCNPC', Exec) {
     group = 'submodules'
     description = 'Builds CustomNPC+ dev JAR from submodule source (no embedded Mixin)'
     workingDir file('CustomNPC-Plus')
 
     doFirst { cleanDevJars('CustomNPC-Plus') }
+    doLast { touchMarker('CustomNPC-Plus') }
 
     def gradlew = gradlewFor(file('CustomNPC-Plus'))
     if (isWindows) {
@@ -64,18 +78,20 @@ tasks.register('buildCNPC', Exec) {
         commandLine gradlew, 'build', '-Pnomixin', '-x', 'test'
     }
 
-    // Gradle up-to-date checking
     inputs.dir file('CustomNPC-Plus/src')
-    outputs.dir file('CustomNPC-Plus/build/libs')
+    inputs.files file('CustomNPC-Plus/build.gradle'), file('CustomNPC-Plus/dependencies.gradle')
+    outputs.file file('CustomNPC-Plus/build/libs/.build-marker')
 }
 
 // ---- Build GeckoLib ----
+// Skipped automatically when source hasn't changed. doFirst cleans stale JARs when it runs.
 tasks.register('buildGeckoLib', Exec) {
     group = 'submodules'
     description = 'Builds GeckoLib dev JAR from submodule source'
     workingDir file('GeckoLib')
 
     doFirst { cleanDevJars('GeckoLib') }
+    doLast { touchMarker('GeckoLib') }
 
     def gradlew = gradlewFor(file('GeckoLib'))
     if (isWindows) {
@@ -84,9 +100,9 @@ tasks.register('buildGeckoLib', Exec) {
         commandLine gradlew, 'build', '-x', 'test'
     }
 
-    // Gradle up-to-date checking
     inputs.dir file('GeckoLib/src')
-    outputs.dir file('GeckoLib/build/libs')
+    inputs.files file('GeckoLib/build.gradle'), file('GeckoLib/dependencies.gradle')
+    outputs.file file('GeckoLib/build/libs/.build-marker')
 }
 
 // ---- Convenience: build all submodules ----
