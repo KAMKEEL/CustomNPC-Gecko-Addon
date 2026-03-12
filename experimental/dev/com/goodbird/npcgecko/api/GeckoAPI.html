@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":9,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":9,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -159,6 +159,13 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#clearItemModel(noppes.npcs.api.item.IItemCustomizable)">clearItemModel</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/item/IItemCustomizable.html?is-external=true" title="class or interface in noppes.npcs.api.item" class="externalLink">IItemCustomizable</a>&nbsp;item)</code></th>
+<td class="colLast">
+<div class="block">Remove the gecko model from a customizable item, reverting to normal 2D rendering.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="IGeckoColor.html" title="interface in com.goodbird.npcgecko.api">IGeckoColor</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#colorOfRGB(int,int,int)">colorOfRGB</a></span>&#8203;(int&nbsp;r,
           int&nbsp;g,
@@ -167,7 +174,7 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <div class="block">Create a color from RGB components.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="IGeckoColor.html" title="interface in com.goodbird.npcgecko.api">IGeckoColor</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#colorOfRGBA(int,int,int,int)">colorOfRGBA</a></span>&#8203;(int&nbsp;r,
            int&nbsp;g,
@@ -177,35 +184,35 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <div class="block">Create a color from RGBA components.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createAnimationBuilder()">createAnimationBuilder</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Create a new animation builder for constructing animation sequences.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createAnimBuilder()">createAnimBuilder</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Create a new animation builder for constructing animation sequences.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAnimatable(noppes.npcs.api.block.IBlockScripted)">getAnimatable</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/block/IBlockScripted.html?is-external=true" title="class or interface in noppes.npcs.api.block" class="externalLink">IBlockScripted</a>&nbsp;scriptedBlock)</code></th>
 <td class="colLast">
 <div class="block">Get the animation configuration interface for a scripted block.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAnimatable(noppes.npcs.api.entity.ICustomNpc)">getAnimatable</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/entity/ICustomNpc.html?is-external=true" title="class or interface in noppes.npcs.api.entity" class="externalLink">ICustomNpc</a>&lt;noppes.npcs.entity.EntityNPCInterface&gt;&nbsp;npc)</code></th>
 <td class="colLast">
 <div class="block">Get the animation configuration interface for an NPC.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="IGeckoAnimation.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimation</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAnimation(java.lang.String,java.lang.String)">getAnimation</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animationFile,
             <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animationName)</code></th>
@@ -213,26 +220,40 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <div class="block">Get animation metadata from a loaded animation file.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAnimationFileList()">getAnimationFileList</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get a list of all loaded animation file resource locations.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAnimationList(java.lang.String)">getAnimationList</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animationFile)</code></th>
 <td class="colLast">
 <div class="block">Get a list of all animation names in an animation file.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
+<td class="colFirst"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>[]</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDisplayFileList()">getDisplayFileList</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Get a list of all loaded display file names from item_displays/ folders.</div>
+</td>
+</tr>
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hasItemModel(noppes.npcs.api.item.IItemCustomizable)">hasItemModel</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/item/IItemCustomizable.html?is-external=true" title="class or interface in noppes.npcs.api.item" class="externalLink">IItemCustomizable</a>&nbsp;item)</code></th>
+<td class="colLast">
+<div class="block">Check if a customizable item has a gecko model assigned.</div>
+</td>
+</tr>
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>static <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#Instance()">Instance</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setAnimationFile(noppes.npcs.api.block.IBlockScripted,java.lang.String)">setAnimationFile</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/block/IBlockScripted.html?is-external=true" title="class or interface in noppes.npcs.api.block" class="externalLink">IBlockScripted</a>&nbsp;scriptedBlock,
                 <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animation)</code></th>
@@ -240,7 +261,7 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <div class="block">Set the animation file resource location for a scripted block.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setAnimationFile(noppes.npcs.api.entity.ICustomNpc,java.lang.String)">setAnimationFile</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/entity/ICustomNpc.html?is-external=true" title="class or interface in noppes.npcs.api.entity" class="externalLink">ICustomNpc</a>&lt;noppes.npcs.entity.EntityNPCInterface&gt;&nbsp;npc,
                 <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animation)</code></th>
@@ -248,7 +269,15 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <div class="block">Set the animation file resource location for an NPC.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i15" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setDisplayJSON(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setDisplayJSON</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/item/IItemCustomizable.html?is-external=true" title="class or interface in noppes.npcs.api.item" class="externalLink">IItemCustomizable</a>&nbsp;item,
+              <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;displayFile)</code></th>
+<td class="colLast">
+<div class="block">Set the display JSON file for a gecko item.</div>
+</td>
+</tr>
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setIdleAnimation(noppes.npcs.api.block.IBlockScripted,java.lang.String)">setIdleAnimation</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/block/IBlockScripted.html?is-external=true" title="class or interface in noppes.npcs.api.block" class="externalLink">IBlockScripted</a>&nbsp;scriptedBlock,
                 <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animation)</code></th>
@@ -256,7 +285,7 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <div class="block">Set the idle animation name for a scripted block.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setIdleAnimation(noppes.npcs.api.entity.ICustomNpc,java.lang.String)">setIdleAnimation</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/entity/ICustomNpc.html?is-external=true" title="class or interface in noppes.npcs.api.entity" class="externalLink">ICustomNpc</a>&lt;noppes.npcs.entity.EntityNPCInterface&gt;&nbsp;npc,
                 <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animation)</code></th>
@@ -264,7 +293,56 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <div class="block">Set the idle animation name for an NPC.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i18" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setItemAnimationFile(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setItemAnimationFile</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/item/IItemCustomizable.html?is-external=true" title="class or interface in noppes.npcs.api.item" class="externalLink">IItemCustomizable</a>&nbsp;item,
+                    <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animation)</code></th>
+<td class="colLast">
+<div class="block">Set the animation file resource location for a customizable item.</div>
+</td>
+</tr>
+<tr id="i19" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setItemDisplay(noppes.npcs.api.item.IItemCustomizable,java.lang.String,float,float,float,float,float,float,float,float,float)">setItemDisplay</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/item/IItemCustomizable.html?is-external=true" title="class or interface in noppes.npcs.api.item" class="externalLink">IItemCustomizable</a>&nbsp;item,
+              <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;context,
+              float&nbsp;tx,
+              float&nbsp;ty,
+              float&nbsp;tz,
+              float&nbsp;rx,
+              float&nbsp;ry,
+              float&nbsp;rz,
+              float&nbsp;sx,
+              float&nbsp;sy,
+              float&nbsp;sz)</code></th>
+<td class="colLast">
+<div class="block">Set the display transform for a specific render context on a gecko item.</div>
+</td>
+</tr>
+<tr id="i20" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setItemIdleAnimation(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setItemIdleAnimation</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/item/IItemCustomizable.html?is-external=true" title="class or interface in noppes.npcs.api.item" class="externalLink">IItemCustomizable</a>&nbsp;item,
+                    <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animation)</code></th>
+<td class="colLast">
+<div class="block">Set the idle animation name for a customizable item.</div>
+</td>
+</tr>
+<tr id="i21" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setItemModel(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setItemModel</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/item/IItemCustomizable.html?is-external=true" title="class or interface in noppes.npcs.api.item" class="externalLink">IItemCustomizable</a>&nbsp;item,
+            <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;model)</code></th>
+<td class="colLast">
+<div class="block">Set the geo model resource location for a customizable item.</div>
+</td>
+</tr>
+<tr id="i22" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setItemTexture(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setItemTexture</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/item/IItemCustomizable.html?is-external=true" title="class or interface in noppes.npcs.api.item" class="externalLink">IItemCustomizable</a>&nbsp;item,
+              <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;texture)</code></th>
+<td class="colLast">
+<div class="block">Set the texture resource location for a customizable item.</div>
+</td>
+</tr>
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setModel(noppes.npcs.api.block.IBlockScripted,java.lang.String)">setModel</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/block/IBlockScripted.html?is-external=true" title="class or interface in noppes.npcs.api.block" class="externalLink">IBlockScripted</a>&nbsp;scriptedBlock,
         <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;model)</code></th>
@@ -272,7 +350,7 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <div class="block">Set the geo model resource location for a scripted block.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setModel(noppes.npcs.api.entity.ICustomNpc,java.lang.String)">setModel</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/entity/ICustomNpc.html?is-external=true" title="class or interface in noppes.npcs.api.entity" class="externalLink">ICustomNpc</a>&lt;noppes.npcs.entity.EntityNPCInterface&gt;&nbsp;npc,
         <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;model)</code></th>
@@ -280,7 +358,7 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <div class="block">Set the geo model resource location for an NPC.</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i25" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTexture(noppes.npcs.api.block.IBlockScripted,java.lang.String)">setTexture</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/block/IBlockScripted.html?is-external=true" title="class or interface in noppes.npcs.api.block" class="externalLink">IBlockScripted</a>&nbsp;scriptedBlock,
           <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;texture)</code></th>
@@ -288,7 +366,7 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <div class="block">Set the texture resource location for a scripted block.</div>
 </td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i26" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTexture(noppes.npcs.api.entity.ICustomNpc,java.lang.String)">setTexture</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/entity/ICustomNpc.html?is-external=true" title="class or interface in noppes.npcs.api.entity" class="externalLink">ICustomNpc</a>&lt;noppes.npcs.entity.EntityNPCInterface&gt;&nbsp;npc,
           <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;texture)</code></th>
@@ -296,7 +374,7 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <div class="block">Set the texture resource location for an NPC.</div>
 </td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i27" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#syncAnimForAll(noppes.npcs.api.block.IBlockScripted,com.goodbird.npcgecko.api.IGeckoAnimationBuilder)">syncAnimForAll</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/block/IBlockScripted.html?is-external=true" title="class or interface in noppes.npcs.api.block" class="externalLink">IBlockScripted</a>&nbsp;scriptedBlock,
               <a href="IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a>&nbsp;builder)</code></th>
@@ -304,7 +382,7 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <div class="block">Sync an animation to all players for a scripted block.</div>
 </td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i28" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#syncAnimForAll(noppes.npcs.api.entity.ICustomNpc,com.goodbird.npcgecko.api.IGeckoAnimationBuilder)">syncAnimForAll</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/entity/ICustomNpc.html?is-external=true" title="class or interface in noppes.npcs.api.entity" class="externalLink">ICustomNpc</a>&lt;noppes.npcs.entity.EntityNPCInterface&gt;&nbsp;npc,
               <a href="IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a>&nbsp;builder)</code></th>
@@ -312,7 +390,7 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <div class="block">Sync an animation to all players for an NPC.</div>
 </td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i29" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#syncAnimForPlayer(noppes.npcs.api.block.IBlockScripted,com.goodbird.npcgecko.api.IGeckoAnimationBuilder,noppes.npcs.api.entity.IPlayer)">syncAnimForPlayer</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/block/IBlockScripted.html?is-external=true" title="class or interface in noppes.npcs.api.block" class="externalLink">IBlockScripted</a>&nbsp;scriptedBlock,
                  <a href="IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a>&nbsp;builder,
@@ -321,7 +399,7 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <div class="block">Sync an animation to a specific player for a scripted block.</div>
 </td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i30" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#syncAnimForPlayer(noppes.npcs.api.entity.ICustomNpc,com.goodbird.npcgecko.api.IGeckoAnimationBuilder,noppes.npcs.api.entity.IPlayer)">syncAnimForPlayer</a></span>&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/entity/ICustomNpc.html?is-external=true" title="class or interface in noppes.npcs.api.entity" class="externalLink">ICustomNpc</a>&lt;noppes.npcs.entity.EntityNPCInterface&gt;&nbsp;npc,
                  <a href="IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a>&nbsp;builder,
@@ -763,7 +841,7 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <a id="syncAnimForAll(noppes.npcs.api.block.IBlockScripted,com.goodbird.npcgecko.api.IGeckoAnimationBuilder)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>syncAnimForAll</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;syncAnimForAll&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/block/IBlockScripted.html?is-external=true" title="class or interface in noppes.npcs.api.block" class="externalLink">IBlockScripted</a>&nbsp;scriptedBlock,
@@ -776,6 +854,202 @@ extends <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.ap
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>scriptedBlock</code> - The block to play the animation on</dd>
 <dd><code>builder</code> - The animation builder with queued animations</dd>
+</dl>
+</li>
+</ul>
+<a id="setItemModel(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setItemModel</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;setItemModel&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/item/IItemCustomizable.html?is-external=true" title="class or interface in noppes.npcs.api.item" class="externalLink">IItemCustomizable</a>&nbsp;item,
+                         <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;model)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="AbstractGeckoAPI.html#setItemModel(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">AbstractGeckoAPI</a></code></span></div>
+<div class="block">Set the geo model resource location for a customizable item.
+ Works with both Scripted Items and Linked Items.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="AbstractGeckoAPI.html#setItemModel(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setItemModel</a></code>&nbsp;in class&nbsp;<code><a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>item</code> - The item (IItemCustom or IItemLinked from event.item or API)</dd>
+<dd><code>model</code> - The model path (e.g. "geckolib3:geo/mymodel.geo.json")</dd>
+</dl>
+</li>
+</ul>
+<a id="setItemTexture(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setItemTexture</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;setItemTexture&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/item/IItemCustomizable.html?is-external=true" title="class or interface in noppes.npcs.api.item" class="externalLink">IItemCustomizable</a>&nbsp;item,
+                           <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;texture)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="AbstractGeckoAPI.html#setItemTexture(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">AbstractGeckoAPI</a></code></span></div>
+<div class="block">Set the texture resource location for a customizable item.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="AbstractGeckoAPI.html#setItemTexture(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setItemTexture</a></code>&nbsp;in class&nbsp;<code><a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>item</code> - The item</dd>
+<dd><code>texture</code> - The texture path (e.g. "geckolib3:textures/item/mytexture.png")</dd>
+</dl>
+</li>
+</ul>
+<a id="setItemAnimationFile(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setItemAnimationFile</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;setItemAnimationFile&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/item/IItemCustomizable.html?is-external=true" title="class or interface in noppes.npcs.api.item" class="externalLink">IItemCustomizable</a>&nbsp;item,
+                                 <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animation)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="AbstractGeckoAPI.html#setItemAnimationFile(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">AbstractGeckoAPI</a></code></span></div>
+<div class="block">Set the animation file resource location for a customizable item.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="AbstractGeckoAPI.html#setItemAnimationFile(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setItemAnimationFile</a></code>&nbsp;in class&nbsp;<code><a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>item</code> - The item</dd>
+<dd><code>animation</code> - The animation file path (e.g. "geckolib3:animations/mymodel.animation.json")</dd>
+</dl>
+</li>
+</ul>
+<a id="setItemIdleAnimation(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setItemIdleAnimation</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;setItemIdleAnimation&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/item/IItemCustomizable.html?is-external=true" title="class or interface in noppes.npcs.api.item" class="externalLink">IItemCustomizable</a>&nbsp;item,
+                                 <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animation)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="AbstractGeckoAPI.html#setItemIdleAnimation(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">AbstractGeckoAPI</a></code></span></div>
+<div class="block">Set the idle animation name for a customizable item.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="AbstractGeckoAPI.html#setItemIdleAnimation(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setItemIdleAnimation</a></code>&nbsp;in class&nbsp;<code><a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>item</code> - The item</dd>
+<dd><code>animation</code> - The animation name from the animation file</dd>
+</dl>
+</li>
+</ul>
+<a id="hasItemModel(noppes.npcs.api.item.IItemCustomizable)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>hasItemModel</h4>
+<pre class="methodSignature">public&nbsp;boolean&nbsp;hasItemModel&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/item/IItemCustomizable.html?is-external=true" title="class or interface in noppes.npcs.api.item" class="externalLink">IItemCustomizable</a>&nbsp;item)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="AbstractGeckoAPI.html#hasItemModel(noppes.npcs.api.item.IItemCustomizable)">AbstractGeckoAPI</a></code></span></div>
+<div class="block">Check if a customizable item has a gecko model assigned.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="AbstractGeckoAPI.html#hasItemModel(noppes.npcs.api.item.IItemCustomizable)">hasItemModel</a></code>&nbsp;in class&nbsp;<code><a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>item</code> - The item to check</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if the item has a custom gecko model</dd>
+</dl>
+</li>
+</ul>
+<a id="clearItemModel(noppes.npcs.api.item.IItemCustomizable)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>clearItemModel</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;clearItemModel&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/item/IItemCustomizable.html?is-external=true" title="class or interface in noppes.npcs.api.item" class="externalLink">IItemCustomizable</a>&nbsp;item)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="AbstractGeckoAPI.html#clearItemModel(noppes.npcs.api.item.IItemCustomizable)">AbstractGeckoAPI</a></code></span></div>
+<div class="block">Remove the gecko model from a customizable item, reverting to normal 2D rendering.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="AbstractGeckoAPI.html#clearItemModel(noppes.npcs.api.item.IItemCustomizable)">clearItemModel</a></code>&nbsp;in class&nbsp;<code><a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>item</code> - The item to clear the model from</dd>
+</dl>
+</li>
+</ul>
+<a id="setDisplayJSON(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setDisplayJSON</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;setDisplayJSON&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/item/IItemCustomizable.html?is-external=true" title="class or interface in noppes.npcs.api.item" class="externalLink">IItemCustomizable</a>&nbsp;item,
+                           <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;displayFile)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="AbstractGeckoAPI.html#setDisplayJSON(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">AbstractGeckoAPI</a></code></span></div>
+<div class="block">Set the display JSON file for a gecko item.
+ The file is loaded from assets/{domain}/item_displays/ folders.
+ This controls how the 3D model is positioned, rotated, and scaled
+ in each render context (first person, third person, inventory, ground).
+
+ <p>Example: <code>GeckoAPI.setDisplayJSON(item, "sword.json")</code></p></div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="AbstractGeckoAPI.html#setDisplayJSON(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setDisplayJSON</a></code>&nbsp;in class&nbsp;<code><a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>item</code> - The item to set the display JSON on</dd>
+<dd><code>displayFile</code> - The display JSON filename (e.g. "sword.json")</dd>
+</dl>
+</li>
+</ul>
+<a id="getDisplayFileList()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDisplayFileList</h4>
+<pre class="methodSignature">public&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>[]&nbsp;getDisplayFileList()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="AbstractGeckoAPI.html#getDisplayFileList()">AbstractGeckoAPI</a></code></span></div>
+<div class="block">Get a list of all loaded display file names from item_displays/ folders.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="AbstractGeckoAPI.html#getDisplayFileList()">getDisplayFileList</a></code>&nbsp;in class&nbsp;<code><a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Array of display file names</dd>
+</dl>
+</li>
+</ul>
+<a id="setItemDisplay(noppes.npcs.api.item.IItemCustomizable,java.lang.String,float,float,float,float,float,float,float,float,float)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>setItemDisplay</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;setItemDisplay&#8203;(<a href="https://kamkeel.github.io/CustomNPC-Plus/experimental/dev/noppes/npcs/api/item/IItemCustomizable.html?is-external=true" title="class or interface in noppes.npcs.api.item" class="externalLink">IItemCustomizable</a>&nbsp;item,
+                           <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;context,
+                           float&nbsp;tx,
+                           float&nbsp;ty,
+                           float&nbsp;tz,
+                           float&nbsp;rx,
+                           float&nbsp;ry,
+                           float&nbsp;rz,
+                           float&nbsp;sx,
+                           float&nbsp;sy,
+                           float&nbsp;sz)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="AbstractGeckoAPI.html#setItemDisplay(noppes.npcs.api.item.IItemCustomizable,java.lang.String,float,float,float,float,float,float,float,float,float)">AbstractGeckoAPI</a></code></span></div>
+<div class="block">Set the display transform for a specific render context on a gecko item.
+ This controls how the 3D model is positioned, rotated, and scaled
+ when rendered in that context.
+
+ <p>If no per-context transform is set, the item's existing rotation/scale/translate
+ properties are used as fallback.</p></div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="AbstractGeckoAPI.html#setItemDisplay(noppes.npcs.api.item.IItemCustomizable,java.lang.String,float,float,float,float,float,float,float,float,float)">setItemDisplay</a></code>&nbsp;in class&nbsp;<code><a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>item</code> - The item to set the display transform on</dd>
+<dd><code>context</code> - The render context: "first_person", "third_person", "inventory", or "ground"</dd>
+<dd><code>tx</code> - Translation X</dd>
+<dd><code>ty</code> - Translation Y</dd>
+<dd><code>tz</code> - Translation Z</dd>
+<dd><code>rx</code> - Rotation X (degrees)</dd>
+<dd><code>ry</code> - Rotation Y (degrees)</dd>
+<dd><code>rz</code> - Rotation Z (degrees)</dd>
+<dd><code>sx</code> - Scale X</dd>
+<dd><code>sy</code> - Scale Y</dd>
+<dd><code>sz</code> - Scale Z</dd>
 </dl>
 </li>
 </ul>
