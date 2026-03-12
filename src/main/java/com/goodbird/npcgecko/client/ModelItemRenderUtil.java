@@ -78,6 +78,12 @@ public class ModelItemRenderUtil {
         applyRotate(transform, type);
         applyScale(transform, type);
 
+        // Compensate for GeoItemStackRenderer's internal transforms:
+        //   translate(0, 0.01, 0) + translate(0.5, 0.5, 0.5) + rotate(90, Y)
+        // Apply inverse so our tuned defaults remain the final matrix.
+        GL11.glRotatef(-90, 0, 1, 0);
+        GL11.glTranslatef(-0.5F, -0.51F, -0.5F);
+
         if(type == ItemRenderType.INVENTORY)
             RenderHelper.disableStandardItemLighting();
         RENDERER.render(wrapper, itemStack);
