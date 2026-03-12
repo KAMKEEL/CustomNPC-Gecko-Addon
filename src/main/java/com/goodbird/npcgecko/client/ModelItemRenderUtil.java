@@ -72,13 +72,13 @@ public class ModelItemRenderUtil {
     }
 
     public static void applyTranslate(ItemDisplayTransform t, ItemRenderType type) {
-        // Inline per-context defaults
+        // Apply Default Positioning for 1.7.10
         switch (type) {
             case EQUIPPED_FIRST_PERSON:
                 GL11.glTranslatef(0.5F, 0.55F, 0.5F);
                 break;
             case EQUIPPED:
-                GL11.glTranslatef(0F, -0.7F, 0F);
+                GL11.glTranslatef(0.7F, 0.4F, 0.7F);
                 break;
             case INVENTORY:
                 GL11.glTranslatef(0F, 0.05F, 0F);
@@ -96,11 +96,15 @@ public class ModelItemRenderUtil {
     }
 
     public static void applyRotate(ItemDisplayTransform t, ItemRenderType type) {
+        // Apply Default Rotationing for 1.7.10
         switch (type) {
             case EQUIPPED_FIRST_PERSON:
                 GL11.glRotatef(-45F, 0.0F, 1.0F, 0.0F);
                 break;
             case EQUIPPED:
+                GL11.glRotatef(-65F, 1.0F, 0.0F, 0.0F);
+                GL11.glRotatef(45F, 0.0F, 0.0F, 1.0F);
+                GL11.glRotatef(20F, 0.0F, 1.0F, 0.0F);
                 break;
             case INVENTORY:
                 GL11.glRotatef(-135F, 0.0F, 1.0F, 0.0F);
@@ -121,13 +125,15 @@ public class ModelItemRenderUtil {
     }
 
     public static void applyScale(ItemDisplayTransform t, ItemRenderType type) {
+        // Apply Default Scaling for 1.7.10
         switch (type) {
             case EQUIPPED_FIRST_PERSON:
                 float scale = 2.36f;
                 GL11.glScalef(scale, scale, scale);
                 break;
             case EQUIPPED:
-                //GL11.glScalef(0F, -0.5F, 0F);
+                scale = 2.5f;
+                GL11.glScalef(scale, scale, scale);
                 break;
             case INVENTORY:
                 scale = 1.65f;
