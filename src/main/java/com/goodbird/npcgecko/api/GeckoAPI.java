@@ -1,7 +1,5 @@
 package com.goodbird.npcgecko.api;
 
-import com.goodbird.npcgecko.data.CustomItemModelData;
-import com.goodbird.npcgecko.data.ItemDisplayTransform;
 import software.bernie.geckolib3.resource.ItemDisplayLibrary;
 import com.goodbird.npcgecko.wrapper.*;
 import com.goodbird.npcgecko.mixin.IDataDisplay;
@@ -18,13 +16,17 @@ import noppes.npcs.api.entity.IPlayer;
 import noppes.npcs.api.item.IItemCustomizable;
 import noppes.npcs.blocks.tiles.TileScripted;
 import noppes.npcs.entity.EntityNPCInterface;
-import noppes.npcs.scripted.item.ScriptCustomizableItem;
 import software.bernie.geckolib3.core.builder.Animation;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.util.Color;
 import software.bernie.geckolib3.file.AnimationFile;
 import software.bernie.geckolib3.resource.GeckoLibCache;
 
+/**
+ * Implementation of {@link AbstractGeckoAPI} that provides the concrete GeckoLib integration.
+ * This class is loaded reflectively when GeckoLib is present and should not be
+ * referenced directly. Use {@link AbstractGeckoAPI#Instance()} to obtain the API.
+ */
 public class GeckoAPI extends AbstractGeckoAPI {
     private static AbstractGeckoAPI Instance;
 
@@ -225,89 +227,16 @@ public class GeckoAPI extends AbstractGeckoAPI {
     // Item Methods
     // ========================================================================
 
-    private CustomItemModelData getOrCreateItemModelData(IItemCustomizable item) {
+    @Override
+    public IGeckoItemModel getItemGecko(IItemCustomizable item) {
         if (!(item instanceof IScriptCustomItem)) {
             throw new IllegalArgumentException("Item does not support gecko models. Must be a Scripted or Linked item.");
         }
-        IScriptCustomItem scriptItem = (IScriptCustomItem) item;
-        if (!scriptItem.hasCustomModel()) {
-            scriptItem.setCustomModelData(new CustomItemModelData());
-        }
-        return scriptItem.getCustomModelData();
-    }
-
-    @Override
-    public void setItemModel(IItemCustomizable item, String model) {
-        CustomItemModelData data = getOrCreateItemModelData(item);
-        data.setModel(model);
-        ((ScriptCustomizableItem) item).saveItemData();
-    }
-
-    @Override
-    public void setItemTexture(IItemCustomizable item, String texture) {
-        CustomItemModelData data = getOrCreateItemModelData(item);
-        data.setTexture(texture);
-        ((ScriptCustomizableItem) item).saveItemData();
-    }
-
-    @Override
-    public void setItemAnimationFile(IItemCustomizable item, String animation) {
-        CustomItemModelData data = getOrCreateItemModelData(item);
-        data.setAnimFile(animation);
-        ((ScriptCustomizableItem) item).saveItemData();
-    }
-
-    @Override
-    public void setItemIdleAnimation(IItemCustomizable item, String animation) {
-        CustomItemModelData data = getOrCreateItemModelData(item);
-        data.setIdleAnim(animation);
-        ((ScriptCustomizableItem) item).saveItemData();
-    }
-
-    @Override
-    public boolean hasItemModel(IItemCustomizable item) {
-        if (!(item instanceof IScriptCustomItem)) {
-            return false;
-        }
-        return ((IScriptCustomItem) item).hasCustomModel();
-    }
-
-    @Override
-    public void clearItemModel(IItemCustomizable item) {
-        if (item instanceof IScriptCustomItem) {
-            ((IScriptCustomItem) item).setCustomModelData(null);
-            ((ScriptCustomizableItem) item).saveItemData();
-        }
-    }
-
-    @Override
-    public void setDisplayJSON(IItemCustomizable item, String displayFile) {
-        CustomItemModelData data = getOrCreateItemModelData(item);
-        data.setDisplayFile(displayFile);
-        ((ScriptCustomizableItem) item).saveItemData();
+        return new GeckoItemModelWrapper(item);
     }
 
     @Override
     public String[] getDisplayFileList() {
         return ItemDisplayLibrary.instance.getFileNames();
-    }
-
-    @Override
-    public void setItemDisplay(IItemCustomizable item, String context,
-            float tx, float ty, float tz,
-            float rx, float ry, float rz,
-            float sx, float sy, float sz) {
-        CustomItemModelData data = getOrCreateItemModelData(item);
-        ItemDisplayTransform transform = new ItemDisplayTransform(tx, ty, tz, rx, ry, rz, sx, sy, sz);
-        switch (context.toLowerCase()) {
-            case "first_person": data.setFirstPerson(transform); break;
-            case "third_person": data.setThirdPerson(transform); break;
-            case "inventory":    data.setInventory(transform); break;
-            case "ground":       data.setGround(transform); break;
-            default:
-                throw new IllegalArgumentException("Unknown display context: " + context
-                    + ". Use: first_person, third_person, inventory, ground");
-        }
-        ((ScriptCustomizableItem) item).saveItemData();
     }
 }

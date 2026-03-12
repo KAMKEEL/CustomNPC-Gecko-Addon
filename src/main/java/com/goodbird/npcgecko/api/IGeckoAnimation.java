@@ -1,59 +1,62 @@
 package com.goodbird.npcgecko.api;
 
 /**
- * Interface for querying animation metadata from a loaded animation file.
- * Provides read-only access to animation properties defined in Blockbench.
+ * Read-only interface for querying animation metadata from a loaded animation file.
+ * Provides access to animation properties as defined in Blockbench.
  *
- * <p>Obtain via {@link AbstractGeckoAPI#getAnimation(String, String)}.</p>
+ * <p>Obtain an instance via {@link AbstractGeckoAPI#getAnimation}.</p>
+ *
+ * @see AbstractGeckoAPI#getAnimation
+ * @see AbstractGeckoAPI#getAnimationList
  */
 public interface IGeckoAnimation {
 
     /**
      * Get the animation name as defined in the animation file.
      *
-     * @return The animation name
+     * @return the animation name
      */
     String getName();
 
     /**
-     * Get the duration of this animation in seconds.
+     * Get the total duration of this animation in seconds.
      *
-     * @return The animation length in seconds
+     * @return the animation length in seconds
      */
     double getLength();
 
     /**
-     * Whether this animation loops by default.
+     * Check whether this animation loops by default as defined in the animation file.
      *
-     * @return True if the animation loops
+     * @return true if the animation is set to loop
      */
     boolean isLooping();
 
     /**
      * Get the names of all bones that have keyframes in this animation.
      *
-     * @return Array of bone names with animation data
+     * @return array of bone names that are animated
      */
     String[] getAnimatedBoneNames();
 
     /**
-     * Get the number of sound keyframes in this animation.
+     * Get the number of sound effect keyframes in this animation.
      *
-     * @return The sound keyframe count
+     * @return the sound keyframe count
      */
     int getSoundKeyframeCount();
 
     /**
-     * Get the number of particle keyframes in this animation.
+     * Get the number of particle effect keyframes in this animation.
      *
-     * @return The particle keyframe count
+     * @return the particle keyframe count
      */
     int getParticleKeyframeCount();
 
     /**
      * Get the number of custom instruction keyframes in this animation.
      *
-     * @return The custom instruction keyframe count
+     * @return the custom instruction keyframe count
      */
     int getCustomInstructionKeyframeCount();
 }

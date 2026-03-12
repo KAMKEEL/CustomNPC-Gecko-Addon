@@ -1,27 +1,28 @@
 package com.goodbird.npcgecko.api;
 
 /**
- * Read-only interface for querying the runtime state of a Gecko model.
- * Allows scripts to inspect model bones and their current transforms.
+ * Read-only interface for querying the runtime state of a GeckoLib model.
+ * Provides access to the model's bone hierarchy after animations have been applied.
  *
- * <p>This interface provides access to the model's bone hierarchy after
- * animations have been applied, useful for attaching effects or
- * querying positions of specific model parts.</p>
+ * <p>Useful for inspecting bone transforms, attaching effects to specific
+ * model parts, or querying positions of bones at runtime.</p>
+ *
+ * @see IGeckoBone
  */
 public interface IGeckoModel {
 
     /**
-     * Get a bone by name.
+     * Get a bone by its name as defined in the model file.
      *
-     * @param name The bone name as defined in the model file
-     * @return The bone, or null if not found
+     * @param name the bone name
+     * @return the bone interface, or null if no bone with that name exists
      */
     IGeckoBone getBone(String name);
 
     /**
      * Get the names of all bones in this model.
      *
-     * @return Array of bone names
+     * @return array of all bone names
      */
     String[] getBoneNames();
 }

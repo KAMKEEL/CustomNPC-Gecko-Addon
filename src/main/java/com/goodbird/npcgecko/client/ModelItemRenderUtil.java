@@ -4,31 +4,28 @@ import com.goodbird.npcgecko.client.model.ItemModelCustom;
 import com.goodbird.npcgecko.data.CustomItemModelData;
 import com.goodbird.npcgecko.data.ItemDisplayData;
 import com.goodbird.npcgecko.data.ItemDisplayTransform;
-import com.goodbird.npcgecko.mixin.IScriptCustomItem;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.client.IItemRenderer.ItemRenderType;
-import noppes.npcs.api.item.IItemCustomizable;
-import noppes.npcs.api.item.IItemStack;
-import noppes.npcs.scripted.NpcAPI;
 import org.lwjgl.opengl.GL11;
-import scala.tools.nsc.doc.base.comment.Inline;
 import software.bernie.geckolib3.item.AnimatableStackWrapper;
 import software.bernie.geckolib3.renderers.geo.GeoItemStackRenderer;
 
+import java.util.WeakHashMap;
+
 public class ModelItemRenderUtil {
     private static final GeoItemStackRenderer RENDERER = new GeoItemStackRenderer(new ItemModelCustom());
+    private static final WeakHashMap<ItemStack, CustomItemModelData> modelDataCache = new WeakHashMap<>();
 
     /**
      * Quick check if an ItemStack has a gecko model attached.
-     * Used by the shouldUseRenderHelper mixin to route gecko items
-     * through the EQUIPPED_BLOCK path in ForgeHooksClient.
+     * Reads directly from the ItemStack's root NBT tag (top-level "GeckoModelData")
+     * to avoid NpcAPI cache dependencies that cause flickering when items are moved.
      */
     public static boolean hasGeckoModel(ItemStack itemStack) {
-        IItemStack iItemStack = NpcAPI.Instance().getIItemStack(itemStack);
-        if (!(iItemStack instanceof IItemCustomizable)) return false;
-        if (!(iItemStack instanceof IScriptCustomItem)) return false;
-        return ((IScriptCustomItem) iItemStack).hasCustomModel();
+        if (itemStack == null || !itemStack.hasTagCompound()) return false;
+        return itemStack.getTagCompound().hasKey("GeckoModelData");
     }
 
     /**
@@ -52,19 +49,23 @@ public class ModelItemRenderUtil {
 
     /**
      * Attempts to render a gecko model for the given item.
-     * Returns true if rendering was handled, false if the item has no gecko model.
+     * Reads model data directly from the ItemStack's NBT to avoid NpcAPI cache
+     * dependencies that cause flickering when items are moved in inventory.
      */
     public static boolean tryRender(ItemRenderType type, ItemStack itemStack) {
-        IItemStack iItemStack = NpcAPI.Instance().getIItemStack(itemStack);
-        if (!(iItemStack instanceof IItemCustomizable)) return false;
-        IItemCustomizable scriptCustomItem = (IItemCustomizable) iItemStack;
-        if (!(scriptCustomItem instanceof IScriptCustomItem)) return false;
-        IScriptCustomItem geckoItem = (IScriptCustomItem) scriptCustomItem;
-        if (!geckoItem.hasCustomModel()) return false;
+        if (itemStack == null || !itemStack.hasTagCompound()) return false;
+        NBTTagCompound root = itemStack.getTagCompound();
+        if (!root.hasKey("GeckoModelData")) return false;
 
-        CustomItemModelData modelData = geckoItem.getCustomModelData();
+        CustomItemModelData modelData = modelDataCache.get(itemStack);
+        if (modelData == null) {
+            modelData = new CustomItemModelData();
+            modelData.readFromNBT(root.getCompoundTag("GeckoModelData"));
+            modelDataCache.put(itemStack, modelData);
+        }
+
         AnimatableStackWrapper wrapper = AnimatableStackWrapper.of(itemStack).withUserData(modelData);
-        ItemDisplayTransform transform = resolveTransform(modelData, scriptCustomItem, type);
+        ItemDisplayTransform transform = resolveTransform(modelData, type);
 
         GL11.glPushMatrix();
 
@@ -183,7 +184,7 @@ public class ModelItemRenderUtil {
      *   3) null — let the apply methods use their inline defaults
      */
     public static ItemDisplayTransform resolveTransform(
-            CustomItemModelData modelData, IItemCustomizable item, ItemRenderType type) {
+            CustomItemModelData modelData, ItemRenderType type) {
 
         // 1) Per-item NBT override
         ItemDisplayTransform nbtTransform = null;

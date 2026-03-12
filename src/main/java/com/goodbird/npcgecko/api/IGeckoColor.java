@@ -1,57 +1,67 @@
 package com.goodbird.npcgecko.api;
 
 /**
- * Interface for color manipulation. Provides access to RGBA color components
- * and common color operations.
+ * Interface for color manipulation with RGBA components.
  *
  * <p>Create colors using the factory methods on {@link AbstractGeckoAPI}:</p>
  * <pre>
- * var color = GeckoAPI.Instance().colorOfRGB(255, 0, 0); // Red
- * var alpha = GeckoAPI.Instance().colorOfRGBA(255, 0, 0, 128); // Semi-transparent red
+ * var red = gecko.colorOfRGB(255, 0, 0);
+ * var semiTransparent = gecko.colorOfRGBA(255, 0, 0, 128);
  * </pre>
+ *
+ * @see AbstractGeckoAPI#colorOfRGB
+ * @see AbstractGeckoAPI#colorOfRGBA
  */
 public interface IGeckoColor {
 
     /**
-     * Get the packed ARGB color value.
+     * Get the packed ARGB color value as a single integer.
      *
-     * @return The packed color as an integer
+     * @return the packed ARGB color integer
      */
     int getColor();
 
     /**
-     * @return The red component (0-255)
+     * Get the red component.
+     *
+     * @return the red component (0-255)
      */
     int getRed();
 
     /**
-     * @return The green component (0-255)
+     * Get the green component.
+     *
+     * @return the green component (0-255)
      */
     int getGreen();
 
     /**
-     * @return The blue component (0-255)
+     * Get the blue component.
+     *
+     * @return the blue component (0-255)
      */
     int getBlue();
 
     /**
-     * @return The alpha component (0-255)
+     * Get the alpha (transparency) component.
+     *
+     * @return the alpha component (0-255, where 255 is fully opaque)
      */
     int getAlpha();
 
     /**
      * Create a brighter version of this color.
      *
-     * @param factor How much brighter (0.0 = no change, 1.0 = white)
-     * @return A new brighter color
+     * @param factor brightness factor (0.0 = no change, 1.0 = white)
+     * @return a new brighter color
      */
     IGeckoColor brighter(double factor);
 
     /**
      * Create a darker version of this color.
      *
-     * @param factor How much darker (0.0 = no change, 1.0 = black)
-     * @return A new darker color
+     * @param factor darkness factor (0.0 = no change, 1.0 = black)
+     * @return a new darker color
      */
     IGeckoColor darker(double factor);
 }

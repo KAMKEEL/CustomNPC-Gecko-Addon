@@ -8,13 +8,45 @@ import noppes.npcs.api.entity.IPlayer;
 import noppes.npcs.api.item.IItemCustomizable;
 import noppes.npcs.entity.EntityNPCInterface;
 
+/**
+ * Main entry point for the GeckoLib Addon API.
+ * Provides methods for controlling GeckoLib 3D models, animations, textures,
+ * and display settings on CustomNPC+ entities, scripted blocks, and items.
+ *
+ * <p>Access the API singleton via {@code AbstractGeckoAPI.Instance()}.
+ * Check availability first with {@code AbstractGeckoAPI.IsAvailable()}.</p>
+ *
+ * <p>Script usage example:</p>
+ * <pre>
+ * var gecko = Java.type("com.goodbird.npcgecko.api.AbstractGeckoAPI").Instance();
+ * if (gecko != null) {
+ *     gecko.setModel(npc, "geckolib3:geo/custom_npc.geo.json");
+ *     gecko.setTexture(npc, "geckolib3:textures/model/custom_npc.png");
+ * }
+ * </pre>
+ *
+ * @see IGeckoAnimatable
+ * @see IGeckoItemModel
+ * @see IGeckoAnimationBuilder
+ */
 public abstract class AbstractGeckoAPI {
     private static AbstractGeckoAPI instance = null;
 
+    /**
+     * Check whether the GeckoLib mod is loaded and the API is available.
+     *
+     * @return true if GeckoLib is loaded
+     */
     public static boolean IsAvailable() {
         return Loader.isModLoaded("geckolib3");
     }
 
+    /**
+     * Get the API singleton instance.
+     * Returns null if GeckoLib is not loaded.
+     *
+     * @return the API instance, or null if GeckoLib is unavailable
+     */
     public static AbstractGeckoAPI Instance() {
         if (instance != null) {
             return instance;
@@ -37,15 +69,23 @@ public abstract class AbstractGeckoAPI {
 
     /**
      * Create a new animation builder for constructing animation sequences.
+     * Alias for {@link #createAnimationBuilder()}.
      *
-     * @return A new animation builder
+     * @return a new animation builder instance
      */
     public abstract IGeckoAnimationBuilder createAnimBuilder();
 
     /**
      * Create a new animation builder for constructing animation sequences.
      *
-     * @return A new animation builder
+     * <p>Usage example:</p>
+     * <pre>
+     * var builder = gecko.createAnimationBuilder();
+     * builder.playOnce("animation.model.attack").loop("animation.model.idle");
+     * gecko.syncAnimForAll(npc, builder);
+     * </pre>
+     *
+     * @return a new animation builder instance
      */
     public abstract IGeckoAnimationBuilder createAnimationBuilder();
 
@@ -54,18 +94,24 @@ public abstract class AbstractGeckoAPI {
     // ========================================================================
 
     /**
-     * Get the animation configuration interface for an NPC.
+     * Get the gecko model configuration interface for an NPC.
+     * The returned object allows reading and writing model, texture,
+     * animation file, and animation state settings.
      *
-     * @param npc The NPC to get animation config for
-     * @return The animatable interface for this NPC
+     * @param npc the NPC to configure
+     * @return the animatable interface for this NPC
+     * @see IGeckoAnimatable
      */
     public abstract IGeckoAnimatable getAnimatable(ICustomNpc<EntityNPCInterface> npc);
 
     /**
-     * Get the animation configuration interface for a scripted block.
+     * Get the gecko model configuration interface for a scripted block.
+     * The returned object allows reading and writing model, texture,
+     * animation file, and animation state settings.
      *
-     * @param scriptedBlock The block to get animation config for
-     * @return The animatable interface for this block
+     * @param scriptedBlock the scripted block to configure
+     * @return the animatable interface for this block
+     * @see IGeckoAnimatable
      */
     public abstract IGeckoAnimatable getAnimatable(IBlockScripted scriptedBlock);
 
@@ -74,26 +120,28 @@ public abstract class AbstractGeckoAPI {
     // ========================================================================
 
     /**
-     * Get a list of all animation names in an animation file.
+     * Get a list of all animation names defined in an animation file.
      *
-     * @param animationFile The animation file resource location (e.g. "npcgecko:animations/geo_npc.animation.json")
-     * @return Array of animation names, or empty array if file not found
+     * @param animationFile the animation file resource location
+     *        (e.g. "geckolib3:animations/model.animation.json")
+     * @return array of animation names, or an empty array if the file was not found
      */
     public abstract String[] getAnimationList(String animationFile);
 
     /**
      * Get a list of all loaded animation file resource locations.
      *
-     * @return Array of animation file paths
+     * @return array of animation file resource location strings
      */
     public abstract String[] getAnimationFileList();
 
     /**
      * Get animation metadata from a loaded animation file.
      *
-     * @param animationFile The animation file resource location
-     * @param animationName The animation name within the file
-     * @return The animation metadata, or null if not found
+     * @param animationFile the animation file resource location
+     * @param animationName the animation name within the file
+     * @return the animation metadata, or null if not found
+     * @see IGeckoAnimation
      */
     public abstract IGeckoAnimation getAnimation(String animationFile, String animationName);
 
@@ -104,21 +152,23 @@ public abstract class AbstractGeckoAPI {
     /**
      * Create a color from RGB components.
      *
-     * @param r Red component (0-255)
-     * @param g Green component (0-255)
-     * @param b Blue component (0-255)
-     * @return A new color
+     * @param r red component (0-255)
+     * @param g green component (0-255)
+     * @param b blue component (0-255)
+     * @return a new color instance
+     * @see IGeckoColor
      */
     public abstract IGeckoColor colorOfRGB(int r, int g, int b);
 
     /**
      * Create a color from RGBA components.
      *
-     * @param r Red component (0-255)
-     * @param g Green component (0-255)
-     * @param b Blue component (0-255)
-     * @param a Alpha component (0-255)
-     * @return A new color
+     * @param r red component (0-255)
+     * @param g green component (0-255)
+     * @param b blue component (0-255)
+     * @param a alpha component (0-255, where 255 is fully opaque)
+     * @return a new color instance
+     * @see IGeckoColor
      */
     public abstract IGeckoColor colorOfRGBA(int r, int g, int b, int a);
 
@@ -127,51 +177,54 @@ public abstract class AbstractGeckoAPI {
     // ========================================================================
 
     /**
-     * Set the geo model resource location for an NPC.
+     * Set the GeckoLib geo model resource location for an NPC.
      *
-     * @param npc The target NPC
-     * @param model The model path (e.g. "geckolib3:geo/npc.geo.json")
+     * @param npc the target NPC
+     * @param model the model resource location (e.g. "geckolib3:geo/npc.geo.json")
      */
     public abstract void setModel(ICustomNpc<EntityNPCInterface> npc, String model);
 
     /**
      * Set the texture resource location for an NPC.
      *
-     * @param npc The target NPC
-     * @param texture The texture path
+     * @param npc the target NPC
+     * @param texture the texture resource location (e.g. "geckolib3:textures/model/npc.png")
      */
     public abstract void setTexture(ICustomNpc<EntityNPCInterface> npc, String texture);
 
     /**
      * Set the animation file resource location for an NPC.
      *
-     * @param npc The target NPC
-     * @param animation The animation file path
+     * @param npc the target NPC
+     * @param animation the animation file resource location
+     *        (e.g. "geckolib3:animations/npc.animation.json")
      */
     public abstract void setAnimationFile(ICustomNpc<EntityNPCInterface> npc, String animation);
 
     /**
      * Set the idle animation name for an NPC.
+     * The animation must exist in the currently assigned animation file.
      *
-     * @param npc The target NPC
-     * @param animation The animation name from the animation file
+     * @param npc the target NPC
+     * @param animation the animation name (e.g. "animation.npc.idle")
      */
     public abstract void setIdleAnimation(ICustomNpc<EntityNPCInterface> npc, String animation);
 
     /**
-     * Sync an animation to a specific player for an NPC.
+     * Sync a queued animation sequence to a specific player for an NPC.
+     * Only the specified player will see the animation.
      *
-     * @param npc The NPC to play the animation on
-     * @param builder The animation builder with queued animations
-     * @param player The player to send the animation to
+     * @param npc the NPC to play the animation on
+     * @param builder the animation builder containing the queued animation sequence
+     * @param player the player to send the animation to
      */
     public abstract void syncAnimForPlayer(ICustomNpc<EntityNPCInterface> npc, IGeckoAnimationBuilder builder, IPlayer<EntityPlayerMP> player);
 
     /**
-     * Sync an animation to all players for an NPC.
+     * Sync a queued animation sequence to all connected players for an NPC.
      *
-     * @param npc The NPC to play the animation on
-     * @param builder The animation builder with queued animations
+     * @param npc the NPC to play the animation on
+     * @param builder the animation builder containing the queued animation sequence
      */
     public abstract void syncAnimForAll(ICustomNpc<EntityNPCInterface> npc, IGeckoAnimationBuilder builder);
 
@@ -180,51 +233,54 @@ public abstract class AbstractGeckoAPI {
     // ========================================================================
 
     /**
-     * Set the geo model resource location for a scripted block.
+     * Set the GeckoLib geo model resource location for a scripted block.
      *
-     * @param scriptedBlock The target block
-     * @param model The model path
+     * @param scriptedBlock the target scripted block
+     * @param model the model resource location (e.g. "geckolib3:geo/block.geo.json")
      */
     public abstract void setModel(IBlockScripted scriptedBlock, String model);
 
     /**
      * Set the texture resource location for a scripted block.
      *
-     * @param scriptedBlock The target block
-     * @param texture The texture path
+     * @param scriptedBlock the target scripted block
+     * @param texture the texture resource location (e.g. "geckolib3:textures/model/block.png")
      */
     public abstract void setTexture(IBlockScripted scriptedBlock, String texture);
 
     /**
      * Set the animation file resource location for a scripted block.
      *
-     * @param scriptedBlock The target block
-     * @param animation The animation file path
+     * @param scriptedBlock the target scripted block
+     * @param animation the animation file resource location
+     *        (e.g. "geckolib3:animations/block.animation.json")
      */
     public abstract void setAnimationFile(IBlockScripted scriptedBlock, String animation);
 
     /**
      * Set the idle animation name for a scripted block.
+     * The animation must exist in the currently assigned animation file.
      *
-     * @param scriptedBlock The target block
-     * @param animation The animation name from the animation file
+     * @param scriptedBlock the target scripted block
+     * @param animation the animation name (e.g. "animation.block.idle")
      */
     public abstract void setIdleAnimation(IBlockScripted scriptedBlock, String animation);
 
     /**
-     * Sync an animation to a specific player for a scripted block.
+     * Sync a queued animation sequence to a specific player for a scripted block.
+     * Only the specified player will see the animation.
      *
-     * @param scriptedBlock The block to play the animation on
-     * @param builder The animation builder with queued animations
-     * @param player The player to send the animation to
+     * @param scriptedBlock the scripted block to play the animation on
+     * @param builder the animation builder containing the queued animation sequence
+     * @param player the player to send the animation to
      */
     public abstract void syncAnimForPlayer(IBlockScripted scriptedBlock, IGeckoAnimationBuilder builder, IPlayer<EntityPlayerMP> player);
 
     /**
-     * Sync an animation to all players for a scripted block.
+     * Sync a queued animation sequence to all connected players for a scripted block.
      *
-     * @param scriptedBlock The block to play the animation on
-     * @param builder The animation builder with queued animations
+     * @param scriptedBlock the scripted block to play the animation on
+     * @param builder the animation builder containing the queued animation sequence
      */
     public abstract void syncAnimForAll(IBlockScripted scriptedBlock, IGeckoAnimationBuilder builder);
 
@@ -233,95 +289,33 @@ public abstract class AbstractGeckoAPI {
     // ========================================================================
 
     /**
-     * Set the geo model resource location for a customizable item.
+     * Get the gecko model interface for a customizable item.
      * Works with both Scripted Items and Linked Items.
+     * The returned object allows reading and writing model, texture,
+     * animation, and display transform settings.
      *
-     * @param item The item (IItemCustom or IItemLinked from event.item or API)
-     * @param model The model path (e.g. "geckolib3:geo/mymodel.geo.json")
+     * <p>Usage example:</p>
+     * <pre>
+     * var itemGecko = gecko.getItemGecko(event.item);
+     * itemGecko.setModel("geckolib3:geo/sword.geo.json");
+     * itemGecko.setTexture("geckolib3:textures/model/sword.png");
+     * itemGecko.setAnimationFile("geckolib3:animations/sword.animation.json");
+     * itemGecko.setIdleAnimation("animation.sword.idle");
+     * </pre>
+     *
+     * @param item the customizable item (IItemCustom or IItemLinked)
+     * @return the gecko model interface for this item
+     * @throws IllegalArgumentException if the item is not a Scripted or Linked item
+     * @see IGeckoItemModel
      */
-    public abstract void setItemModel(IItemCustomizable item, String model);
+    public abstract IGeckoItemModel getItemGecko(IItemCustomizable item);
 
     /**
-     * Set the texture resource location for a customizable item.
-     *
-     * @param item The item
-     * @param texture The texture path (e.g. "geckolib3:textures/item/mytexture.png")
-     */
-    public abstract void setItemTexture(IItemCustomizable item, String texture);
-
-    /**
-     * Set the animation file resource location for a customizable item.
-     *
-     * @param item The item
-     * @param animation The animation file path (e.g. "geckolib3:animations/mymodel.animation.json")
-     */
-    public abstract void setItemAnimationFile(IItemCustomizable item, String animation);
-
-    /**
-     * Set the idle animation name for a customizable item.
-     *
-     * @param item The item
-     * @param animation The animation name from the animation file
-     */
-    public abstract void setItemIdleAnimation(IItemCustomizable item, String animation);
-
-    /**
-     * Check if a customizable item has a gecko model assigned.
-     *
-     * @param item The item to check
-     * @return true if the item has a custom gecko model
-     */
-    public abstract boolean hasItemModel(IItemCustomizable item);
-
-    /**
-     * Remove the gecko model from a customizable item, reverting to normal 2D rendering.
-     *
-     * @param item The item to clear the model from
-     */
-    public abstract void clearItemModel(IItemCustomizable item);
-
-    /**
-     * Set the display JSON file for a gecko item.
-     * The file is loaded from assets/{domain}/item_displays/ folders.
-     * This controls how the 3D model is positioned, rotated, and scaled
+     * Get a list of all loaded display file names from item_displays/ resource folders.
+     * Display files control how 3D item models are positioned, rotated, and scaled
      * in each render context (first person, third person, inventory, ground).
      *
-     * <p>Example: {@code GeckoAPI.setDisplayJSON(item, "sword.json")}</p>
-     *
-     * @param item The item to set the display JSON on
-     * @param displayFile The display JSON filename (e.g. "sword.json")
-     */
-    public abstract void setDisplayJSON(IItemCustomizable item, String displayFile);
-
-    /**
-     * Get a list of all loaded display file names from item_displays/ folders.
-     *
-     * @return Array of display file names
+     * @return array of display file names (e.g. "sword.json", "tool.json")
      */
     public abstract String[] getDisplayFileList();
-
-    /**
-     * Set the display transform for a specific render context on a gecko item.
-     * This controls how the 3D model is positioned, rotated, and scaled
-     * when rendered in that context.
-     *
-     * <p>If no per-context transform is set, the item's existing rotation/scale/translate
-     * properties are used as fallback.</p>
-     *
-     * @param item The item to set the display transform on
-     * @param context The render context: "first_person", "third_person", "inventory", or "ground"
-     * @param tx Translation X
-     * @param ty Translation Y
-     * @param tz Translation Z
-     * @param rx Rotation X (degrees)
-     * @param ry Rotation Y (degrees)
-     * @param rz Rotation Z (degrees)
-     * @param sx Scale X
-     * @param sy Scale Y
-     * @param sz Scale Z
-     */
-    public abstract void setItemDisplay(IItemCustomizable item, String context,
-        float tx, float ty, float tz,
-        float rx, float ry, float rz,
-        float sx, float sy, float sz);
 }
