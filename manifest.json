@@ -1,6 +1,6 @@
 {
   "releases": [],
-  "experimental": [{"id":"dev","branch":"dev","path":"experimental/dev","hash":"6fa5f1c","date":"2026-03-12T01:25:06-04:00"}],
-  "generated": "2026-03-12T05:29:25Z",
+  "experimental": [{"id":"dev","branch":"dev","path":"experimental/dev","hash":"9642c9f","date":"2026-03-12T05:50:51-04:00"}],
+  "generated": "2026-03-12T09:55:22Z",
   "source": "manifest"
 }
