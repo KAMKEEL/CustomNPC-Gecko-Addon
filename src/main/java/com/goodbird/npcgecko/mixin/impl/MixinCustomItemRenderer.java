@@ -22,10 +22,12 @@ public class MixinCustomItemRenderer {
     )
     public void shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper, CallbackInfoReturnable<Boolean> cir) {
         if (ModelItemRenderUtil.hasGeckoModel(item)) {
-            // Return true for all helpers, matching GeoItemRenderer behavior.
-            // EQUIPPED_BLOCK → simple translate(-0.5) path in ForgeHooksClient
-            // INVENTORY_BLOCK → 3D isometric inventory rendering
-            cir.setReturnValue(true);
+            // Only override INVENTORY_BLOCK for 3D isometric inventory rendering.
+            // For EQUIPPED, keep the default sprite path — it handles all arm
+            // orientations correctly (player, zombie, NPC models).
+            if (helper == ItemRendererHelper.INVENTORY_BLOCK) {
+                cir.setReturnValue(true);
+            }
         }
     }
 

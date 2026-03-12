@@ -32,14 +32,27 @@ public class ModelItemRenderUtil {
     }
 
     /**
+     * Undoes ForgeHooksClient's sprite path transforms and applies the simpler
+     * EQUIPPED_BLOCK translate instead. This normalizes the matrix state so that
+     * our EQUIPPED defaults work consistently regardless of arm bone orientation.
+     *
+     * Sprite path applies: translate(0,-0.3,0) → scale(1.5) → rotate(50,Y) → rotate(335,Z) → translate(-0.9375,-0.0625,0)
+     * We undo in reverse, then apply the block path: translate(-0.5,-0.5,-0.5)
+     */
+    private static void normalizeEquipped() {
+        // Undo sprite path (reverse order)
+        GL11.glTranslatef(0.9375F, 0.0625F, 0.0F);
+        GL11.glRotatef(-335.0F, 0.0F, 0.0F, 1.0F);
+        GL11.glRotatef(-50.0F, 0.0F, 1.0F, 0.0F);
+        GL11.glScalef(1.0F / 1.5F, 1.0F / 1.5F, 1.0F / 1.5F);
+        GL11.glTranslatef(0.0F, 0.3F, 0.0F);
+        // Apply old block path
+        GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+    }
+
+    /**
      * Attempts to render a gecko model for the given item.
      * Returns true if rendering was handled, false if the item has no gecko model.
-     *
-     * With shouldUseRenderHelper returning true for EQUIPPED_BLOCK,
-     * ForgeHooksClient only applies translate(-0.5, -0.5, -0.5) before calling us.
-     * Our per-type defaults below match GeoItemRenderer.renderItem() transforms.
-     * GeoItemStackRenderer.render() then applies the standard GeckoLib transforms
-     * (translate 0.5,0.5,0.5 + rotate 90 Y) matching GeoItemRenderer.render().
      */
     public static boolean tryRender(ItemRenderType type, ItemStack itemStack) {
         IItemStack iItemStack = NpcAPI.Instance().getIItemStack(itemStack);
@@ -53,8 +66,14 @@ public class ModelItemRenderUtil {
         AnimatableStackWrapper wrapper = AnimatableStackWrapper.of(itemStack).withUserData(modelData);
         ItemDisplayTransform transform = resolveTransform(modelData, scriptCustomItem, type);
 
-        // Reset Resetting to the Upper Stack
         GL11.glPushMatrix();
+
+        // For equipped types, undo the sprite path and apply the block path
+        // so our tuned defaults work consistently across all arm orientations
+        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
+            normalizeEquipped();
+        }
+
         applyTranslate(transform, type);
         applyRotate(transform, type);
         applyScale(transform, type);
@@ -78,10 +97,10 @@ public class ModelItemRenderUtil {
                 GL11.glTranslatef(0.5F, 0.55F, 0.5F);
                 break;
             case EQUIPPED:
-                GL11.glTranslatef(0.7F, 0.4F, 0.7F);
+                GL11.glTranslatef(0.75F, 0.4F, 0F);
                 break;
             case INVENTORY:
-                GL11.glTranslatef(0F, 0.05F, 0F);
+                GL11.glTranslatef(0F, -0.1F, 0F);
                 break;
             case ENTITY:
                 GL11.glTranslatef(0F, 0.0F, 0F);
@@ -102,9 +121,9 @@ public class ModelItemRenderUtil {
                 GL11.glRotatef(-45F, 0.0F, 1.0F, 0.0F);
                 break;
             case EQUIPPED:
-                GL11.glRotatef(-65F, 1.0F, 0.0F, 0.0F);
-                GL11.glRotatef(45F, 0.0F, 0.0F, 1.0F);
-                GL11.glRotatef(20F, 0.0F, 1.0F, 0.0F);
+                GL11.glRotatef(-90F, 0.0F, 1.0F, 0.0F);
+                GL11.glRotatef(33F, 1.0F, 0.0F, 0.0F);
+                GL11.glRotatef(-5F, 0.0F, 1.0F, 0.0F);
                 break;
             case INVENTORY:
                 GL11.glRotatef(-135F, 0.0F, 1.0F, 0.0F);
@@ -132,15 +151,14 @@ public class ModelItemRenderUtil {
                 GL11.glScalef(scale, scale, scale);
                 break;
             case EQUIPPED:
-                scale = 2.5f;
+                scale = 1.0f;
                 GL11.glScalef(scale, scale, scale);
                 break;
             case INVENTORY:
-                scale = 1.65f;
+                scale = 1.5f;
                 GL11.glScalef(scale, scale, scale);
                 break;
             case ENTITY:
-                //GL11.glScalef(0F, -0.5F, 0F);
                 break;
             default:
                 break;
