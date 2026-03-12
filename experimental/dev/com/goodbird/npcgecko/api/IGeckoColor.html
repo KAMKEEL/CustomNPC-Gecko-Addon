@@ -124,14 +124,18 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <hr>
 <pre>public interface <span class="typeNameLabel">IGeckoColor</span></pre>
-<div class="block">Interface for color manipulation. Provides access to RGBA color components
- and common color operations.
+<div class="block">Interface for color manipulation with RGBA components.
 
  <p>Create colors using the factory methods on <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api"><code>AbstractGeckoAPI</code></a>:</p>
  <pre>
- var color = GeckoAPI.Instance().colorOfRGB(255, 0, 0); // Red
- var alpha = GeckoAPI.Instance().colorOfRGBA(255, 0, 0, 128); // Semi-transparent red
+ var red = gecko.colorOfRGB(255, 0, 0);
+ var semiTransparent = gecko.colorOfRGBA(255, 0, 0, 128);
  </pre></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="AbstractGeckoAPI.html#colorOfRGB(int,int,int)"><code>AbstractGeckoAPI.colorOfRGB(int, int, int)</code></a>, 
+<a href="AbstractGeckoAPI.html#colorOfRGBA(int,int,int,int)"><code>AbstractGeckoAPI.colorOfRGBA(int, int, int, int)</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -169,29 +173,37 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAlpha()">getAlpha</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get the alpha (transparency) component.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getBlue()">getBlue</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get the blue component.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getColor()">getColor</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Get the packed ARGB color value.</div>
+<div class="block">Get the packed ARGB color value as a single integer.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getGreen()">getGreen</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get the green component.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRed()">getRed</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get the red component.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -217,10 +229,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getColor</h4>
 <pre class="methodSignature">int&nbsp;getColor()</pre>
-<div class="block">Get the packed ARGB color value.</div>
+<div class="block">Get the packed ARGB color value as a single integer.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The packed color as an integer</dd>
+<dd>the packed ARGB color integer</dd>
 </dl>
 </li>
 </ul>
@@ -231,9 +243,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getRed</h4>
 <pre class="methodSignature">int&nbsp;getRed()</pre>
+<div class="block">Get the red component.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The red component (0-255)</dd>
+<dd>the red component (0-255)</dd>
 </dl>
 </li>
 </ul>
@@ -244,9 +257,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getGreen</h4>
 <pre class="methodSignature">int&nbsp;getGreen()</pre>
+<div class="block">Get the green component.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The green component (0-255)</dd>
+<dd>the green component (0-255)</dd>
 </dl>
 </li>
 </ul>
@@ -257,9 +271,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getBlue</h4>
 <pre class="methodSignature">int&nbsp;getBlue()</pre>
+<div class="block">Get the blue component.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The blue component (0-255)</dd>
+<dd>the blue component (0-255)</dd>
 </dl>
 </li>
 </ul>
@@ -270,9 +285,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getAlpha</h4>
 <pre class="methodSignature">int&nbsp;getAlpha()</pre>
+<div class="block">Get the alpha (transparency) component.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The alpha component (0-255)</dd>
+<dd>the alpha component (0-255, where 255 is fully opaque)</dd>
 </dl>
 </li>
 </ul>
@@ -286,9 +302,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Create a brighter version of this color.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>factor</code> - How much brighter (0.0 = no change, 1.0 = white)</dd>
+<dd><code>factor</code> - brightness factor (0.0 = no change, 1.0 = white)</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>A new brighter color</dd>
+<dd>a new brighter color</dd>
 </dl>
 </li>
 </ul>
@@ -302,9 +318,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Create a darker version of this color.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>factor</code> - How much darker (0.0 = no change, 1.0 = black)</dd>
+<dd><code>factor</code> - darkness factor (0.0 = no change, 1.0 = black)</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>A new darker color</dd>
+<dd>a new darker color</dd>
 </dl>
 </li>
 </ul>

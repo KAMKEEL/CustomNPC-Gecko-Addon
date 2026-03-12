@@ -125,14 +125,22 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public interface <span class="typeNameLabel">IGeckoAnimationBuilder</span></pre>
 <div class="block">Builder interface for constructing animation sequences.
- Follows the builder pattern - all methods return the builder for chaining.
+ Follows the builder pattern where all methods return this builder for chaining.
 
- <p>Example usage in scripts:</p>
+ <p>Create an instance via <a href="AbstractGeckoAPI.html#createAnimationBuilder()"><code>AbstractGeckoAPI.createAnimationBuilder()</code></a>.</p>
+
+ <p>Usage example:</p>
  <pre>
- var builder = GeckoAPI.Instance().createAnimationBuilder();
- builder.playOnce("attack").loop("idle");
- GeckoAPI.Instance().syncAnimForAll(npc, builder);
+ var builder = gecko.createAnimationBuilder();
+ builder.playOnce("animation.npc.attack").loop("animation.npc.idle");
+ gecko.syncAnimForAll(npc, builder);
  </pre></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="AbstractGeckoAPI.html#createAnimationBuilder()"><code>AbstractGeckoAPI.createAnimationBuilder()</code></a>, 
+<a href="AbstractGeckoAPI.html#syncAnimForAll(noppes.npcs.api.entity.ICustomNpc,com.goodbird.npcgecko.api.IGeckoAnimationBuilder)"><code>AbstractGeckoAPI.syncAnimForAll(noppes.npcs.api.entity.ICustomNpc&lt;noppes.npcs.entity.EntityNPCInterface&gt;, com.goodbird.npcgecko.api.IGeckoAnimationBuilder)</code></a>, 
+<a href="AbstractGeckoAPI.html#syncAnimForPlayer(noppes.npcs.api.entity.ICustomNpc,com.goodbird.npcgecko.api.IGeckoAnimationBuilder,noppes.npcs.api.entity.IPlayer)"><code>AbstractGeckoAPI.syncAnimForPlayer(noppes.npcs.api.entity.ICustomNpc&lt;noppes.npcs.entity.EntityNPCInterface&gt;, com.goodbird.npcgecko.api.IGeckoAnimationBuilder, noppes.npcs.api.entity.IPlayer&lt;net.minecraft.entity.player.EntityPlayerMP&gt;)</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -157,7 +165,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <td class="colFirst"><code><a href="IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addAnimation(java.lang.String)">addAnimation</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animationName)</code></th>
 <td class="colLast">
-<div class="block">Add an animation to the queue with default loop behavior from the animation file.</div>
+<div class="block">Add an animation to the queue using the default loop behavior
+ defined in the animation file.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -165,21 +174,21 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addRepeatingAnimation(java.lang.String,int)">addRepeatingAnimation</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animationName,
                      int&nbsp;timesToRepeat)</code></th>
 <td class="colLast">
-<div class="block">Add an animation to the queue repeated multiple times.</div>
+<div class="block">Add an animation to the queue that repeats a specified number of times.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#clearAnimations()">clearAnimations</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Clear all animations currently in the builder.</div>
+<div class="block">Clear all animations currently queued in this builder.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#loop(java.lang.String)">loop</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animationName)</code></th>
 <td class="colLast">
-<div class="block">Add an animation that loops indefinitely until replaced.</div>
+<div class="block">Add an animation that loops indefinitely until replaced by another animation.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
@@ -193,7 +202,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <td class="colFirst"><code><a href="IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#playOnce(java.lang.String)">playOnce</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animationName)</code></th>
 <td class="colLast">
-<div class="block">Add an animation that plays once then moves to the next in queue.</div>
+<div class="block">Add an animation that plays once, then advances to the next in the queue.</div>
 </td>
 </tr>
 </table>
@@ -220,12 +229,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>playOnce</h4>
 <pre class="methodSignature"><a href="IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a>&nbsp;playOnce&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animationName)</pre>
-<div class="block">Add an animation that plays once then moves to the next in queue.</div>
+<div class="block">Add an animation that plays once, then advances to the next in the queue.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>animationName</code> - The animation name matching the Blockbench file</dd>
+<dd><code>animationName</code> - the animation name as defined in the Blockbench animation file</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>This builder for chaining</dd>
+<dd>this builder for chaining</dd>
 </dl>
 </li>
 </ul>
@@ -236,12 +245,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>loop</h4>
 <pre class="methodSignature"><a href="IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a>&nbsp;loop&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animationName)</pre>
-<div class="block">Add an animation that loops indefinitely until replaced.</div>
+<div class="block">Add an animation that loops indefinitely until replaced by another animation.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>animationName</code> - The animation name matching the Blockbench file</dd>
+<dd><code>animationName</code> - the animation name as defined in the Blockbench animation file</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>This builder for chaining</dd>
+<dd>this builder for chaining</dd>
 </dl>
 </li>
 </ul>
@@ -255,9 +264,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Add an animation that plays once and holds on the last frame.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>animationName</code> - The animation name matching the Blockbench file</dd>
+<dd><code>animationName</code> - the animation name as defined in the Blockbench animation file</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>This builder for chaining</dd>
+<dd>this builder for chaining</dd>
 </dl>
 </li>
 </ul>
@@ -268,12 +277,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>addAnimation</h4>
 <pre class="methodSignature"><a href="IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a>&nbsp;addAnimation&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animationName)</pre>
-<div class="block">Add an animation to the queue with default loop behavior from the animation file.</div>
+<div class="block">Add an animation to the queue using the default loop behavior
+ defined in the animation file.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>animationName</code> - The animation name matching the Blockbench file</dd>
+<dd><code>animationName</code> - the animation name as defined in the Blockbench animation file</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>This builder for chaining</dd>
+<dd>this builder for chaining</dd>
 </dl>
 </li>
 </ul>
@@ -285,13 +295,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <h4>addRepeatingAnimation</h4>
 <pre class="methodSignature"><a href="IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a>&nbsp;addRepeatingAnimation&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animationName,
                                              int&nbsp;timesToRepeat)</pre>
-<div class="block">Add an animation to the queue repeated multiple times.</div>
+<div class="block">Add an animation to the queue that repeats a specified number of times.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>animationName</code> - The animation name matching the Blockbench file</dd>
-<dd><code>timesToRepeat</code> - How many times to repeat the animation</dd>
+<dd><code>animationName</code> - the animation name as defined in the Blockbench animation file</dd>
+<dd><code>timesToRepeat</code> - how many times to repeat the animation</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>This builder for chaining</dd>
+<dd>this builder for chaining</dd>
 </dl>
 </li>
 </ul>
@@ -302,10 +312,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>clearAnimations</h4>
 <pre class="methodSignature"><a href="IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a>&nbsp;clearAnimations()</pre>
-<div class="block">Clear all animations currently in the builder.</div>
+<div class="block">Clear all animations currently queued in this builder.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>This builder for chaining</dd>
+<dd>this builder for chaining</dd>
 </dl>
 </li>
 </ul>

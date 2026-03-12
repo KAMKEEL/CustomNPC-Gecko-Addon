@@ -98,16 +98,19 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <h2 class="title">A</h2>
 <dl>
 <dt><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api"><span class="typeNameLink">AbstractGeckoAPI</span></a> - Class in <a href="com/goodbird/npcgecko/api/package-summary.html">com.goodbird.npcgecko.api</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Main entry point for the GeckoLib Addon API.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#%3Cinit%3E()">AbstractGeckoAPI()</a></span> - Constructor for class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimationBuilder.html#addAnimation(java.lang.String)">addAnimation(String)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a></dt>
 <dd>
-<div class="block">Add an animation to the queue with default loop behavior from the animation file.</div>
+<div class="block">Add an animation to the queue using the default loop behavior
+ defined in the animation file.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimationBuilder.html#addRepeatingAnimation(java.lang.String,int)">addRepeatingAnimation(String, int)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a></dt>
 <dd>
-<div class="block">Add an animation to the queue repeated multiple times.</div>
+<div class="block">Add an animation to the queue that repeats a specified number of times.</div>
 </dd>
 </dl>
 <a id="I:B">
@@ -125,16 +128,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </a>
 <h2 class="title">C</h2>
 <dl>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoItemModel.html#clear()">clear()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoItemModel</a></dt>
+<dd>
+<div class="block">Remove the gecko model from this item, reverting it to normal 2D rendering.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimationBuilder.html#clearAnimations()">clearAnimations()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a></dt>
 <dd>
-<div class="block">Clear all animations currently in the builder.</div>
+<div class="block">Clear all animations currently queued in this builder.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#clearItemModel(noppes.npcs.api.item.IItemCustomizable)">clearItemModel(IItemCustomizable)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
-<dd>
-<div class="block">Remove the gecko model from a customizable item, reverting to normal 2D rendering.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#clearItemModel(noppes.npcs.api.item.IItemCustomizable)">clearItemModel(IItemCustomizable)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#colorOfRGB(int,int,int)">colorOfRGB(int, int, int)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
 <dd>
 <div class="block">Create a color from RGB components.</div>
@@ -178,18 +179,22 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <h2 class="title">G</h2>
 <dl>
 <dt><a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api"><span class="typeNameLink">GeckoAPI</span></a> - Class in <a href="com/goodbird/npcgecko/api/package-summary.html">com.goodbird.npcgecko.api</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Implementation of <a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api"><code>AbstractGeckoAPI</code></a> that provides the concrete GeckoLib integration.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoColor.html#getAlpha()">getAlpha()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoColor.html" title="interface in com.goodbird.npcgecko.api">IGeckoColor</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the alpha (transparency) component.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#getAnimatable(noppes.npcs.api.block.IBlockScripted)">getAnimatable(IBlockScripted)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
 <dd>
-<div class="block">Get the animation configuration interface for a scripted block.</div>
+<div class="block">Get the gecko model configuration interface for a scripted block.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#getAnimatable(noppes.npcs.api.block.IBlockScripted)">getAnimatable(IBlockScripted)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#getAnimatable(noppes.npcs.api.entity.ICustomNpc)">getAnimatable(ICustomNpc&lt;EntityNPCInterface&gt;)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
 <dd>
-<div class="block">Get the animation configuration interface for an NPC.</div>
+<div class="block">Get the gecko model configuration interface for an NPC.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#getAnimatable(noppes.npcs.api.entity.ICustomNpc)">getAnimatable(ICustomNpc&lt;EntityNPCInterface&gt;)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
 <dd>&nbsp;</dd>
@@ -207,6 +212,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Get the animation file resource location.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoItemModel.html#getAnimationFile()">getAnimationFile()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoItemModel</a></dt>
+<dd>
+<div class="block">Get the animation file resource location.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#getAnimationFileList()">getAnimationFileList()</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
 <dd>
 <div class="block">Get a list of all loaded animation file resource locations.</div>
@@ -215,15 +224,17 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#getAnimationList(java.lang.String)">getAnimationList(String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
 <dd>
-<div class="block">Get a list of all animation names in an animation file.</div>
+<div class="block">Get a list of all animation names defined in an animation file.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#getAnimationList(java.lang.String)">getAnimationList(String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoColor.html#getBlue()">getBlue()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoColor.html" title="interface in com.goodbird.npcgecko.api">IGeckoColor</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the blue component.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoModel.html#getBone(java.lang.String)">getBone(String)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoModel</a></dt>
 <dd>
-<div class="block">Get a bone by name.</div>
+<div class="block">Get a bone by its name as defined in the model file.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoModel.html#getBoneNames()">getBoneNames()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoModel</a></dt>
 <dd>
@@ -231,11 +242,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#getChildBones()">getChildBones()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
 <dd>
-<div class="block">Get the child bones of this bone.</div>
+<div class="block">Get the direct child bones of this bone.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoColor.html#getColor()">getColor()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoColor.html" title="interface in com.goodbird.npcgecko.api">IGeckoColor</a></dt>
 <dd>
-<div class="block">Get the packed ARGB color value.</div>
+<div class="block">Get the packed ARGB color value as a single integer.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimation.html#getCustomInstructionKeyframeCount()">getCustomInstructionKeyframeCount()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimation.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimation</a></dt>
 <dd>
@@ -243,15 +254,21 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#getDisplayFileList()">getDisplayFileList()</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
 <dd>
-<div class="block">Get a list of all loaded display file names from item_displays/ folders.</div>
+<div class="block">Get a list of all loaded display file names from item_displays/ resource folders.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#getDisplayFileList()">getDisplayFileList()</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoItemModel.html#getDisplayJSON()">getDisplayJSON()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoItemModel</a></dt>
+<dd>
+<div class="block">Get the display JSON filename currently assigned to this item.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoColor.html#getGreen()">getGreen()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoColor.html" title="interface in com.goodbird.npcgecko.api">IGeckoColor</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the green component.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html#getHeadBoneName()">getHeadBoneName()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></dt>
 <dd>
-<div class="block">Get the bone name used for head tracking/rotation.</div>
+<div class="block">Get the bone name used for head tracking and rotation.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html#getHurtAnimation()">getHurtAnimation()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></dt>
 <dd>
@@ -261,15 +278,29 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Get the idle animation name.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoItemModel.html#getIdleAnimation()">getIdleAnimation()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoItemModel</a></dt>
+<dd>
+<div class="block">Get the idle animation name.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#getItemGecko(noppes.npcs.api.item.IItemCustomizable)">getItemGecko(IItemCustomizable)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
+<dd>
+<div class="block">Get the gecko model interface for a customizable item.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#getItemGecko(noppes.npcs.api.item.IItemCustomizable)">getItemGecko(IItemCustomizable)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimation.html#getLength()">getLength()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimation.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimation</a></dt>
 <dd>
-<div class="block">Get the duration of this animation in seconds.</div>
+<div class="block">Get the total duration of this animation in seconds.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html#getMeleeAttackAnimation()">getMeleeAttackAnimation()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></dt>
 <dd>
 <div class="block">Get the melee attack animation name.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html#getModel()">getModel()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></dt>
+<dd>
+<div class="block">Get the geo model resource location.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoItemModel.html#getModel()">getModel()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoItemModel</a></dt>
 <dd>
 <div class="block">Get the geo model resource location.</div>
 </dd>
@@ -283,51 +314,85 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#getParent()">getParent()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
 <dd>
-<div class="block">Get the parent bone, or null if this is a root bone.</div>
+<div class="block">Get the parent bone in the bone hierarchy.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimation.html#getParticleKeyframeCount()">getParticleKeyframeCount()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimation.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimation</a></dt>
 <dd>
-<div class="block">Get the number of particle keyframes in this animation.</div>
+<div class="block">Get the number of particle effect keyframes in this animation.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#getPivotX()">getPivotX()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the X pivot point of this bone.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#getPivotY()">getPivotY()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the Y pivot point of this bone.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#getPivotZ()">getPivotZ()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the Z pivot point of this bone.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#getPositionX()">getPositionX()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the X position offset from the bone's rest position.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#getPositionY()">getPositionY()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the Y position offset from the bone's rest position.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#getPositionZ()">getPositionZ()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the Z position offset from the bone's rest position.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html#getRangedAttackAnimation()">getRangedAttackAnimation()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></dt>
 <dd>
 <div class="block">Get the ranged attack animation name.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoColor.html#getRed()">getRed()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoColor.html" title="interface in com.goodbird.npcgecko.api">IGeckoColor</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the red component.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#getRotationX()">getRotationX()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the X rotation in radians.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#getRotationY()">getRotationY()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the Y rotation in radians.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#getRotationZ()">getRotationZ()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the Z rotation in radians.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#getScaleX()">getScaleX()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the X scale multiplier.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#getScaleY()">getScaleY()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the Y scale multiplier.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#getScaleZ()">getScaleZ()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the Z scale multiplier.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimation.html#getSoundKeyframeCount()">getSoundKeyframeCount()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimation.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimation</a></dt>
 <dd>
-<div class="block">Get the number of sound keyframes in this animation.</div>
+<div class="block">Get the number of sound effect keyframes in this animation.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html#getTexture()">getTexture()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></dt>
 <dd>
 <div class="block">Get the texture resource location.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoItemModel.html#getTexture()">getTexture()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoItemModel</a></dt>
+<dd>
+<div class="block">Get the texture resource location.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html#getTransitionLengthTicks()">getTransitionLengthTicks()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></dt>
+<dd>
+<div class="block">Get the transition duration between animations in ticks.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoItemModel.html#getTransitionLengthTicks()">getTransitionLengthTicks()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoItemModel</a></dt>
 <dd>
 <div class="block">Get the transition duration between animations in ticks.</div>
 </dd>
@@ -341,12 +406,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </a>
 <h2 class="title">H</h2>
 <dl>
-<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#hasItemModel(noppes.npcs.api.item.IItemCustomizable)">hasItemModel(IItemCustomizable)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoItemModel.html#hasModel()">hasModel()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoItemModel</a></dt>
 <dd>
-<div class="block">Check if a customizable item has a gecko model assigned.</div>
+<div class="block">Check if this item currently has a gecko model assigned.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#hasItemModel(noppes.npcs.api.item.IItemCustomizable)">hasItemModel(IItemCustomizable)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
-<dd>&nbsp;</dd>
 </dl>
 <a id="I:I">
 <!--   -->
@@ -355,11 +418,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dl>
 <dt><a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api"><span class="typeNameLink">IGeckoAnimatable</span></a> - Interface in <a href="com/goodbird/npcgecko/api/package-summary.html">com.goodbird.npcgecko.api</a></dt>
 <dd>
-<div class="block">Interface for accessing and modifying Gecko model configuration on NPCs and scripted blocks.</div>
+<div class="block">Interface for accessing and modifying GeckoLib model configuration on NPCs and scripted blocks.</div>
 </dd>
 <dt><a href="com/goodbird/npcgecko/api/IGeckoAnimation.html" title="interface in com.goodbird.npcgecko.api"><span class="typeNameLink">IGeckoAnimation</span></a> - Interface in <a href="com/goodbird/npcgecko/api/package-summary.html">com.goodbird.npcgecko.api</a></dt>
 <dd>
-<div class="block">Interface for querying animation metadata from a loaded animation file.</div>
+<div class="block">Read-only interface for querying animation metadata from a loaded animation file.</div>
 </dd>
 <dt><a href="com/goodbird/npcgecko/api/IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api"><span class="typeNameLink">IGeckoAnimationBuilder</span></a> - Interface in <a href="com/goodbird/npcgecko/api/package-summary.html">com.goodbird.npcgecko.api</a></dt>
 <dd>
@@ -367,27 +430,37 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api"><span class="typeNameLink">IGeckoBone</span></a> - Interface in <a href="com/goodbird/npcgecko/api/package-summary.html">com.goodbird.npcgecko.api</a></dt>
 <dd>
-<div class="block">Interface for querying and modifying bone transforms on a Gecko model at runtime.</div>
+<div class="block">Interface for querying and modifying bone transforms on a GeckoLib model at runtime.</div>
 </dd>
 <dt><a href="com/goodbird/npcgecko/api/IGeckoColor.html" title="interface in com.goodbird.npcgecko.api"><span class="typeNameLink">IGeckoColor</span></a> - Interface in <a href="com/goodbird/npcgecko/api/package-summary.html">com.goodbird.npcgecko.api</a></dt>
 <dd>
-<div class="block">Interface for color manipulation.</div>
+<div class="block">Interface for color manipulation with RGBA components.</div>
+</dd>
+<dt><a href="com/goodbird/npcgecko/api/IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api"><span class="typeNameLink">IGeckoItemModel</span></a> - Interface in <a href="com/goodbird/npcgecko/api/package-summary.html">com.goodbird.npcgecko.api</a></dt>
+<dd>
+<div class="block">Interface for accessing and modifying GeckoLib 3D model configuration on items.</div>
 </dd>
 <dt><a href="com/goodbird/npcgecko/api/IGeckoModel.html" title="interface in com.goodbird.npcgecko.api"><span class="typeNameLink">IGeckoModel</span></a> - Interface in <a href="com/goodbird/npcgecko/api/package-summary.html">com.goodbird.npcgecko.api</a></dt>
 <dd>
-<div class="block">Read-only interface for querying the runtime state of a Gecko model.</div>
+<div class="block">Read-only interface for querying the runtime state of a GeckoLib model.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#Instance()">Instance()</a></span> - Static method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Get the API singleton instance.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#Instance()">Instance()</a></span> - Static method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#IsAvailable()">IsAvailable()</a></span> - Static method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Check whether the GeckoLib mod is loaded and the API is available.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#isHidden()">isHidden()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Check whether this bone is hidden from rendering.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimation.html#isLooping()">isLooping()</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimation.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimation</a></dt>
 <dd>
-<div class="block">Whether this animation loops by default.</div>
+<div class="block">Check whether this animation loops by default as defined in the animation file.</div>
 </dd>
 </dl>
 <a id="I:L">
@@ -397,7 +470,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dl>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimationBuilder.html#loop(java.lang.String)">loop(String)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a></dt>
 <dd>
-<div class="block">Add an animation that loops indefinitely until replaced.</div>
+<div class="block">Add an animation that loops indefinitely until replaced by another animation.</div>
 </dd>
 </dl>
 <a id="I:P">
@@ -411,7 +484,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimationBuilder.html#playOnce(java.lang.String)">playOnce(String)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimationBuilder.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimationBuilder</a></dt>
 <dd>
-<div class="block">Add an animation that plays once then moves to the next in queue.</div>
+<div class="block">Add an animation that plays once, then advances to the next in the queue.</div>
 </dd>
 </dl>
 <a id="I:S">
@@ -420,6 +493,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <h2 class="title">S</h2>
 <dl>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html#setAnimationFile(java.lang.String)">setAnimationFile(String)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></dt>
+<dd>
+<div class="block">Set the animation file resource location.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoItemModel.html#setAnimationFile(java.lang.String)">setAnimationFile(String)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoItemModel</a></dt>
 <dd>
 <div class="block">Set the animation file resource location.</div>
 </dd>
@@ -435,15 +512,19 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#setAnimationFile(noppes.npcs.api.entity.ICustomNpc,java.lang.String)">setAnimationFile(ICustomNpc&lt;EntityNPCInterface&gt;, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#setDisplayJSON(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setDisplayJSON(IItemCustomizable, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoItemModel.html#setDisplay(java.lang.String,float,float,float,float,float,float,float,float,float)">setDisplay(String, float, float, float, float, float, float, float, float, float)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoItemModel</a></dt>
 <dd>
-<div class="block">Set the display JSON file for a gecko item.</div>
+<div class="block">Set the display transform for a specific render context.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#setDisplayJSON(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setDisplayJSON(IItemCustomizable, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
-<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoItemModel.html#setDisplayJSON(java.lang.String)">setDisplayJSON(String)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoItemModel</a></dt>
+<dd>
+<div class="block">Set the display JSON file for controlling how the 3D model is positioned,
+ rotated, and scaled in each render context (first person, third person,
+ inventory, and ground).</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html#setHeadBoneName(java.lang.String)">setHeadBoneName(String)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></dt>
 <dd>
-<div class="block">Set the bone name used for head tracking/rotation.</div>
+<div class="block">Set the bone name used for head tracking and rotation.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#setHidden(boolean)">setHidden(boolean)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
 <dd>
@@ -454,6 +535,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Set the hurt animation name.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html#setIdleAnimation(java.lang.String)">setIdleAnimation(String)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></dt>
+<dd>
+<div class="block">Set the idle animation name.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoItemModel.html#setIdleAnimation(java.lang.String)">setIdleAnimation(String)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoItemModel</a></dt>
 <dd>
 <div class="block">Set the idle animation name.</div>
 </dd>
@@ -469,79 +554,53 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#setIdleAnimation(noppes.npcs.api.entity.ICustomNpc,java.lang.String)">setIdleAnimation(ICustomNpc&lt;EntityNPCInterface&gt;, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#setItemAnimationFile(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setItemAnimationFile(IItemCustomizable, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
-<dd>
-<div class="block">Set the animation file resource location for a customizable item.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#setItemAnimationFile(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setItemAnimationFile(IItemCustomizable, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#setItemDisplay(noppes.npcs.api.item.IItemCustomizable,java.lang.String,float,float,float,float,float,float,float,float,float)">setItemDisplay(IItemCustomizable, String, float, float, float, float, float, float, float, float, float)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
-<dd>
-<div class="block">Set the display transform for a specific render context on a gecko item.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#setItemDisplay(noppes.npcs.api.item.IItemCustomizable,java.lang.String,float,float,float,float,float,float,float,float,float)">setItemDisplay(IItemCustomizable, String, float, float, float, float, float, float, float, float, float)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#setItemIdleAnimation(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setItemIdleAnimation(IItemCustomizable, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
-<dd>
-<div class="block">Set the idle animation name for a customizable item.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#setItemIdleAnimation(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setItemIdleAnimation(IItemCustomizable, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#setItemModel(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setItemModel(IItemCustomizable, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
-<dd>
-<div class="block">Set the geo model resource location for a customizable item.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#setItemModel(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setItemModel(IItemCustomizable, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#setItemTexture(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setItemTexture(IItemCustomizable, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
-<dd>
-<div class="block">Set the texture resource location for a customizable item.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#setItemTexture(noppes.npcs.api.item.IItemCustomizable,java.lang.String)">setItemTexture(IItemCustomizable, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html#setMeleeAttackAnimation(java.lang.String)">setMeleeAttackAnimation(String)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></dt>
 <dd>
 <div class="block">Set the melee attack animation name.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html#setModel(java.lang.String)">setModel(String)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></dt>
 <dd>
-<div class="block">Set the geo model resource location.</div>
+<div class="block">Set the GeckoLib geo model resource location.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoItemModel.html#setModel(java.lang.String)">setModel(String)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoItemModel</a></dt>
+<dd>
+<div class="block">Set the GeckoLib geo model resource location.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#setModel(noppes.npcs.api.block.IBlockScripted,java.lang.String)">setModel(IBlockScripted, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
 <dd>
-<div class="block">Set the geo model resource location for a scripted block.</div>
+<div class="block">Set the GeckoLib geo model resource location for a scripted block.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#setModel(noppes.npcs.api.block.IBlockScripted,java.lang.String)">setModel(IBlockScripted, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#setModel(noppes.npcs.api.entity.ICustomNpc,java.lang.String)">setModel(ICustomNpc&lt;EntityNPCInterface&gt;, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
 <dd>
-<div class="block">Set the geo model resource location for an NPC.</div>
+<div class="block">Set the GeckoLib geo model resource location for an NPC.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#setModel(noppes.npcs.api.entity.ICustomNpc,java.lang.String)">setModel(ICustomNpc&lt;EntityNPCInterface&gt;, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#setPivotX(float)">setPivotX(float)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
 <dd>
-<div class="block">Set the X pivot point.</div>
+<div class="block">Set the X pivot point of this bone.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#setPivotY(float)">setPivotY(float)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
 <dd>
-<div class="block">Set the Y pivot point.</div>
+<div class="block">Set the Y pivot point of this bone.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#setPivotZ(float)">setPivotZ(float)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
 <dd>
-<div class="block">Set the Z pivot point.</div>
+<div class="block">Set the Z pivot point of this bone.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#setPositionX(float)">setPositionX(float)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
 <dd>
-<div class="block">Set the X position offset.</div>
+<div class="block">Set the X position offset from the bone's rest position.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#setPositionY(float)">setPositionY(float)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
 <dd>
-<div class="block">Set the Y position offset.</div>
+<div class="block">Set the Y position offset from the bone's rest position.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoBone.html#setPositionZ(float)">setPositionZ(float)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></dt>
 <dd>
-<div class="block">Set the Z position offset.</div>
+<div class="block">Set the Z position offset from the bone's rest position.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html#setRangedAttackAnimation(java.lang.String)">setRangedAttackAnimation(String)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></dt>
 <dd>
@@ -575,6 +634,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Set the texture resource location.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoItemModel.html#setTexture(java.lang.String)">setTexture(String)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoItemModel</a></dt>
+<dd>
+<div class="block">Set the texture resource location used when rendering this item's 3D model.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#setTexture(noppes.npcs.api.block.IBlockScripted,java.lang.String)">setTexture(IBlockScripted, String)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
 <dd>
 <div class="block">Set the texture resource location for a scripted block.</div>
@@ -591,31 +654,35 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Set the transition duration between animations in ticks.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoItemModel.html#setTransitionLengthTicks(int)">setTransitionLengthTicks(int)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoItemModel</a></dt>
+<dd>
+<div class="block">Set the transition duration between animations in ticks.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html#setWalkAnimation(java.lang.String)">setWalkAnimation(String)</a></span> - Method in interface com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></dt>
 <dd>
 <div class="block">Set the walk animation name.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#syncAnimForAll(noppes.npcs.api.block.IBlockScripted,com.goodbird.npcgecko.api.IGeckoAnimationBuilder)">syncAnimForAll(IBlockScripted, IGeckoAnimationBuilder)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
 <dd>
-<div class="block">Sync an animation to all players for a scripted block.</div>
+<div class="block">Sync a queued animation sequence to all connected players for a scripted block.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#syncAnimForAll(noppes.npcs.api.block.IBlockScripted,com.goodbird.npcgecko.api.IGeckoAnimationBuilder)">syncAnimForAll(IBlockScripted, IGeckoAnimationBuilder)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#syncAnimForAll(noppes.npcs.api.entity.ICustomNpc,com.goodbird.npcgecko.api.IGeckoAnimationBuilder)">syncAnimForAll(ICustomNpc&lt;EntityNPCInterface&gt;, IGeckoAnimationBuilder)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
 <dd>
-<div class="block">Sync an animation to all players for an NPC.</div>
+<div class="block">Sync a queued animation sequence to all connected players for an NPC.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#syncAnimForAll(noppes.npcs.api.entity.ICustomNpc,com.goodbird.npcgecko.api.IGeckoAnimationBuilder)">syncAnimForAll(ICustomNpc&lt;EntityNPCInterface&gt;, IGeckoAnimationBuilder)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#syncAnimForPlayer(noppes.npcs.api.block.IBlockScripted,com.goodbird.npcgecko.api.IGeckoAnimationBuilder,noppes.npcs.api.entity.IPlayer)">syncAnimForPlayer(IBlockScripted, IGeckoAnimationBuilder, IPlayer&lt;EntityPlayerMP&gt;)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
 <dd>
-<div class="block">Sync an animation to a specific player for a scripted block.</div>
+<div class="block">Sync a queued animation sequence to a specific player for a scripted block.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#syncAnimForPlayer(noppes.npcs.api.block.IBlockScripted,com.goodbird.npcgecko.api.IGeckoAnimationBuilder,noppes.npcs.api.entity.IPlayer)">syncAnimForPlayer(IBlockScripted, IGeckoAnimationBuilder, IPlayer&lt;EntityPlayerMP&gt;)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html#syncAnimForPlayer(noppes.npcs.api.entity.ICustomNpc,com.goodbird.npcgecko.api.IGeckoAnimationBuilder,noppes.npcs.api.entity.IPlayer)">syncAnimForPlayer(ICustomNpc&lt;EntityNPCInterface&gt;, IGeckoAnimationBuilder, IPlayer&lt;EntityPlayerMP&gt;)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></dt>
 <dd>
-<div class="block">Sync an animation to a specific player for an NPC.</div>
+<div class="block">Sync a queued animation sequence to a specific player for an NPC.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/goodbird/npcgecko/api/GeckoAPI.html#syncAnimForPlayer(noppes.npcs.api.entity.ICustomNpc,com.goodbird.npcgecko.api.IGeckoAnimationBuilder,noppes.npcs.api.entity.IPlayer)">syncAnimForPlayer(ICustomNpc&lt;EntityNPCInterface&gt;, IGeckoAnimationBuilder, IPlayer&lt;EntityPlayerMP&gt;)</a></span> - Method in class com.goodbird.npcgecko.api.<a href="com/goodbird/npcgecko/api/GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></dt>
 <dd>&nbsp;</dd>

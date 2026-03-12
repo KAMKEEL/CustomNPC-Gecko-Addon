@@ -124,10 +124,15 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <hr>
 <pre>public interface <span class="typeNameLabel">IGeckoAnimation</span></pre>
-<div class="block">Interface for querying animation metadata from a loaded animation file.
- Provides read-only access to animation properties defined in Blockbench.
+<div class="block">Read-only interface for querying animation metadata from a loaded animation file.
+ Provides access to animation properties as defined in Blockbench.
 
- <p>Obtain via <a href="AbstractGeckoAPI.html#getAnimation(java.lang.String,java.lang.String)"><code>AbstractGeckoAPI.getAnimation(String, String)</code></a>.</p></div>
+ <p>Obtain an instance via <a href="AbstractGeckoAPI.html#getAnimation(java.lang.String,java.lang.String)"><code>AbstractGeckoAPI.getAnimation(java.lang.String, java.lang.String)</code></a>.</p></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="AbstractGeckoAPI.html#getAnimation(java.lang.String,java.lang.String)"><code>AbstractGeckoAPI.getAnimation(java.lang.String, java.lang.String)</code></a>, 
+<a href="AbstractGeckoAPI.html#getAnimationList(java.lang.String)"><code>AbstractGeckoAPI.getAnimationList(java.lang.String)</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -166,7 +171,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLength()">getLength</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Get the duration of this animation in seconds.</div>
+<div class="block">Get the total duration of this animation in seconds.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
@@ -180,21 +185,21 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getParticleKeyframeCount()">getParticleKeyframeCount</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Get the number of particle keyframes in this animation.</div>
+<div class="block">Get the number of particle effect keyframes in this animation.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSoundKeyframeCount()">getSoundKeyframeCount</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Get the number of sound keyframes in this animation.</div>
+<div class="block">Get the number of sound effect keyframes in this animation.</div>
 </td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isLooping()">isLooping</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Whether this animation loops by default.</div>
+<div class="block">Check whether this animation loops by default as defined in the animation file.</div>
 </td>
 </tr>
 </table>
@@ -224,7 +229,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Get the animation name as defined in the animation file.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The animation name</dd>
+<dd>the animation name</dd>
 </dl>
 </li>
 </ul>
@@ -235,10 +240,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getLength</h4>
 <pre class="methodSignature">double&nbsp;getLength()</pre>
-<div class="block">Get the duration of this animation in seconds.</div>
+<div class="block">Get the total duration of this animation in seconds.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The animation length in seconds</dd>
+<dd>the animation length in seconds</dd>
 </dl>
 </li>
 </ul>
@@ -249,10 +254,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>isLooping</h4>
 <pre class="methodSignature">boolean&nbsp;isLooping()</pre>
-<div class="block">Whether this animation loops by default.</div>
+<div class="block">Check whether this animation loops by default as defined in the animation file.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>True if the animation loops</dd>
+<dd>true if the animation is set to loop</dd>
 </dl>
 </li>
 </ul>
@@ -266,7 +271,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Get the names of all bones that have keyframes in this animation.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Array of bone names with animation data</dd>
+<dd>array of bone names that are animated</dd>
 </dl>
 </li>
 </ul>
@@ -277,10 +282,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getSoundKeyframeCount</h4>
 <pre class="methodSignature">int&nbsp;getSoundKeyframeCount()</pre>
-<div class="block">Get the number of sound keyframes in this animation.</div>
+<div class="block">Get the number of sound effect keyframes in this animation.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The sound keyframe count</dd>
+<dd>the sound keyframe count</dd>
 </dl>
 </li>
 </ul>
@@ -291,10 +296,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getParticleKeyframeCount</h4>
 <pre class="methodSignature">int&nbsp;getParticleKeyframeCount()</pre>
-<div class="block">Get the number of particle keyframes in this animation.</div>
+<div class="block">Get the number of particle effect keyframes in this animation.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The particle keyframe count</dd>
+<dd>the particle keyframe count</dd>
 </dl>
 </li>
 </ul>
@@ -308,7 +313,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Get the number of custom instruction keyframes in this animation.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The custom instruction keyframe count</dd>
+<dd>the custom instruction keyframe count</dd>
 </dl>
 </li>
 </ul>

@@ -108,13 +108,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <tr class="altColor">
 <th class="colFirst" scope="row"><a href="IGeckoAnimatable.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimatable</a></th>
 <td class="colLast">
-<div class="block">Interface for accessing and modifying Gecko model configuration on NPCs and scripted blocks.</div>
+<div class="block">Interface for accessing and modifying GeckoLib model configuration on NPCs and scripted blocks.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <th class="colFirst" scope="row"><a href="IGeckoAnimation.html" title="interface in com.goodbird.npcgecko.api">IGeckoAnimation</a></th>
 <td class="colLast">
-<div class="block">Interface for querying animation metadata from a loaded animation file.</div>
+<div class="block">Read-only interface for querying animation metadata from a loaded animation file.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -126,19 +126,25 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <tr class="rowColor">
 <th class="colFirst" scope="row"><a href="IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></th>
 <td class="colLast">
-<div class="block">Interface for querying and modifying bone transforms on a Gecko model at runtime.</div>
+<div class="block">Interface for querying and modifying bone transforms on a GeckoLib model at runtime.</div>
 </td>
 </tr>
 <tr class="altColor">
 <th class="colFirst" scope="row"><a href="IGeckoColor.html" title="interface in com.goodbird.npcgecko.api">IGeckoColor</a></th>
 <td class="colLast">
-<div class="block">Interface for color manipulation.</div>
+<div class="block">Interface for color manipulation with RGBA components.</div>
 </td>
 </tr>
 <tr class="rowColor">
+<th class="colFirst" scope="row"><a href="IGeckoItemModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoItemModel</a></th>
+<td class="colLast">
+<div class="block">Interface for accessing and modifying GeckoLib 3D model configuration on items.</div>
+</td>
+</tr>
+<tr class="altColor">
 <th class="colFirst" scope="row"><a href="IGeckoModel.html" title="interface in com.goodbird.npcgecko.api">IGeckoModel</a></th>
 <td class="colLast">
-<div class="block">Read-only interface for querying the runtime state of a Gecko model.</div>
+<div class="block">Read-only interface for querying the runtime state of a GeckoLib model.</div>
 </td>
 </tr>
 </tbody>
@@ -154,11 +160,15 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <tbody>
 <tr class="altColor">
 <th class="colFirst" scope="row"><a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api">AbstractGeckoAPI</a></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Main entry point for the GeckoLib Addon API.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <th class="colFirst" scope="row"><a href="GeckoAPI.html" title="class in com.goodbird.npcgecko.api">GeckoAPI</a></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Implementation of <a href="AbstractGeckoAPI.html" title="class in com.goodbird.npcgecko.api"><code>AbstractGeckoAPI</code></a> that provides the concrete GeckoLib integration.</div>
+</td>
 </tr>
 </tbody>
 </table>

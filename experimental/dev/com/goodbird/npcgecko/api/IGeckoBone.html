@@ -124,11 +124,16 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <hr>
 <pre>public interface <span class="typeNameLabel">IGeckoBone</span></pre>
-<div class="block">Interface for querying and modifying bone transforms on a Gecko model at runtime.
- Bones represent individual parts of a model (e.g. "head", "left_arm", "held_item").
+<div class="block">Interface for querying and modifying bone transforms on a GeckoLib model at runtime.
+ Bones represent individual parts of a model (e.g. "head", "left_arm", "body").
 
  <p>Position values are relative offsets from the bone's rest position.
- Rotation values are in radians. Scale values are multipliers (1.0 = default).</p></div>
+ Rotation values are in radians.
+ Scale values are multipliers where 1.0 is the default size.</p></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="IGeckoModel.html#getBone(java.lang.String)"><code>IGeckoModel.getBone(java.lang.String)</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -153,7 +158,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <td class="colFirst"><code><a href="IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a>[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getChildBones()">getChildBones</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Get the child bones of this bone.</div>
+<div class="block">Get the direct child bones of this bone.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -167,73 +172,99 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <td class="colFirst"><code><a href="IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getParent()">getParent</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Get the parent bone, or null if this is a root bone.</div>
+<div class="block">Get the parent bone in the bone hierarchy.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPivotX()">getPivotX</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get the X pivot point of this bone.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPivotY()">getPivotY</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get the Y pivot point of this bone.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPivotZ()">getPivotZ</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get the Z pivot point of this bone.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPositionX()">getPositionX</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get the X position offset from the bone's rest position.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPositionY()">getPositionY</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get the Y position offset from the bone's rest position.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPositionZ()">getPositionZ</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get the Z position offset from the bone's rest position.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRotationX()">getRotationX</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get the X rotation in radians.</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRotationY()">getRotationY</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get the Y rotation in radians.</div>
+</td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRotationZ()">getRotationZ</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get the Z rotation in radians.</div>
+</td>
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code>float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getScaleX()">getScaleX</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get the X scale multiplier.</div>
+</td>
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code>float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getScaleY()">getScaleY</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get the Y scale multiplier.</div>
+</td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code>float</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getScaleZ()">getScaleZ</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Get the Z scale multiplier.</div>
+</td>
 </tr>
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isHidden()">isHidden</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Check whether this bone is hidden from rendering.</div>
+</td>
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code>void</code></td>
@@ -246,42 +277,42 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPivotX(float)">setPivotX</a></span>&#8203;(float&nbsp;value)</code></th>
 <td class="colLast">
-<div class="block">Set the X pivot point.</div>
+<div class="block">Set the X pivot point of this bone.</div>
 </td>
 </tr>
 <tr id="i18" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPivotY(float)">setPivotY</a></span>&#8203;(float&nbsp;value)</code></th>
 <td class="colLast">
-<div class="block">Set the Y pivot point.</div>
+<div class="block">Set the Y pivot point of this bone.</div>
 </td>
 </tr>
 <tr id="i19" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPivotZ(float)">setPivotZ</a></span>&#8203;(float&nbsp;value)</code></th>
 <td class="colLast">
-<div class="block">Set the Z pivot point.</div>
+<div class="block">Set the Z pivot point of this bone.</div>
 </td>
 </tr>
 <tr id="i20" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPositionX(float)">setPositionX</a></span>&#8203;(float&nbsp;value)</code></th>
 <td class="colLast">
-<div class="block">Set the X position offset.</div>
+<div class="block">Set the X position offset from the bone's rest position.</div>
 </td>
 </tr>
 <tr id="i21" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPositionY(float)">setPositionY</a></span>&#8203;(float&nbsp;value)</code></th>
 <td class="colLast">
-<div class="block">Set the Y position offset.</div>
+<div class="block">Set the Y position offset from the bone's rest position.</div>
 </td>
 </tr>
 <tr id="i22" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPositionZ(float)">setPositionZ</a></span>&#8203;(float&nbsp;value)</code></th>
 <td class="colLast">
-<div class="block">Set the Z position offset.</div>
+<div class="block">Set the Z position offset from the bone's rest position.</div>
 </td>
 </tr>
 <tr id="i23" class="rowColor">
@@ -353,7 +384,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Get the name of this bone as defined in the model file.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The bone name</dd>
+<dd>the bone name</dd>
 </dl>
 </li>
 </ul>
@@ -364,9 +395,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getPositionX</h4>
 <pre class="methodSignature">float&nbsp;getPositionX()</pre>
+<div class="block">Get the X position offset from the bone's rest position.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The X position offset</dd>
+<dd>the X position offset</dd>
 </dl>
 </li>
 </ul>
@@ -377,9 +409,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getPositionY</h4>
 <pre class="methodSignature">float&nbsp;getPositionY()</pre>
+<div class="block">Get the Y position offset from the bone's rest position.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The Y position offset</dd>
+<dd>the Y position offset</dd>
 </dl>
 </li>
 </ul>
@@ -390,9 +423,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getPositionZ</h4>
 <pre class="methodSignature">float&nbsp;getPositionZ()</pre>
+<div class="block">Get the Z position offset from the bone's rest position.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The Z position offset</dd>
+<dd>the Z position offset</dd>
 </dl>
 </li>
 </ul>
@@ -403,10 +437,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>setPositionX</h4>
 <pre class="methodSignature">void&nbsp;setPositionX&#8203;(float&nbsp;value)</pre>
-<div class="block">Set the X position offset.</div>
+<div class="block">Set the X position offset from the bone's rest position.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>value</code> - The X position offset</dd>
+<dd><code>value</code> - the X position offset</dd>
 </dl>
 </li>
 </ul>
@@ -417,10 +451,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>setPositionY</h4>
 <pre class="methodSignature">void&nbsp;setPositionY&#8203;(float&nbsp;value)</pre>
-<div class="block">Set the Y position offset.</div>
+<div class="block">Set the Y position offset from the bone's rest position.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>value</code> - The Y position offset</dd>
+<dd><code>value</code> - the Y position offset</dd>
 </dl>
 </li>
 </ul>
@@ -431,10 +465,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>setPositionZ</h4>
 <pre class="methodSignature">void&nbsp;setPositionZ&#8203;(float&nbsp;value)</pre>
-<div class="block">Set the Z position offset.</div>
+<div class="block">Set the Z position offset from the bone's rest position.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>value</code> - The Z position offset</dd>
+<dd><code>value</code> - the Z position offset</dd>
 </dl>
 </li>
 </ul>
@@ -445,9 +479,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getRotationX</h4>
 <pre class="methodSignature">float&nbsp;getRotationX()</pre>
+<div class="block">Get the X rotation in radians.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The X rotation in radians</dd>
+<dd>the X rotation in radians</dd>
 </dl>
 </li>
 </ul>
@@ -458,9 +493,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getRotationY</h4>
 <pre class="methodSignature">float&nbsp;getRotationY()</pre>
+<div class="block">Get the Y rotation in radians.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The Y rotation in radians</dd>
+<dd>the Y rotation in radians</dd>
 </dl>
 </li>
 </ul>
@@ -471,9 +507,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getRotationZ</h4>
 <pre class="methodSignature">float&nbsp;getRotationZ()</pre>
+<div class="block">Get the Z rotation in radians.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The Z rotation in radians</dd>
+<dd>the Z rotation in radians</dd>
 </dl>
 </li>
 </ul>
@@ -487,7 +524,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Set the X rotation in radians.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>value</code> - The X rotation in radians</dd>
+<dd><code>value</code> - the X rotation in radians</dd>
 </dl>
 </li>
 </ul>
@@ -501,7 +538,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Set the Y rotation in radians.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>value</code> - The Y rotation in radians</dd>
+<dd><code>value</code> - the Y rotation in radians</dd>
 </dl>
 </li>
 </ul>
@@ -515,7 +552,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Set the Z rotation in radians.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>value</code> - The Z rotation in radians</dd>
+<dd><code>value</code> - the Z rotation in radians</dd>
 </dl>
 </li>
 </ul>
@@ -526,9 +563,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getScaleX</h4>
 <pre class="methodSignature">float&nbsp;getScaleX()</pre>
+<div class="block">Get the X scale multiplier.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The X scale multiplier</dd>
+<dd>the X scale multiplier (1.0 = default size)</dd>
 </dl>
 </li>
 </ul>
@@ -539,9 +577,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getScaleY</h4>
 <pre class="methodSignature">float&nbsp;getScaleY()</pre>
+<div class="block">Get the Y scale multiplier.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The Y scale multiplier</dd>
+<dd>the Y scale multiplier (1.0 = default size)</dd>
 </dl>
 </li>
 </ul>
@@ -552,9 +591,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getScaleZ</h4>
 <pre class="methodSignature">float&nbsp;getScaleZ()</pre>
+<div class="block">Get the Z scale multiplier.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The Z scale multiplier</dd>
+<dd>the Z scale multiplier (1.0 = default size)</dd>
 </dl>
 </li>
 </ul>
@@ -568,7 +608,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Set the X scale multiplier.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>value</code> - The X scale multiplier (1.0 = default)</dd>
+<dd><code>value</code> - the X scale multiplier (1.0 = default size)</dd>
 </dl>
 </li>
 </ul>
@@ -582,7 +622,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Set the Y scale multiplier.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>value</code> - The Y scale multiplier (1.0 = default)</dd>
+<dd><code>value</code> - the Y scale multiplier (1.0 = default size)</dd>
 </dl>
 </li>
 </ul>
@@ -596,7 +636,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Set the Z scale multiplier.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>value</code> - The Z scale multiplier (1.0 = default)</dd>
+<dd><code>value</code> - the Z scale multiplier (1.0 = default size)</dd>
 </dl>
 </li>
 </ul>
@@ -607,9 +647,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getPivotX</h4>
 <pre class="methodSignature">float&nbsp;getPivotX()</pre>
+<div class="block">Get the X pivot point of this bone.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The X pivot point</dd>
+<dd>the X pivot point</dd>
 </dl>
 </li>
 </ul>
@@ -620,9 +661,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getPivotY</h4>
 <pre class="methodSignature">float&nbsp;getPivotY()</pre>
+<div class="block">Get the Y pivot point of this bone.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The Y pivot point</dd>
+<dd>the Y pivot point</dd>
 </dl>
 </li>
 </ul>
@@ -633,9 +675,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getPivotZ</h4>
 <pre class="methodSignature">float&nbsp;getPivotZ()</pre>
+<div class="block">Get the Z pivot point of this bone.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The Z pivot point</dd>
+<dd>the Z pivot point</dd>
 </dl>
 </li>
 </ul>
@@ -646,10 +689,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>setPivotX</h4>
 <pre class="methodSignature">void&nbsp;setPivotX&#8203;(float&nbsp;value)</pre>
-<div class="block">Set the X pivot point.</div>
+<div class="block">Set the X pivot point of this bone.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>value</code> - The X pivot point</dd>
+<dd><code>value</code> - the X pivot point</dd>
 </dl>
 </li>
 </ul>
@@ -660,10 +703,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>setPivotY</h4>
 <pre class="methodSignature">void&nbsp;setPivotY&#8203;(float&nbsp;value)</pre>
-<div class="block">Set the Y pivot point.</div>
+<div class="block">Set the Y pivot point of this bone.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>value</code> - The Y pivot point</dd>
+<dd><code>value</code> - the Y pivot point</dd>
 </dl>
 </li>
 </ul>
@@ -674,10 +717,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>setPivotZ</h4>
 <pre class="methodSignature">void&nbsp;setPivotZ&#8203;(float&nbsp;value)</pre>
-<div class="block">Set the Z pivot point.</div>
+<div class="block">Set the Z pivot point of this bone.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>value</code> - The Z pivot point</dd>
+<dd><code>value</code> - the Z pivot point</dd>
 </dl>
 </li>
 </ul>
@@ -688,9 +731,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>isHidden</h4>
 <pre class="methodSignature">boolean&nbsp;isHidden()</pre>
+<div class="block">Check whether this bone is hidden from rendering.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Whether this bone is hidden from rendering</dd>
+<dd>true if this bone is currently hidden</dd>
 </dl>
 </li>
 </ul>
@@ -701,10 +745,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>setHidden</h4>
 <pre class="methodSignature">void&nbsp;setHidden&#8203;(boolean&nbsp;hidden)</pre>
-<div class="block">Set whether this bone is hidden from rendering.</div>
+<div class="block">Set whether this bone is hidden from rendering.
+ Hidden bones and their children are not drawn.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>hidden</code> - True to hide this bone</dd>
+<dd><code>hidden</code> - true to hide this bone, false to show it</dd>
 </dl>
 </li>
 </ul>
@@ -715,10 +760,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getParent</h4>
 <pre class="methodSignature"><a href="IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a>&nbsp;getParent()</pre>
-<div class="block">Get the parent bone, or null if this is a root bone.</div>
+<div class="block">Get the parent bone in the bone hierarchy.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The parent bone, or null</dd>
+<dd>the parent bone, or null if this is a root bone</dd>
 </dl>
 </li>
 </ul>
@@ -729,10 +774,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <h4>getChildBones</h4>
 <pre class="methodSignature"><a href="IGeckoBone.html" title="interface in com.goodbird.npcgecko.api">IGeckoBone</a>[]&nbsp;getChildBones()</pre>
-<div class="block">Get the child bones of this bone.</div>
+<div class="block">Get the direct child bones of this bone.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Array of child bones</dd>
+<dd>array of child bones, or an empty array if this bone has no children</dd>
 </dl>
 </li>
 </ul>
