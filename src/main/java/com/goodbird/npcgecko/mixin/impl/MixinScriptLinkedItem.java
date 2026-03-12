@@ -3,7 +3,7 @@ package com.goodbird.npcgecko.mixin.impl;
 import com.goodbird.npcgecko.data.CustomItemModelData;
 import com.goodbird.npcgecko.mixin.IScriptCustomItem;
 import net.minecraft.nbt.NBTTagCompound;
-import noppes.npcs.scripted.item.ScriptCustomItem;
+import noppes.npcs.scripted.item.ScriptLinkedItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ScriptCustomItem.class)
-public class MixinScriptCustomItem implements IScriptCustomItem {
+@Mixin(ScriptLinkedItem.class)
+public class MixinScriptLinkedItem implements IScriptCustomItem {
     @Unique
     private CustomItemModelData customNPC_Gecko_Addon$customModelData;
 
