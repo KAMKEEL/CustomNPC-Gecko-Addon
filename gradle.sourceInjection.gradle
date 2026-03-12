@@ -178,7 +178,7 @@ def isInjectedClass = { String classPath ->
 }
 
 def isInjectedResource = { String resPath ->
-    injectedResDirs.any { new File(it, resPath).exists() }
+    injectedResDirs.any { def f = new File(it, resPath); f.exists() && f.isFile() }
 }
 
 // ============================================================================
@@ -191,6 +191,11 @@ def isInjectedResource = { String resPath ->
 jar {
     includeEmptyDirs = false
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    // Ensure processed resources (including assets/) are included in the jar.
+    // The GTNH convention plugin may not include them from processResources output.
+    from("$buildDir/resources/main")
+
     exclude { details ->
         def path = details.relativePath.pathString
         if (path == 'mcmod.info') return false  // keep merged mcmod.info
