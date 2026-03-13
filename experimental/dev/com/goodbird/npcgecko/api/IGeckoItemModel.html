@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6};
+var data = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -139,7 +139,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  itemGecko.setModel("geckolib3:geo/sword.geo.json");
  itemGecko.setTexture("geckolib3:textures/model/sword.png");
  itemGecko.setAnimationFile("geckolib3:animations/sword.animation.json");
- itemGecko.setIdleAnimation("animation.sword.idle");
+
+ var anim = itemGecko.getItemAnimation();
+ anim.setIdleAnimation("animation.sword.idle");
+ anim.setSwingAnimation("animation.sword.swing");
+ anim.setAttackAnimation("animation.sword.attack");
  </pre></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
@@ -187,10 +191,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getIdleAnimation()">getIdleAnimation</a></span>()</code></th>
+<td class="colFirst"><code><a href="IItemAnimation.html" title="interface in com.goodbird.npcgecko.api">IItemAnimation</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getItemAnimation()">getItemAnimation</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Get the idle animation name.</div>
+<div class="block">Get the item animation configuration interface.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
@@ -255,26 +259,19 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setIdleAnimation(java.lang.String)">setIdleAnimation</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animation)</code></th>
-<td class="colLast">
-<div class="block">Set the idle animation name.</div>
-</td>
-</tr>
-<tr id="i12" class="altColor">
-<td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setModel(java.lang.String)">setModel</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;model)</code></th>
 <td class="colLast">
 <div class="block">Set the GeckoLib geo model resource location.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTexture(java.lang.String)">setTexture</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;texture)</code></th>
 <td class="colLast">
 <div class="block">Set the texture resource location used when rendering this item's 3D model.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTransitionLengthTicks(int)">setTransitionLengthTicks</a></span>&#8203;(int&nbsp;ticks)</code></th>
 <td class="colLast">
@@ -399,33 +396,21 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 </li>
 </ul>
-<a id="getIdleAnimation()">
+<a id="getItemAnimation()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getIdleAnimation</h4>
-<pre class="methodSignature"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;getIdleAnimation()</pre>
-<div class="block">Get the idle animation name.</div>
+<h4>getItemAnimation</h4>
+<pre class="methodSignature"><a href="IItemAnimation.html" title="interface in com.goodbird.npcgecko.api">IItemAnimation</a>&nbsp;getItemAnimation()</pre>
+<div class="block">Get the item animation configuration interface.
+ Provides access to getters and setters for all animation types
+ (idle, swing, attack, use).</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the idle animation name, or an empty string if none is set</dd>
-</dl>
-</li>
-</ul>
-<a id="setIdleAnimation(java.lang.String)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setIdleAnimation</h4>
-<pre class="methodSignature">void&nbsp;setIdleAnimation&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;animation)</pre>
-<div class="block">Set the idle animation name.
- This animation plays continuously while the item is not performing other actions.
- The animation must be defined in the currently assigned animation file.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>animation</code> - the animation name (e.g. "animation.sword.idle")</dd>
+<dd>the item animation interface</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="IItemAnimation.html" title="interface in com.goodbird.npcgecko.api"><code>IItemAnimation</code></a></dd>
 </dl>
 </li>
 </ul>

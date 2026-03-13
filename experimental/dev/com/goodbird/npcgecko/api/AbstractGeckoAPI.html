@@ -859,7 +859,10 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
  itemGecko.setModel("geckolib3:geo/sword.geo.json");
  itemGecko.setTexture("geckolib3:textures/model/sword.png");
  itemGecko.setAnimationFile("geckolib3:animations/sword.animation.json");
- itemGecko.setIdleAnimation("animation.sword.idle");
+
+ var anim = itemGecko.getItemAnimation();
+ anim.setIdleAnimation("animation.sword.idle");
+ anim.setAttackAnimation("animation.sword.attack");
  </pre></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
