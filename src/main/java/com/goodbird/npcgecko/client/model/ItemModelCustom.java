@@ -1,5 +1,6 @@
 package com.goodbird.npcgecko.client.model;
 
+import com.goodbird.npcgecko.client.ItemRenderContext;
 import com.goodbird.npcgecko.data.CustomItemModelData;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -10,8 +11,11 @@ import software.bernie.geckolib3.resource.GeckoLibCache;
 public class ItemModelCustom extends AnimatedGeoModel<AnimatableStackWrapper> {
 
     private CustomItemModelData getModelData(AnimatableStackWrapper animatable) {
-        // Primary: read from userData attached by the mixin renderer
+        // Primary: read from ItemRenderContext attached by the mixin renderer
         Object userData = animatable.getUserData();
+        if (userData instanceof ItemRenderContext) {
+            return ((ItemRenderContext) userData).modelData;
+        }
         if (userData instanceof CustomItemModelData) {
             return (CustomItemModelData) userData;
         }

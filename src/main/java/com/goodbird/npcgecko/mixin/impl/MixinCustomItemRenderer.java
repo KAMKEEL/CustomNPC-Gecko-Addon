@@ -38,7 +38,7 @@ public class MixinCustomItemRenderer {
         remap = false
     )
     public void renderItem(ItemRenderType type, ItemStack itemStack, Object[] data, CallbackInfo ci) {
-        if (ModelItemRenderUtil.tryRender(type, itemStack)) {
+        if (ModelItemRenderUtil.tryRender(type, itemStack, data)) {
             ci.cancel();
         }
     }

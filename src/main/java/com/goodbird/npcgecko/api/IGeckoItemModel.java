@@ -16,7 +16,11 @@ package com.goodbird.npcgecko.api;
  * itemGecko.setModel("geckolib3:geo/sword.geo.json");
  * itemGecko.setTexture("geckolib3:textures/model/sword.png");
  * itemGecko.setAnimationFile("geckolib3:animations/sword.animation.json");
- * itemGecko.setIdleAnimation("animation.sword.idle");
+ *
+ * var anim = itemGecko.getItemAnimation();
+ * anim.setIdleAnimation("animation.sword.idle");
+ * anim.setSwingAnimation("animation.sword.swing");
+ * anim.setAttackAnimation("animation.sword.attack");
  * </pre>
  *
  * @see AbstractGeckoAPI#getItemGecko
@@ -76,20 +80,14 @@ public interface IGeckoItemModel {
     void setAnimationFile(String animationFile);
 
     /**
-     * Get the idle animation name.
+     * Get the item animation configuration interface.
+     * Provides access to getters and setters for all animation types
+     * (idle, swing, attack, use).
      *
-     * @return the idle animation name, or an empty string if none is set
+     * @return the item animation interface
+     * @see IItemAnimation
      */
-    String getIdleAnimation();
-
-    /**
-     * Set the idle animation name.
-     * This animation plays continuously while the item is not performing other actions.
-     * The animation must be defined in the currently assigned animation file.
-     *
-     * @param animation the animation name (e.g. "animation.sword.idle")
-     */
-    void setIdleAnimation(String animation);
+    IItemAnimation getItemAnimation();
 
     /**
      * Get the transition duration between animations in ticks.

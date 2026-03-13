@@ -300,7 +300,10 @@ public abstract class AbstractGeckoAPI {
      * itemGecko.setModel("geckolib3:geo/sword.geo.json");
      * itemGecko.setTexture("geckolib3:textures/model/sword.png");
      * itemGecko.setAnimationFile("geckolib3:animations/sword.animation.json");
-     * itemGecko.setIdleAnimation("animation.sword.idle");
+     *
+     * var anim = itemGecko.getItemAnimation();
+     * anim.setIdleAnimation("animation.sword.idle");
+     * anim.setAttackAnimation("animation.sword.attack");
      * </pre>
      *
      * @param item the customizable item (IItemCustom or IItemLinked)

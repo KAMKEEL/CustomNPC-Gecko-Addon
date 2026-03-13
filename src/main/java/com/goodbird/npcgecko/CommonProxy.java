@@ -3,6 +3,7 @@ package com.goodbird.npcgecko;
 import com.goodbird.npcgecko.api.AbstractGeckoAPI;
 import com.goodbird.npcgecko.entity.EntityCustomModel;
 import com.goodbird.npcgecko.handler.EventHandler;
+import com.goodbird.npcgecko.network.ItemAnimSyncable;
 import com.goodbird.npcgecko.network.NetworkHandler;
 import com.goodbird.npcgecko.tile.TileEntityCustomModel;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -22,6 +23,7 @@ public class CommonProxy {
 
     public void init(FMLInitializationEvent ev) {
         NetworkHandler.init();
+        ItemAnimSyncable.INSTANCE.register();
         GameRegistry.registerTileEntity(TileEntityCustomModel.class, "custommodeltile");
         NpcAPI.Instance().addGlobalObject("GeckoAPI", AbstractGeckoAPI.Instance());
     }

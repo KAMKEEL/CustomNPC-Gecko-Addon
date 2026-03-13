@@ -1,5 +1,6 @@
 package com.goodbird.npcgecko.wrapper;
 
+import com.goodbird.npcgecko.api.IItemAnimation;
 import com.goodbird.npcgecko.api.IGeckoItemModel;
 import com.goodbird.npcgecko.data.CustomItemModelData;
 import com.goodbird.npcgecko.data.ItemDisplayTransform;
@@ -91,15 +92,8 @@ public class GeckoItemModelWrapper implements IGeckoItemModel {
     }
 
     @Override
-    public String getIdleAnimation() {
-        CustomItemModelData data = scriptItem.getCustomModelData();
-        return data != null ? data.getIdleAnim() : "";
-    }
-
-    @Override
-    public void setIdleAnimation(String animation) {
-        getOrCreateData().setIdleAnim(animation);
-        persist();
+    public IItemAnimation getItemAnimation() {
+        return new ItemAnimationWrapper(item);
     }
 
     @Override

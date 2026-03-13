@@ -4,24 +4,107 @@ import com.goodbird.npcgecko.client.model.ItemModelCustom;
 import com.goodbird.npcgecko.data.CustomItemModelData;
 import com.goodbird.npcgecko.data.ItemDisplayData;
 import com.goodbird.npcgecko.data.ItemDisplayTransform;
+import com.goodbird.npcgecko.item.ItemCustomModelPredicate;
+import com.goodbird.npcgecko.network.ItemAnimSyncable;
+import net.geckominecraft.client.renderer.GlStateManager;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 import org.lwjgl.opengl.GL11;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimatableModel;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.core.manager.SingletonAnimationFactory;
+import software.bernie.geckolib3.core.snapshot.BoneSnapshot;
+import software.bernie.geckolib3.core.util.Color;
+import software.bernie.geckolib3.geo.render.built.GeoBone;
+import software.bernie.geckolib3.geo.render.built.GeoModel;
 import software.bernie.geckolib3.item.AnimatableStackWrapper;
-import software.bernie.geckolib3.renderers.geo.GeoItemStackRenderer;
+import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.renderers.geo.IGeoRenderer;
+import software.bernie.example.config.ConfigHandler;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.WeakHashMap;
 
-public class ModelItemRenderUtil {
-    private static final GeoItemStackRenderer RENDERER = new GeoItemStackRenderer(new ItemModelCustom());
+/**
+ * Central rendering orchestrator for gecko item models.
+ * Implements IGeoRenderer directly.
+ *
+ * Equipped items (FP/TP) use a shared SingletonAnimationFactory keyed by
+ * entity-slot composite ID, so different entities holding copies of the same
+ * item get independent animation state.
+ *
+ * INVENTORY/ENTITY renders skip animation entirely and reset bones to bind
+ * pose, preventing the shared mutable GeoModel from leaking equipped
+ * animation transforms into display renders.
+ */
+public class ModelItemRenderUtil implements IGeoRenderer<AnimatableStackWrapper> {
+
+    private static final ModelItemRenderUtil INSTANCE = new ModelItemRenderUtil();
+    private static final AnimatedGeoModel<AnimatableStackWrapper> MODEL_PROVIDER = new ItemModelCustom();
+
+    /**
+     * Separate factory for INVENTORY/ENTITY rendering.
+     * Prevents display-only renders from interfering with equipped animation state
+     * (they share no AnimationData since they use different factory instances).
+     */
+    private static final SingletonAnimationFactory displayFactory;
+
+    static {
+        // Model fetcher for AnimatableStackWrapper
+        AnimationController.addModelFetcher((IAnimatable object) -> {
+            if (object instanceof AnimatableStackWrapper) {
+                return (IAnimatableModel) MODEL_PROVIDER;
+            }
+            return null;
+        });
+
+        // Display factory — isolated from the equipped/sync factory
+        IAnimatable displayDummy = new IAnimatable() {
+            @Override
+            public void registerControllers(AnimationData data) {
+                data.addAnimationController(
+                    new AnimationController<>(this, "item_controller", 0, e -> PlayState.STOP));
+            }
+            @Override
+            public AnimationFactory getFactory() { return displayFactory; }
+        };
+        displayFactory = new SingletonAnimationFactory(displayDummy);
+    }
+
     private static final WeakHashMap<ItemStack, CustomItemModelData> modelDataCache = new WeakHashMap<>();
 
     /**
+     * EQUIPPED cache: keyed by animId (entityId << 4 | slot).
+     * Each entity-slot combination gets its own persistent animation state,
+     * so copies of the same item on different entities animate independently.
+     */
+    private static final Map<Integer, AnimatableStackWrapper> equippedWrapperCache = new HashMap<>();
+
+    /**
+     * INVENTORY/ENTITY cache: keyed by ItemStack identity.
+     * These wrappers are only used for model/texture lookup — no animation.
+     */
+    private static final WeakHashMap<ItemStack, AnimatableStackWrapper> nonEquippedWrapperCache = new WeakHashMap<>();
+
+    // Current render state (set per-render, single-threaded)
+    private AnimatableStackWrapper currentWrapper;
+    private ItemStack currentItemStack;
+    private int currentAnimId;
+
+    /**
      * Quick check if an ItemStack has a gecko model attached.
-     * Reads directly from the ItemStack's root NBT tag (top-level "GeckoModelData")
-     * to avoid NpcAPI cache dependencies that cause flickering when items are moved.
      */
     public static boolean hasGeckoModel(ItemStack itemStack) {
         if (itemStack == null || !itemStack.hasTagCompound()) return false;
@@ -30,47 +113,135 @@ public class ModelItemRenderUtil {
 
     /**
      * Undoes ForgeHooksClient's sprite path transforms and applies the simpler
-     * EQUIPPED_BLOCK translate instead. This normalizes the matrix state so that
-     * our EQUIPPED defaults work consistently regardless of arm bone orientation.
-     *
-     * Sprite path applies: translate(0,-0.3,0) → scale(1.5) → rotate(50,Y) → rotate(335,Z) → translate(-0.9375,-0.0625,0)
-     * We undo in reverse, then apply the block path: translate(-0.5,-0.5,-0.5)
+     * EQUIPPED_BLOCK translate instead.
      */
     private static void normalizeEquipped() {
-        // Undo sprite path (reverse order)
         GL11.glTranslatef(0.9375F, 0.0625F, 0.0F);
         GL11.glRotatef(-335.0F, 0.0F, 0.0F, 1.0F);
         GL11.glRotatef(-50.0F, 0.0F, 1.0F, 0.0F);
         GL11.glScalef(1.0F / 1.5F, 1.0F / 1.5F, 1.0F / 1.5F);
         GL11.glTranslatef(0.0F, 0.3F, 0.0F);
-        // Apply old block path
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
     }
 
     /**
-     * Attempts to render a gecko model for the given item.
-     * Reads model data directly from the ItemStack's NBT to avoid NpcAPI cache
-     * dependencies that cause flickering when items are moved in inventory.
+     * Computes a unique animation ID from entity ID and slot index.
+     * Different entities holding copies of the same item get different IDs.
      */
-    public static boolean tryRender(ItemRenderType type, ItemStack itemStack) {
+    private static int computeAnimId(int entityId, int slotIndex) {
+        return (entityId << 4) | (slotIndex & 0xF);
+    }
+
+    /**
+     * Resets all bones in the model to their initial bind pose.
+     * Prevents animation transforms from the equipped render bleeding
+     * into INVENTORY/ENTITY renders via the shared cached GeoModel.
+     */
+    private static void resetBonesToBindPose(GeoModel model) {
+        for (GeoBone bone : model.topLevelBones) {
+            resetBoneRecursive(bone);
+        }
+    }
+
+    private static void resetBoneRecursive(GeoBone bone) {
+        BoneSnapshot initial = bone.getInitialSnapshot();
+        if (initial != null) {
+            bone.setPositionX(initial.positionOffsetX);
+            bone.setPositionY(initial.positionOffsetY);
+            bone.setPositionZ(initial.positionOffsetZ);
+            bone.setRotationX(initial.rotationValueX);
+            bone.setRotationY(initial.rotationValueY);
+            bone.setRotationZ(initial.rotationValueZ);
+            bone.setScaleX(initial.scaleValueX);
+            bone.setScaleY(initial.scaleValueY);
+            bone.setScaleZ(initial.scaleValueZ);
+        }
+        for (GeoBone child : bone.childBones) {
+            resetBoneRecursive(child);
+        }
+    }
+
+    /**
+     * Attempts to render a gecko model for the given item.
+     */
+    public static boolean tryRender(ItemRenderType type, ItemStack itemStack, Object[] data) {
         if (itemStack == null || !itemStack.hasTagCompound()) return false;
         NBTTagCompound root = itemStack.getTagCompound();
         if (!root.hasKey("GeckoModelData")) return false;
 
+        // Always re-read from NBT so script changes (animations, transitions, etc.)
+        // take effect immediately without needing an ItemStack reference change.
         CustomItemModelData modelData = modelDataCache.get(itemStack);
         if (modelData == null) {
             modelData = new CustomItemModelData();
-            modelData.readFromNBT(root.getCompoundTag("GeckoModelData"));
             modelDataCache.put(itemStack, modelData);
         }
+        modelData.readFromNBT(root.getCompoundTag("GeckoModelData"));
 
-        AnimatableStackWrapper wrapper = AnimatableStackWrapper.of(itemStack).withUserData(modelData);
+        // Extract entity for EQUIPPED types
+        EntityLivingBase entity = null;
+        int entityId = 0;
+        int slotIndex = -1;
+        if (type == ItemRenderType.EQUIPPED || type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
+            // Try to find entity in the data array (CustomNPC+ may not follow
+            // Forge's standard data[0] = entity convention)
+            if (data != null) {
+                for (int i = 0; i < data.length; i++) {
+                    if (data[i] instanceof EntityLivingBase) {
+                        entity = (EntityLivingBase) data[i];
+                        break;
+                    }
+                }
+            }
+            // Fallback: for first-person, we know it's the local player
+            if (entity == null && type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
+                entity = Minecraft.getMinecraft().thePlayer;
+            }
+            if (entity != null) {
+                entityId = entity.getEntityId();
+                if (entity instanceof net.minecraft.entity.player.EntityPlayer) {
+                    slotIndex = ((net.minecraft.entity.player.EntityPlayer) entity).inventory.currentItem;
+                } else {
+                    slotIndex = 0;
+                }
+            }
+        }
+
+        // Look up or create wrapper
+        AnimatableStackWrapper wrapper;
+        boolean isEquipped = (type == ItemRenderType.EQUIPPED || type == ItemRenderType.EQUIPPED_FIRST_PERSON);
+        int animId = 0;
+
+        if (isEquipped) {
+            animId = computeAnimId(entityId, slotIndex);
+            AnimationFactory sharedFactory = ItemAnimSyncable.INSTANCE.getSharedFactory();
+            wrapper = equippedWrapperCache.get(animId);
+            if (wrapper == null) {
+                int transitionTicks = modelData.getTransitionLengthTicks();
+                wrapper = AnimatableStackWrapper.of(itemStack, sharedFactory)
+                        .withControllerRegistrar((w, d) -> {
+                            d.addAnimationController(new AnimationController<>(w, "item_controller", transitionTicks, ItemCustomModelPredicate::predicate));
+                        });
+                equippedWrapperCache.put(animId, wrapper);
+            } else if (wrapper.getStack() != itemStack) {
+                wrapper.setStack(itemStack);
+            }
+            wrapper.withUserData(new ItemRenderContext(modelData, type, entity, entityId, slotIndex));
+        } else {
+            // INVENTORY/ENTITY: no animation, just model/texture lookup
+            wrapper = nonEquippedWrapperCache.get(itemStack);
+            if (wrapper == null) {
+                wrapper = AnimatableStackWrapper.of(itemStack, displayFactory);
+                nonEquippedWrapperCache.put(itemStack, wrapper);
+            }
+            // userData is still needed for model/texture resolution
+            wrapper.withUserData(new ItemRenderContext(modelData, type, null, 0, -1));
+        }
+
         ItemDisplayTransform transform = resolveTransform(modelData, type);
 
         GL11.glPushMatrix();
 
-        // For equipped types, undo the sprite path and apply the block path
-        // so our tuned defaults work consistently across all arm orientations
         if (type == ItemRenderType.EQUIPPED_FIRST_PERSON) {
             normalizeEquipped();
         }
@@ -79,26 +250,92 @@ public class ModelItemRenderUtil {
         applyRotate(transform, type);
         applyScale(transform, type);
 
-        // Compensate for GeoItemStackRenderer's internal transforms:
-        //   translate(0, 0.01, 0) + translate(0.5, 0.5, 0.5) + rotate(90, Y)
-        // Apply inverse so our tuned defaults remain the final matrix.
-        GL11.glRotatef(-90, 0, 1, 0);
-        GL11.glTranslatef(-0.5F, -0.51F, -0.5F);
-
-        if(type == ItemRenderType.INVENTORY)
+        if (type == ItemRenderType.INVENTORY)
             RenderHelper.disableStandardItemLighting();
-        RENDERER.render(wrapper, itemStack);
 
-        if(type == ItemRenderType.INVENTORY)
+        INSTANCE.renderItem(wrapper, itemStack, animId, isEquipped);
+
+        if (type == ItemRenderType.INVENTORY)
             RenderHelper.enableStandardItemLighting();
-
 
         GL11.glPopMatrix();
         return true;
     }
 
+    /**
+     * Drives GeckoLib model loading, animation ticking, and rendering.
+     *
+     * @param animate true for equipped items (tick animation), false for
+     *                INVENTORY/ENTITY (reset to bind pose, no animation).
+     */
+    private void renderItem(AnimatableStackWrapper wrapper, ItemStack itemStack, int animId, boolean animate) {
+        this.currentWrapper = wrapper;
+        this.currentItemStack = itemStack;
+        this.currentAnimId = animId;
+
+        GeoModel model;
+        try {
+            model = MODEL_PROVIDER.getModel(MODEL_PROVIDER.getModelLocation(wrapper));
+        } catch (Exception e) {
+            if (ConfigHandler.debugPrintStacktraces) {
+                e.printStackTrace();
+            }
+            return;
+        }
+
+        if (animate) {
+            AnimationEvent<AnimatableStackWrapper> itemEvent = new AnimationEvent<>(wrapper, 0, 0,
+                    Minecraft.getMinecraft().timer.renderPartialTicks, false,
+                    Collections.singletonList(itemStack));
+            wrapper.getFactory().getOrCreateAnimationData(animId, wrapper);
+            MODEL_PROVIDER.setLivingAnimations(wrapper, animId, itemEvent);
+        } else {
+            // Non-equipped (INVENTORY/ENTITY): no animation runs, so manually
+            // reset bones to bind pose to prevent stale transforms from the
+            // last equipped render bleeding into display renders.
+            resetBonesToBindPose(model);
+        }
+
+        GlStateManager.pushMatrix();
+        try {
+            Minecraft.getMinecraft().renderEngine.bindTexture(getTextureLocation(wrapper));
+            Color renderColor = getRenderColor(wrapper, 0f);
+            render(model, wrapper, 0, (float) renderColor.getRed() / 255f,
+                    (float) renderColor.getGreen() / 255f,
+                    (float) renderColor.getBlue() / 255f,
+                    (float) renderColor.getAlpha() / 255f);
+        } catch (Exception e) {
+            if (ConfigHandler.debugPrintStacktraces) {
+                e.printStackTrace();
+            }
+        } finally {
+            GlStateManager.popMatrix();
+        }
+    }
+
+    @Override
+    public AnimatedGeoModel<AnimatableStackWrapper> getGeoModelProvider() {
+        return MODEL_PROVIDER;
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(AnimatableStackWrapper instance) {
+        return MODEL_PROVIDER.getTextureLocation(instance);
+    }
+
+    @Override
+    public Integer getUniqueID(AnimatableStackWrapper animatable) {
+        // Return entity-slot animId, NOT the GeckoLibID from NBT.
+        // Duplicated stacks share the same GeckoLibID, so using it here
+        // would cause GeckoLib internals to cross-contaminate between entities.
+        return currentAnimId;
+    }
+
+    // ========================================================================
+    // Transform helpers (unchanged)
+    // ========================================================================
+
     public static void applyTranslate(ItemDisplayTransform t, ItemRenderType type) {
-        // Apply Default Positioning for 1.7.10
         switch (type) {
             case EQUIPPED_FIRST_PERSON:
                 GL11.glTranslatef(0.5F, 0.55F, 0.5F);
@@ -115,14 +352,12 @@ public class ModelItemRenderUtil {
             default:
                 break;
         }
-
         if (t != null && t.hasTranslation()) {
             GL11.glTranslatef(t.getTranslateX(), t.getTranslateY(), t.getTranslateZ());
         }
     }
 
     public static void applyRotate(ItemDisplayTransform t, ItemRenderType type) {
-        // Apply Default Rotationing for 1.7.10
         switch (type) {
             case EQUIPPED_FIRST_PERSON:
                 GL11.glRotatef(-45F, 0.0F, 1.0F, 0.0F);
@@ -142,7 +377,6 @@ public class ModelItemRenderUtil {
             default:
                 break;
         }
-
         if (t != null && t.hasRotation()) {
             GL11.glRotatef(t.getRotationY(), 0.0F, 1.0F, 0.0F);
             GL11.glRotatef(t.getRotationX(), 1.0F, 0.0F, 0.0F);
@@ -151,7 +385,6 @@ public class ModelItemRenderUtil {
     }
 
     public static void applyScale(ItemDisplayTransform t, ItemRenderType type) {
-        // Apply Default Scaling for 1.7.10
         switch (type) {
             case EQUIPPED_FIRST_PERSON:
                 float scale = 2.36f;
@@ -173,20 +406,10 @@ public class ModelItemRenderUtil {
         if (t != null && t.hasScale()) {
             GL11.glScalef(t.getScaleX(), t.getScaleY(), t.getScaleZ());
         }
-        // No per-context default scale — GeoItemRenderer doesn't scale per type
     }
 
-    /**
-     * Resolves the display transform for a given render context.
-     * Priority:
-     *   1) Per-item NBT override (set via setItemDisplay)
-     *   2) Display JSON file (set via setDisplayJSON)
-     *   3) null — let the apply methods use their inline defaults
-     */
     public static ItemDisplayTransform resolveTransform(
             CustomItemModelData modelData, ItemRenderType type) {
-
-        // 1) Per-item NBT override
         ItemDisplayTransform nbtTransform = null;
         switch (type) {
             case EQUIPPED_FIRST_PERSON: nbtTransform = modelData.getFirstPerson(); break;
@@ -197,7 +420,6 @@ public class ModelItemRenderUtil {
         }
         if (nbtTransform != null) return nbtTransform;
 
-        // 2) Display JSON file (explicitly assigned via setDisplayJSON)
         String displayFile = modelData.getDisplayFile();
         if (displayFile != null && !displayFile.isEmpty()) {
             ItemDisplayData fileData = ItemDisplayLoader.getInstance().getDisplayData(displayFile);
@@ -211,8 +433,6 @@ public class ModelItemRenderUtil {
                 }
             }
         }
-
-        // 3) No transform found — apply methods will use inline defaults
         return null;
     }
 }
