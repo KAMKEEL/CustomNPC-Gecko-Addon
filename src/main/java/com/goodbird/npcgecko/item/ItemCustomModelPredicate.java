@@ -83,7 +83,14 @@ public class ItemCustomModelPredicate {
             if (swingActive) {
                 if (controller.getAnimationState() == AnimationState.Stopped) {
                     fpSwingActive.put(animId, false);
-                    // Fall through to use/idle
+                    // Swing just finished — if player is already using, blend directly
+                    // from swing end pose into use (skip idle entirely)
+                    if (localPlayer.isUsingItem() && useAnim != null && !useAnim.isEmpty()) {
+                        controller.markNeedsReload();
+                        controller.setAnimation(new AnimationBuilder().loop(useAnim));
+                        return PlayState.CONTINUE;
+                    }
+                    // Otherwise fall through to use/idle checks below
                 } else {
                     // Swing still playing, no new click — suppress vanilla swing
                     localPlayer.isSwingInProgress = false;
@@ -124,7 +131,7 @@ public class ItemCustomModelPredicate {
                 if (controller.getAnimationState() != AnimationState.Stopped) {
                     return PlayState.CONTINUE;
                 }
-                // Swing finished, fall through to idle
+                // Swing finished — check if use started, blend directly from swing end pose
             }
 
             // --- Use ---
