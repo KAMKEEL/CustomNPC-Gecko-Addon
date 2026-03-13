@@ -102,6 +102,13 @@ public class ModelItemRenderUtil implements IGeoRenderer<AnimatableStackWrapper>
     private AnimatableStackWrapper currentWrapper;
     private ItemStack currentItemStack;
     private int currentAnimId;
+    private Color currentItemColor = Color.WHITE;
+
+    /** Frame counter for rotation rate, incremented each render call (like original's item3dRenderTicks). */
+    private static int renderTickCounter = 0;
+
+    /** CustomNPC+'s default item color — treated as "no tint" for 3D models. */
+    private static final int DEFAULT_NPC_ITEM_COLOR = 0x8B4513;
 
     /**
      * Quick check if an ItemStack has a gecko model attached.
@@ -250,6 +257,11 @@ public class ModelItemRenderUtil implements IGeoRenderer<AnimatableStackWrapper>
         applyRotate(transform, type);
         applyScale(transform, type);
 
+        // Apply CustomNPC+ scripted item display properties (translate, rotation,
+        // rotation rate, scale, color) from the ItemData NBT tag.
+        applyCustomNpcItemData(root);
+        renderTickCounter++;
+
         if (type == ItemRenderType.INVENTORY)
             RenderHelper.disableStandardItemLighting();
 
@@ -331,8 +343,13 @@ public class ModelItemRenderUtil implements IGeoRenderer<AnimatableStackWrapper>
         return currentAnimId;
     }
 
+    @Override
+    public Color getRenderColor(AnimatableStackWrapper animatable, float partialTicks) {
+        return currentItemColor;
+    }
+
     // ========================================================================
-    // Transform helpers (unchanged)
+    // Transform helpers
     // ========================================================================
 
     public static void applyTranslate(ItemDisplayTransform t, ItemRenderType type) {
@@ -405,6 +422,73 @@ public class ModelItemRenderUtil implements IGeoRenderer<AnimatableStackWrapper>
         }
         if (t != null && t.hasScale()) {
             GL11.glScalef(t.getScaleX(), t.getScaleY(), t.getScaleZ());
+        }
+    }
+
+    /**
+     * Reads CustomNPC+'s ItemData NBT and applies the scripted item display
+     * properties (translate, rotation, rotation rate, scale) as GL transforms,
+     * and sets the color for getRenderColor().
+     *
+     * These are the properties set via scripting API: setScale(), setRotation(),
+     * setTranslate(), setColor(), setRotationRate().
+     */
+    private static void applyCustomNpcItemData(NBTTagCompound root) {
+        if (!root.hasKey("ItemData")) {
+            INSTANCE.currentItemColor = Color.WHITE;
+            return;
+        }
+        NBTTagCompound itemData = root.getCompoundTag("ItemData");
+
+        // --- Color ---
+        // The default CustomNPC+ item color (0x8B4513 / saddle brown) is a sprite
+        // tint that doesn't make sense for 3D models. Treat it as "no tint".
+        if (itemData.hasKey("ItemColor")) {
+            int color = itemData.getInteger("ItemColor");
+            if (color != DEFAULT_NPC_ITEM_COLOR) {
+                int r = (color >> 16) & 0xFF;
+                int g = (color >> 8) & 0xFF;
+                int b = color & 0xFF;
+                INSTANCE.currentItemColor = Color.ofRGBA(r, g, b, 255);
+            } else {
+                INSTANCE.currentItemColor = Color.WHITE;
+            }
+        } else {
+            INSTANCE.currentItemColor = Color.WHITE;
+        }
+
+        // --- Translation ---
+        float tx = itemData.hasKey("TranslateX") ? itemData.getFloat("TranslateX") : 0;
+        float ty = itemData.hasKey("TranslateY") ? itemData.getFloat("TranslateY") : 0;
+        float tz = itemData.hasKey("TranslateZ") ? itemData.getFloat("TranslateZ") : 0;
+        if (tx != 0 || ty != 0 || tz != 0) {
+            GL11.glTranslatef(tx, ty, tz);
+        }
+
+        // --- Rotation (static) ---
+        float rx = itemData.hasKey("RotationX") ? itemData.getFloat("RotationX") : 0;
+        float ry = itemData.hasKey("RotationY") ? itemData.getFloat("RotationY") : 0;
+        float rz = itemData.hasKey("RotationZ") ? itemData.getFloat("RotationZ") : 0;
+        if (rx != 0) GL11.glRotatef(rx, 1, 0, 0);
+        if (ry != 0) GL11.glRotatef(ry, 0, 1, 0);
+        if (rz != 0) GL11.glRotatef(rz, 0, 0, 1);
+
+        // --- Rotation rate (continuous spinning) ---
+        float rxr = itemData.hasKey("RotationXRate") ? itemData.getFloat("RotationXRate") : 0;
+        float ryr = itemData.hasKey("RotationYRate") ? itemData.getFloat("RotationYRate") : 0;
+        float rzr = itemData.hasKey("RotationZRate") ? itemData.getFloat("RotationZRate") : 0;
+        if (rxr != 0 || ryr != 0 || rzr != 0) {
+            if (rxr != 0) GL11.glRotatef(rxr * renderTickCounter % 360, 1, 0, 0);
+            if (ryr != 0) GL11.glRotatef(ryr * renderTickCounter % 360, 0, 1, 0);
+            if (rzr != 0) GL11.glRotatef(rzr * renderTickCounter % 360, 0, 0, 1);
+        }
+
+        // --- Scale ---
+        float sx = itemData.hasKey("ScaleX") ? itemData.getFloat("ScaleX") : 1;
+        float sy = itemData.hasKey("ScaleY") ? itemData.getFloat("ScaleY") : 1;
+        float sz = itemData.hasKey("ScaleZ") ? itemData.getFloat("ScaleZ") : 1;
+        if (sx != 1 || sy != 1 || sz != 1) {
+            GL11.glScalef(sx, sy, sz);
         }
     }
 
